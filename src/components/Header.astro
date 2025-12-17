@@ -1,46 +1,80 @@
 ---
+import { SITE_TITLE } from '../consts';
 // 检测当前是否在主页
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
 ---
 
 <header>
-	<div class="nav-icons">
+	<div class="header-container">
 		{!isHomePage && (
-			<a href="/" class="home-link" aria-label="Home">
-				<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-					<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-					<polyline points="9 22 9 12 15 12 15 22"></polyline>
-				</svg>
+			<a href="/" class="brand-link" aria-label="Home">
+				<span class="brand-text">{SITE_TITLE}</span>
 			</a>
 		)}
-		<button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
-			<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-			</svg>
-		</button>
+		<div class="nav-icons">
+			{!isHomePage && (
+				<a href="/" class="home-link" aria-label="Home">
+					<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+						<polyline points="9 22 9 12 15 12 15 22"></polyline>
+					</svg>
+				</a>
+			)}
+			<button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
+				<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+				</svg>
+			</button>
+		</div>
 	</div>
 </header>
 <style>
 	header {
-		position: fixed;
+		position: sticky;
 		top: 0;
 		left: 0;
 		right: 0;
-		z-index: 100;
-		background: transparent;
+		z-index: 50;
+		background: rgba(255, 255, 255, 0.8);
+		backdrop-filter: blur(12px);
+		-webkit-backdrop-filter: blur(12px);
+		border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 		padding: 0;
 		margin: 0;
-		pointer-events: none;
+		transition: background-color 0.3s ease, border-color 0.3s ease;
+	}
+	
+	html.dark header {
+		background: rgba(26, 26, 26, 0.8);
+		border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	}
+	
+	.header-container {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 1rem 1.5rem;
+		max-width: 100%;
+	}
+	
+	.brand-link {
+		text-decoration: none;
+		color: var(--text-color);
+		font-weight: 600;
+		font-size: 1rem;
+		display: none;
+		transition: opacity 0.2s ease;
+	}
+	
+	.brand-link:hover {
+		opacity: 0.7;
 	}
 	
 	.nav-icons {
-		position: absolute;
-		top: 1.5rem;
-		right: 1.5rem;
 		display: flex;
 		align-items: center;
 		gap: 0.5rem;
-		pointer-events: auto;
+		margin-left: auto;
 	}
 	
 	.home-link,
@@ -85,9 +119,12 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 	}
 	
 	@media (max-width: 768px) {
-		.nav-icons {
-			top: 1rem;
-			right: 1rem;
+		.header-container {
+			padding: 0.75rem 1rem;
+		}
+		
+		.brand-link {
+			display: block;
 		}
 		
 		.home-link,

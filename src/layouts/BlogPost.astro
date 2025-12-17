@@ -21,6 +21,7 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				width: calc(100% - 2em);
 				max-width: 100%;
 				margin: 0;
+				padding-top: 0;
 			}
 			.hero-image {
 				width: 100%;
@@ -146,6 +147,61 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 					padding-right: 1rem;
 				}
 			}
+			
+			/* 回到顶部按钮 */
+			.back-to-top {
+				position: fixed;
+				bottom: 2rem;
+				right: 1.5rem;
+				width: 48px;
+				height: 48px;
+				border-radius: 50%;
+				background-color: #6366f1;
+				color: #ffffff;
+				border: none;
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+				z-index: 40;
+			}
+			
+			.back-to-top.visible {
+				opacity: 1;
+				pointer-events: auto;
+			}
+			
+			.back-to-top:hover {
+				transform: translateY(-2px);
+				box-shadow: 0 6px 16px rgba(99, 102, 241, 0.5);
+			}
+			
+			.back-to-top:active {
+				transform: translateY(0);
+			}
+			
+			.back-to-top-icon {
+				width: 24px;
+				height: 24px;
+			}
+			
+			@media (max-width: 768px) {
+				.back-to-top {
+					bottom: 1.5rem;
+					right: 1rem;
+					width: 44px;
+					height: 44px;
+				}
+				
+				.back-to-top-icon {
+					width: 20px;
+					height: 20px;
+				}
+			}
 		</style>
 	</head>
 
@@ -196,6 +252,11 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 			</article>
 		</main>
 		<Footer />
+		<button id="back-to-top" class="back-to-top" aria-label="Back to top">
+			<svg class="back-to-top-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+				<path d="m18 15-6-6-6 6"></path>
+			</svg>
+		</button>
 		<script>
 			// 生成 slug（与 Astro 默认行为一致）
 			function generateSlug(text) {
@@ -264,18 +325,42 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 					});
 				};
 
-				// 使用 throttle 优化滚动性能
+				// 回到顶部按钮
+				const backToTopButton = document.getElementById('back-to-top');
+				const scrollThreshold = 300;
+				
+				function toggleBackToTop() {
+					if (window.scrollY > scrollThreshold) {
+						backToTopButton?.classList.add('visible');
+					} else {
+						backToTopButton?.classList.remove('visible');
+					}
+				}
+				
+				// 使用 throttle 优化滚动性能（合并多个滚动处理）
 				let ticking = false;
 				window.addEventListener('scroll', () => {
 					if (!ticking) {
 						window.requestAnimationFrame(() => {
 							updateActiveTocLink();
+							toggleBackToTop();
 							ticking = false;
 						});
 						ticking = true;
 					}
 				});
-				updateActiveTocLink(); // 初始调用
+				
+				// 初始调用
+				updateActiveTocLink();
+				toggleBackToTop();
+				
+				// 点击回到顶部
+				backToTopButton?.addEventListener('click', () => {
+					window.scrollTo({
+						top: 0,
+						behavior: 'smooth'
+					});
+				});
 			});
 		</script>
 	</body>

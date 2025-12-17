@@ -37,6 +37,7 @@ function formatDate(date: Date): string {
 				text-align: center;
 				padding: 6rem 2rem 4rem 2rem;
 				max-width: 100%;
+				margin-top: 0;
 			}
 			
 			.header-logo-title {
@@ -111,6 +112,7 @@ function formatDate(date: Date): string {
 				text-decoration: none;
 				color: inherit;
 				display: block;
+				max-width: 100%;
 			}
 			
 			/* 第一行：元数据 */
@@ -137,6 +139,10 @@ function formatDate(date: Date): string {
 				margin: 0 0 0.5rem 0;
 				line-height: 1.3;
 				transition: color 0.2s ease;
+				white-space: normal;
+				word-wrap: break-word;
+				overflow-wrap: break-word;
+				max-width: 100%;
 			}
 			
 			.post-item a:hover .post-title {
@@ -151,6 +157,10 @@ function formatDate(date: Date): string {
 				line-height: 1.6;
 				font-style: italic;
 				transition: color 0.2s ease;
+				white-space: normal;
+				word-wrap: break-word;
+				overflow-wrap: break-word;
+				max-width: 100%;
 			}
 			
 			html.dark .post-description {
@@ -189,6 +199,10 @@ function formatDate(date: Date): string {
 				
 				.post-title {
 					font-size: 1.5rem;
+				}
+				
+				.post-description {
+					line-height: 1.5;
 				}
 				
 				.post-item {
