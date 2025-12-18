@@ -288,6 +288,55 @@ function formatDate(date: Date): string {
 					font-size: 1.5rem;
 				}
 			}
+			
+			/* ========================================
+			   强制性移动端文字溢出修复 (max-width: 720px)
+			   覆盖所有可能的布局冲突
+			======================================== */
+			@media (max-width: 720px) {
+				/* 1. 强制限制所有文章容器的宽度 */
+				.post-list,
+				.post-list li,
+				.post-item,
+				.post-item a {
+					width: 100% !important;
+					max-width: 100vw !important;
+					box-sizing: border-box !important;
+					overflow-x: hidden !important; /* 禁止横向溢出 */
+				}
+				
+				/* 2. 强制文字换行，不许抵抗 */
+				.post-meta,
+				.post-title,
+				.post-description,
+				.post-item p,
+				.post-item h2,
+				.post-item h4,
+				.post-item .date {
+					white-space: normal !important;
+					overflow-wrap: anywhere !important; /* 最强换行逻辑 */
+					word-break: break-word !important;
+					word-wrap: break-word !important;
+					min-width: 0 !important; /* 解锁 Flex 收缩 */
+					max-width: 100% !important;
+					box-sizing: border-box !important;
+					padding-right: 0.5rem !important; /* 留一点呼吸空间 */
+				}
+				
+				/* 3. 确保父容器不溢出 */
+				.post-list-container {
+					max-width: 100vw !important;
+					overflow-x: hidden !important;
+					box-sizing: border-box !important;
+				}
+				
+				/* 4. 防止 body 和 html 横向滚动 */
+				body,
+				html {
+					overflow-x: hidden !important;
+					max-width: 100vw !important;
+				}
+			}
 		</style>
 	</head>
 	<body>
