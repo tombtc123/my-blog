@@ -15,6 +15,182 @@ const { title, description = '' } = Astro.props;
 <html lang="zh-CN">
 	<head>
 		<BaseHead title={title} description={description} />
+		<style is:global>
+			/* 舒适阅读 - 文章排版优化 */
+			
+			/* 1. 容器布局 */
+			.prose {
+				max-width: 680px;
+				margin: 0 auto;
+				padding-left: 24px;
+				padding-right: 24px;
+				box-sizing: border-box;
+			}
+			
+			/* 2. 正文排版 */
+			.prose {
+				font-size: 18px;
+				line-height: 1.75;
+				text-align: left;
+				color: #374151;
+				font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", "Helvetica Neue", Arial, sans-serif;
+			}
+			
+			.prose p {
+				margin-bottom: 1.4em;
+				text-align: left;
+			}
+			
+			/* 深色模式适配 */
+			html.dark .prose {
+				color: #e5e7eb;
+			}
+			
+			/* 3. 标题样式 - 层次清晰但不过于突兀 */
+			.prose h1 {
+				font-size: 28px;
+				font-weight: 700;
+				line-height: 1.3;
+				margin-top: 0;
+				margin-bottom: 1.2em;
+				color: var(--text-color);
+			}
+			
+			.prose h2 {
+				font-size: 22px;
+				font-weight: 600;
+				margin-top: 2em;
+				margin-bottom: 0.8em;
+				color: var(--text-color);
+				line-height: 1.4;
+			}
+			
+			.prose h3 {
+				font-size: 19px;
+				font-weight: 600;
+				margin-top: 1.6em;
+				margin-bottom: 0.7em;
+				color: var(--text-color);
+				line-height: 1.4;
+			}
+			
+			.prose h4,
+			.prose h5,
+			.prose h6 {
+				font-weight: 600;
+				margin-top: 1.4em;
+				margin-bottom: 0.6em;
+				color: var(--text-color);
+				line-height: 1.4;
+			}
+			
+			/* 4. 列表样式 - 舒适易读 */
+			.prose ul,
+			.prose ol {
+				padding-left: 1.5em;
+				margin-bottom: 1.4em;
+				margin-top: 1em;
+			}
+			
+			.prose li {
+				font-size: 18px;
+				line-height: 1.75;
+				margin-bottom: 0.6em;
+			}
+			
+			/* 嵌套列表 */
+			.prose ul ul,
+			.prose ol ol,
+			.prose ul ol,
+			.prose ol ul {
+				margin-top: 0.5em;
+				margin-bottom: 0.5em;
+				padding-left: 1.2em;
+			}
+			
+			/* 5. 其他元素 - 舒适间距 */
+			.prose blockquote {
+				margin-top: 1.4em;
+				margin-bottom: 1.4em;
+				padding-left: 1.2em;
+				border-left: 3px solid rgba(0, 0, 0, 0.1);
+			}
+			
+			html.dark .prose blockquote {
+				border-left-color: rgba(255, 255, 255, 0.2);
+			}
+			
+			.prose pre {
+				margin-top: 1.4em;
+				margin-bottom: 1.4em;
+				padding: 1.2em;
+				border-radius: 8px;
+				overflow-x: auto;
+			}
+			
+			.prose img {
+				width: 100%;
+				height: auto;
+				margin-top: 1.4em;
+				margin-bottom: 1.4em;
+				border-radius: 8px;
+				display: block;
+			}
+			
+			.prose hr {
+				margin-top: 2em;
+				margin-bottom: 2em;
+				border: none;
+				border-top: 1px solid rgba(0, 0, 0, 0.1);
+			}
+			
+			html.dark .prose hr {
+				border-top-color: rgba(255, 255, 255, 0.1);
+			}
+			
+			/* 6. 链接样式 */
+			.prose a {
+				color: #4f46e5;
+				text-decoration: underline;
+				text-decoration-color: rgba(79, 70, 229, 0.3);
+				text-underline-offset: 2px;
+				transition: color 0.2s ease, text-decoration-color 0.2s ease;
+			}
+			
+			.prose a:hover {
+				color: #4338ca;
+				text-decoration-color: #4338ca;
+			}
+			
+			html.dark .prose a {
+				color: #818cf8;
+			}
+			
+			html.dark .prose a:hover {
+				color: #a5b4fc;
+			}
+			
+			/* 移动端优化 */
+			@media (max-width: 768px) {
+				.prose {
+					padding-left: 20px;
+					padding-right: 20px;
+					font-size: 17px;
+				}
+				
+				.prose h1 {
+					font-size: 24px;
+				}
+				
+				.prose h2 {
+					font-size: 20px;
+				}
+				
+				.prose h3 {
+					font-size: 18px;
+				}
+			}
+		</style>
 	</head>
 	<body>
 		<Header />

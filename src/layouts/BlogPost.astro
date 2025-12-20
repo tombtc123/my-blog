@@ -1,5 +1,4 @@
 ---
-import { Image } from 'astro:assets';
 import type { CollectionEntry, MarkdownHeading } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -23,15 +22,6 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				margin: 0;
 				padding-top: 0;
 			}
-			.hero-image {
-				width: 100%;
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-				max-width: 100%;
-				height: auto;
-			}
 			.article-container {
 				display: flex;
 				max-width: 1200px;
@@ -44,19 +34,15 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				width: 680px;
 				max-width: 100%;
 				margin: 0 auto;
-				padding: 1em;
-				/* 字体、字号、行高、颜色等排版样式已在 global.css 中定义 */
+				/* padding 由 Layout.astro 全局样式控制 */
 			}
 			
 			@media (max-width: 768px) {
 				.article-container {
-					padding-left: 1.25rem;
-					padding-right: 1.25rem;
-				}
-				.prose {
 					padding-left: 0;
 					padding-right: 0;
 				}
+				/* .prose 的 padding 由 Layout.astro 全局样式控制 */
 			}
 			.title {
 				margin-bottom: 1em;
@@ -142,13 +128,12 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				}
 				.article-container {
 					flex-direction: column;
-					padding: 0 1.25rem;
+					padding: 0;
 				}
 				.prose {
 					width: 100%;
 					max-width: 100%;
-					padding-left: 0;
-					padding-right: 0;
+					/* padding 由 Layout.astro 全局样式控制 */
 				}
 			}
 			
@@ -213,9 +198,6 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 		<Header />
 		<main>
 			<article>
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
 				<div class="article-container">
 					<div class="prose">
 						<div class="title">
