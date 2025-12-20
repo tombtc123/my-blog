@@ -49,9 +49,13 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 			}
 			
 			@media (max-width: 768px) {
+				.article-container {
+					padding-left: 1.25rem;
+					padding-right: 1.25rem;
+				}
 				.prose {
-					padding-left: 1rem;
-					padding-right: 1rem;
+					padding-left: 0;
+					padding-right: 0;
 				}
 			}
 			.title {
@@ -138,13 +142,13 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				}
 				.article-container {
 					flex-direction: column;
-					padding: 0 1rem;
+					padding: 0 1.25rem;
 				}
 				.prose {
 					width: 100%;
 					max-width: 100%;
-					padding-left: 1rem;
-					padding-right: 1rem;
+					padding-left: 0;
+					padding-right: 0;
 				}
 			}
 			

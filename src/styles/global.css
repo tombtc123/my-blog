@@ -113,16 +113,40 @@ html.dark .prose {
 .prose h5,
 .prose h6 {
 	color: var(--text-color);
-	margin-top: 1.5em;
-	margin-bottom: 0.75em;
+	margin-top: 2em;
+	margin-bottom: 1em;
+}
+
+/* h2 和 h3 作为主要标题，需要更大的间距 */
+.prose h2,
+.prose h3 {
+	margin-top: 2.5em;
+	margin-bottom: 1em;
+}
+
+/* h1 通常只在文章开头，减少上方间距 */
+.prose h1 {
+	margin-top: 0;
+	margin-bottom: 1em;
 }
 
 .prose ul,
 .prose ol {
-	margin-bottom: 1.5em;
+	padding-left: 1.5em; /* 确保子弹点不顶格 */
+	margin-bottom: 1.5em; /* 列表整体与下方段落拉开距离 */
+	margin-top: 1em; /* 列表上方与上方内容拉开距离 */
 }
 
 .prose li {
+	margin-bottom: 0.8em; /* 增加列表项之间的距离 */
+}
+
+/* 嵌套列表的额外缩进 */
+.prose ul ul,
+.prose ol ol,
+.prose ul ol,
+.prose ol ul {
+	margin-top: 0.5em;
 	margin-bottom: 0.5em;
 }
 
@@ -157,6 +181,11 @@ img {
 	max-width: 100%;
 	height: auto;
 }
+
+.prose img {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+}
 code {
 	padding: 2px 5px;
 	background-color: rgba(229, 233, 240, 0.5);
@@ -169,6 +198,13 @@ html.dark code {
 
 pre {
 	padding: 1.5em;
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
+}
+
+.prose pre {
+	margin-top: 1.5em;
+	margin-bottom: 1.5em;
 }
 
 html.dark pre {
@@ -194,6 +230,7 @@ blockquote {
 
 .prose blockquote {
 	color: #6b7280;
+	margin-top: 1.5em;
 	margin-bottom: 1.5em;
 }
 
@@ -203,6 +240,11 @@ html.dark .prose blockquote {
 hr {
 	border: none;
 	border-top: 1px solid var(--border-color);
+}
+
+.prose hr {
+	margin-top: 2em;
+	margin-bottom: 2em;
 }
 /* 移动端优化 */
 @media (max-width: 720px) {
