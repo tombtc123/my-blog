@@ -6,8 +6,7 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-	site: 'https://tombtc123.github.io',
-	base: '/my-blog',
+	site: 'https://blocktom.com',
 	integrations: [mdx(), sitemap()],
 	markdown: {
 		shikiConfig: {
