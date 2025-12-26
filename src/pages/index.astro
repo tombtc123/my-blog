@@ -125,7 +125,7 @@ function calculateReadingTime(content: string): number {
 			/* 移动端优化 - 保持单行，缩小元素 */
 			@media (max-width: 768px) {
 				.brand-section {
-					padding: 0.75rem 1rem;
+					padding: 0.5rem 0.75rem; /* 极致压缩垂直 padding */
 				}
 				
 				.brand-header-row {
@@ -134,22 +134,40 @@ function calculateReadingTime(content: string): number {
 				
 				.brand-left {
 					gap: 0.5rem;
+					flex: 1;
+					min-width: 0; /* 允许子元素收缩 */
+					overflow: hidden;
 				}
 				
+				.header-logo-title {
+					gap: 0.25rem;
+					flex-shrink: 0; /* Logo 不收缩 */
+				}
+
 				.header-logo {
-					height: 24px;
+					height: 20px; /* 缩小 Logo */
 				}
 				
 				.header-title {
-					font-size: 1rem;
+					font-size: 0.875rem; /* text-sm: 14px */
+					line-height: 1.2; /* 增加行高以防 g p y 等字母下半部被切 */
+					padding-bottom: 2px; /* 额外的底部 padding 作为保险 */
 				}
 				
 				.divider {
-					height: 20px;
+					height: 12px;
+					margin: 0 2px;
+					opacity: 0.3;
+					flex-shrink: 0;
 				}
-				
+
 				.header-subtitle {
-					font-size: 0.75rem;
+					font-size: 10px; /* 极致小 */
+					white-space: nowrap;
+					line-height: 1;
+					opacity: 0.8;
+					/* 确保 Slogan 显示出来 */
+					flex-shrink: 0; /* 不允许压缩 Slogan */
 				}
 			}
 			

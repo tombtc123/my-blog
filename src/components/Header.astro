@@ -12,7 +12,7 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 			</a>
 		)}
 		{!isHomePage && (
-			<span class="site-url slogan">探索科技、思维与生活的边界</span>
+			<span class="site-url">blocktom.com</span>
 		)}
 		<div class="nav-icons">
 			{!isHomePage && (
@@ -85,41 +85,20 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 	
 	@media (max-width: 768px) {
 		header.sticky-header {
-			padding: 4px 0.5rem; /* px-2 equivalent */
+			padding: 4px 1rem;
 		}
 
 		header.sticky-header .brand-link {
-			font-size: 0.875rem; /* text-sm */
-			flex-shrink: 0;
+			font-size: 0.9rem;
 		}
 
-		header.sticky-header .slogan {
-			font-size: 10px; /* 10px */
-			color: #6b7280; /* text-gray-500 */
-			white-space: nowrap;
-			line-height: 1;
-			margin-left: 0.5rem; /* ml-2 */
-			position: static;
-			transform: none;
-			/* Ensure truncation doesn't happen if user meant 'mini' but no wrap */
-			flex-shrink: 1;
-			/* Wait, user said "绝不换行，绝不省略" so flex-shrink should be 0 or handled carefully */
-			/* But space is limited. User said "缩小一号" to fit everything. */
-			/* Let's try to fit. */
-		}
-		
-		html.dark header.sticky-header .slogan {
-			color: #9ca3af; /* text-gray-400 for dark mode */
-		}
-
-		header.sticky-header .nav-icons {
-			gap: 0.5rem; /* gap-2 */
-			flex-shrink: 0;
+		header.sticky-header .site-url {
+			font-size: 0.8rem;
 		}
 
 		header.sticky-header .icon {
-			width: 16px; /* w-4 */
-			height: 16px;
+			width: 18px;
+			height: 18px;
 		}
 	}
 	
