@@ -28,11 +28,12 @@ function calculateReadingTime(content: string): number {
 		<BaseHead title={title} description={description} image={heroImage} />
 		<style>
 			main {
-				width: calc(100% - 2em);
+				width: 100%;
 				max-width: 100%;
 				margin: 0;
 				padding-top: 4rem;
 				overflow-x: hidden;
+				box-sizing: border-box;
 			}
 			.article-container {
 				display: flex;
@@ -55,7 +56,8 @@ function calculateReadingTime(content: string): number {
 					padding-right: 0;
 					flex-direction: column;
 					overflow-x: hidden;
-					max-width: 100vw;
+					width: 100%;
+					max-width: 100%;
 				}
 				
 				.toc {
@@ -252,8 +254,8 @@ function calculateReadingTime(content: string): number {
 			/* Mobile TOC Button */
 			.mobile-toc-button {
 				position: fixed;
-				bottom: 5.5rem;
-				right: 1.5rem;
+				bottom: 6rem;
+				right: 2rem;
 				width: 48px;
 				height: 48px;
 				border-radius: 50%;
@@ -272,6 +274,8 @@ function calculateReadingTime(content: string): number {
 			@media (max-width: 1024px) {
 				.mobile-toc-button {
 					display: flex;
+					right: 1.5rem;
+					bottom: 6.5rem;
 				}
 			}
 			
@@ -346,7 +350,7 @@ function calculateReadingTime(content: string): number {
 			.back-to-top {
 				position: fixed;
 				bottom: 2rem;
-				right: 1.5rem;
+				right: 2rem;
 				width: 48px;
 				height: 48px;
 				border-radius: 50%;
@@ -383,17 +387,23 @@ function calculateReadingTime(content: string): number {
 				height: 24px;
 			}
 			
+			@media (max-width: 1024px) {
+				.back-to-top {
+					right: 1.5rem;
+				}
+			}
+			
 			@media (max-width: 768px) {
 				.back-to-top {
-					bottom: 1.5rem;
-					right: 1.5rem;
-					width: 44px;
-					height: 44px;
+					bottom: 2rem;
+					/* right: 1.5rem;  Inherited from 1024px media query */
+					width: 48px;
+					height: 48px; /* Unity size with TOC button */
 				}
 				
 				.back-to-top-icon {
-					width: 20px;
-					height: 20px;
+					width: 24px;
+					height: 24px;
 				}
 			}
 		</style>
