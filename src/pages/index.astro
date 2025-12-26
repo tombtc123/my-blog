@@ -18,6 +18,19 @@ function formatDate(date: Date): string {
 	const day = date.getDate();
 	return `${year}年${month}月${day}日`;
 }
+
+// 计算阅读时间（基于中文字数，平均每分钟300字）
+function calculateReadingTime(content: string): number {
+	// 移除 Markdown 语法和 HTML 标签
+	const plainText = content.replace(/[#*`\[\]()]/g, '').replace(/<[^>]*>/g, '');
+	// 计算字数（中文字符 + 英文单词）
+	const chineseChars = (plainText.match(/[\u4e00-\u9fa5]/g) || []).length;
+	const englishWords = (plainText.match(/[a-zA-Z]+/g) || []).length;
+	const totalChars = chineseChars + englishWords;
+	// 平均每分钟300字
+	const minutes = Math.ceil(totalChars / 300);
+	return minutes || 1;
+}
 ---
 
 <!doctype html>
@@ -32,22 +45,46 @@ function formatDate(date: Date): string {
 				transition: background-color 0.2s ease, color 0.2s ease;
 			}
 			
-			/* 页眉区域 */
-			.page-header {
-				text-align: center;
-				padding: 6rem 2rem 4rem 2rem;
+			/* 品牌区域 - 完全单行布局 */
+			.brand-section {
+				padding: 1.25rem 2rem;
 				max-width: 100%;
-				margin-top: 0;
+				background: var(--bg-color);
+				border-bottom: 1px solid var(--border-color);
+				position: sticky;
+				top: 0;
+				z-index: 100;
+				backdrop-filter: blur(12px);
+				-webkit-backdrop-filter: blur(12px);
+			}
+			
+			.brand-header-row {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				max-width: 1400px;
+				margin: 0 auto;
+				gap: 2rem;
+			}
+			
+			.brand-left {
+				display: flex;
+				align-items: center;
+				gap: 2rem;
 			}
 			
 			.header-logo-title {
 				display: flex;
 				align-items: center;
-				justify-content: center;
 				gap: 0.75rem;
-				margin-bottom: 1.5rem;
 				text-decoration: none;
-				flex-wrap: wrap;
+			}
+			
+			.divider {
+				width: 1px;
+				height: 30px;
+				background: var(--border-color);
+				opacity: 0.5;
 			}
 			
 			.header-logo {
@@ -59,7 +96,7 @@ function formatDate(date: Date): string {
 			
 			.header-title {
 				font-family: 'Merriweather', 'Georgia', 'Times New Roman', serif;
-				font-size: 1.75rem;
+				font-size: 1.5rem;
 				font-weight: 700;
 				margin: 0;
 				background-image: linear-gradient(135deg, #34d399, #3b82f6);
@@ -68,27 +105,59 @@ function formatDate(date: Date): string {
 				color: transparent;
 				line-height: 1.2;
 				letter-spacing: -0.02em;
-				padding-bottom: 0.1em;
-				display: inline-block;
 			}
 			
 			.header-subtitle {
-				font-size: 1.125rem;
+				font-size: 0.9375rem;
 				color: #888888;
 				font-weight: 400;
 				margin: 0;
 				font-style: normal;
+				white-space: nowrap;
 			}
 			
 			html.dark .header-subtitle {
 				color: #aaaaaa;
 			}
 			
+			/* 导航图标区域 - 移除占位符 */
+			
+			/* 移动端优化 - 保持单行，缩小元素 */
+			@media (max-width: 768px) {
+				.brand-section {
+					padding: 0.75rem 1rem;
+				}
+				
+				.brand-header-row {
+					gap: 0.5rem;
+				}
+				
+				.brand-left {
+					gap: 0.5rem;
+				}
+				
+				.header-logo {
+					height: 24px;
+				}
+				
+				.header-title {
+					font-size: 1rem;
+				}
+				
+				.divider {
+					height: 20px;
+				}
+				
+				.header-subtitle {
+					font-size: 0.75rem;
+				}
+			}
+			
 			/* 文章列表容器 */
 			.post-list-container {
 				max-width: 800px;
 				margin: 0 auto;
-				padding: 0 2rem 8rem 2rem;
+				padding: 2rem 2rem 8rem 2rem;
 			}
 			
 			@media (max-width: 768px) {
@@ -106,6 +175,7 @@ function formatDate(date: Date): string {
 			
 			.post-item {
 				margin-bottom: 4rem;
+				position: relative;
 			}
 			
 			.post-item a {
@@ -116,6 +186,30 @@ function formatDate(date: Date): string {
 				width: 100%;
 				max-width: 100%;
 				box-sizing: border-box;
+				padding: 1.5rem;
+				margin: -1.5rem;
+				border-radius: 12px;
+				transition: all 0.3s ease;
+			}
+			
+			.post-item a:hover {
+				background-color: rgba(99, 102, 241, 0.03);
+				transform: translateY(-2px);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+			}
+			
+			html.dark .post-item a:hover {
+				background-color: rgba(99, 102, 241, 0.08);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+			}
+			
+			/* Hero Image */
+			.post-hero-image {
+				width: 100%;
+				height: 200px;
+				object-fit: cover;
+				border-radius: 8px;
+				margin-bottom: 1rem;
 			}
 			
 			/* 第一行：元数据 */
@@ -125,17 +219,22 @@ function formatDate(date: Date): string {
 				margin-bottom: 0.75rem;
 				letter-spacing: 0.01em;
 				transition: color 0.2s ease;
-				/* 强制换行修复 */
-				min-width: 0 !important;
-				white-space: normal !important;
-				word-wrap: break-word !important;
-				overflow-wrap: anywhere !important;
-				max-width: 100% !important;
-				box-sizing: border-box;
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				flex-wrap: wrap;
+			}
+			
+			.post-meta-separator {
+				color: #ccc;
 			}
 			
 			html.dark .post-meta {
 				color: #888888;
+			}
+			
+			html.dark .post-meta-separator {
+				color: #555;
 			}
 			
 			/* 第二行：大标题 */
@@ -187,20 +286,45 @@ function formatDate(date: Date): string {
 				color: #cccccc;
 			}
 			
+			/* Tags */
+			.post-tags {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				margin-top: 1rem;
+			}
+			
+			.post-tag {
+				font-size: 0.8125rem;
+				padding: 0.25rem 0.75rem;
+				background-color: rgba(99, 102, 241, 0.1);
+				color: #6366f1;
+				border-radius: 16px;
+				transition: all 0.2s ease;
+			}
+			
+			.post-tag:hover {
+				background-color: rgba(99, 102, 241, 0.2);
+			}
+			
+			html.dark .post-tag {
+				background-color: rgba(99, 102, 241, 0.15);
+				color: #818cf8;
+			}
+			
+			html.dark .post-tag:hover {
+				background-color: rgba(99, 102, 241, 0.25);
+			}
+			
 			/* 响应式设计 */
 			@media (max-width: 768px) {
-				.page-header {
-					padding: 4rem 1rem 3rem 1rem;
-				}
-				
-				.header-logo-title {
+				.post-list-container {
 					flex-direction: column;
 					gap: 0.5rem;
 				}
 				
 				.header-logo {
 					height: 32px;
-					width: auto;
 				}
 				
 				.header-title {
@@ -340,23 +464,31 @@ function formatDate(date: Date): string {
 		</style>
 	</head>
 	<body>
-		<Header />
-		<!-- 页眉区域 -->
-		<header class="page-header">
-			<div class="header-logo-title">
-				<Image
-					src={logo}
-					alt="Tom Blog Logo"
-					class="header-logo"
-					width={72}
-					height={72}
-					loading="eager"
-					fetchpriority="high"
-				/>
-				<h1 class="header-title">{SITE_TITLE}</h1>
+		<!-- 品牌区域 - 完全单行布局 -->
+		<div class="brand-section">
+			<div class="brand-header-row">
+				<div class="brand-left">
+					<div class="header-logo-title">
+						<Image
+							src={logo}
+							alt="Tom Blog Logo"
+							class="header-logo"
+							width={72}
+							height={72}
+							loading="eager"
+							fetchpriority="high"
+						/>
+						<h1 class="header-title">{SITE_TITLE}</h1>
+					</div>
+					<div class="divider"></div>
+					<p class="header-subtitle">探索科技、思维与生活的边界</p>
+				</div>
+				<!-- Header 导航图标会显示在右侧 -->
 			</div>
-			<p class="header-subtitle">探索科技、思维与生活的边界</p>
-		</header>
+		</div>
+		
+		<!-- Header 导航栏 - 使用绝对定位放到右上角 -->
+		<Header />
 		
 		<!-- 文章列表 -->
 		<main class="post-list-container">
@@ -365,11 +497,36 @@ function formatDate(date: Date): string {
 					posts.map((post) => (
 						<li class="post-item">
 							<a href={`/blog/${post.id}/`}>
+								{post.data.heroImage && (
+									<Image
+										src={post.data.heroImage}
+										alt={post.data.title}
+										class="post-hero-image"
+										width={800}
+										height={400}
+										loading="lazy"
+									/>
+								)}
 								<div class="post-meta">
-									{formatDate(post.data.pubDate)}
+									<span>{formatDate(post.data.pubDate)}</span>
+									<span class="post-meta-separator">·</span>
+									<span>{calculateReadingTime(post.body)} 分钟阅读</span>
+									{post.data.category && (
+										<>
+											<span class="post-meta-separator">·</span>
+											<span>{post.data.category}</span>
+										</>
+									)}
 								</div>
 								<h2 class="post-title">{post.data.title}</h2>
 								<p class="post-description">{post.data.description}</p>
+								{post.data.tags && post.data.tags.length > 0 && (
+									<div class="post-tags">
+										{post.data.tags.map((tag) => (
+											<span class="post-tag">#{tag}</span>
+										))}
+									</div>
+								)}
 							</a>
 						</li>
 					))

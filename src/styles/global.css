@@ -13,15 +13,16 @@
 	--gray-dark: 51, 51, 51;
 	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
 	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px
-		rgba(var(--gray), 33%);
-	
+		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
+
 	/* 浅色模式变量 */
 	--bg-color: #ffffff;
-	--text-color: #000000;
+	--text-color: #1f2937;
+	/* Softer black */
 	--header-bg: #ffffff;
 	--border-color: rgba(0, 0, 0, 0.1);
-	--color-heading-text: #1f2937;
+	--color-heading-text: #111827;
+	/* Dark gray for headings instead of pitch black */
 }
 
 html.dark {
@@ -42,16 +43,20 @@ body {
 	word-wrap: break-word;
 	overflow-wrap: break-word;
 	color: var(--text-color);
-	font-size: 16px;
-	line-height: 1.7;
+	font-size: 17px;
+	/* Slightly larger base font */
+	line-height: 1.8;
+	/* improved line height */
 	transition: background-color 0.2s ease, color 0.2s ease;
 }
+
 main {
 	width: 680px;
 	max-width: calc(100% - 2em);
 	margin: auto;
 	padding: 3em 1em;
 }
+
 h1,
 h2,
 h3,
@@ -62,48 +67,66 @@ h6 {
 	color: var(--text-color);
 	line-height: 1.2;
 }
+
 h1 {
-	font-size: 3.052em;
+	font-size: 2.5em;
+	/* Reduced from 3.052em */
 }
+
 h2 {
-	font-size: 2.441em;
+	font-size: 2em;
+	/* Reduced from 2.441em */
 }
+
 h3 {
-	font-size: 1.953em;
+	font-size: 1.6em;
+	/* Reduced from 1.953em */
 }
+
 h4 {
-	font-size: 1.563em;
+	font-size: 1.35em;
+	/* Reduced from 1.563em */
 }
+
 h5 {
-	font-size: 1.25em;
+	font-size: 1.15em;
 }
+
 strong,
 b {
 	font-weight: 700;
 }
+
 a {
 	color: var(--accent);
 }
+
 a:hover {
 	color: var(--accent);
 }
+
 p {
 	margin-bottom: 1em;
 }
 
 /* 文章正文排版优化 */
 .prose {
-	font-size: 1.125rem; /* 18px */
-	line-height: 1.75; /* leading-loose */
-	color: #374151; /* Gray-700 */
+	font-size: 1.125rem;
+	/* 18px */
+	line-height: 1.85;
+	/* More breathing room */
+	color: #374151;
+	/* Gray-700 */
 }
 
 html.dark .prose {
-	color: #e5e7eb; /* 深色模式下的浅灰色，保持良好的对比度 */
+	color: #e5e7eb;
+	/* 深色模式下的浅灰色，保持良好的对比度 */
 }
 
 .prose p {
-	margin-bottom: 1.5em; /* 段落间距 1.5em */
+	margin-bottom: 1.5em;
+	/* 段落间距 1.5em */
 }
 
 .prose h1,
@@ -120,25 +143,33 @@ html.dark .prose {
 /* h2 和 h3 作为主要标题，需要更大的间距 */
 .prose h2,
 .prose h3 {
-	margin-top: 2.5em;
+	margin-top: 3em;
+	/* Increased spacing */
 	margin-bottom: 1em;
+	color: var(--color-heading-text);
 }
 
 /* h1 通常只在文章开头，减少上方间距 */
 .prose h1 {
 	margin-top: 0;
-	margin-bottom: 1em;
+	margin-bottom: 0.8em;
+	font-weight: 800;
+	letter-spacing: -0.025em;
 }
 
 .prose ul,
 .prose ol {
-	padding-left: 1.5em; /* 确保子弹点不顶格 */
-	margin-bottom: 1.5em; /* 列表整体与下方段落拉开距离 */
-	margin-top: 1em; /* 列表上方与上方内容拉开距离 */
+	padding-left: 1.5em;
+	/* 确保子弹点不顶格 */
+	margin-bottom: 1.5em;
+	/* 列表整体与下方段落拉开距离 */
+	margin-top: 1em;
+	/* 列表上方与上方内容拉开距离 */
 }
 
 .prose li {
-	margin-bottom: 0.8em; /* 增加列表项之间的距离 */
+	margin-bottom: 0.8em;
+	/* 增加列表项之间的距离 */
 }
 
 /* 嵌套列表的额外缩进 */
@@ -164,19 +195,25 @@ html.dark .prose {
 
 .prose strong,
 .prose b {
-	font-weight: 600;
-	color: var(--text-color);
+	font-weight: 700;
+	color: var(--color-heading-text);
+	background: linear-gradient(120deg, transparent 60%, rgba(var(--accent), 0.1) 60%);
+	/* Subtle highlight */
 }
+
 textarea {
 	width: 100%;
 	font-size: 16px;
 }
+
 input {
 	font-size: 16px;
 }
+
 table {
 	width: 100%;
 }
+
 img {
 	max-width: 100%;
 	height: auto;
@@ -186,6 +223,7 @@ img {
 	margin-top: 1.5em;
 	margin-bottom: 1.5em;
 }
+
 code {
 	padding: 2px 5px;
 	background-color: rgba(229, 233, 240, 0.5);
@@ -211,12 +249,12 @@ html.dark pre {
 	background-color: rgba(0, 0, 0, 0.3);
 }
 
-pre > code {
+pre>code {
 	all: unset;
 	background-color: transparent;
 }
 
-html.dark pre > code {
+html.dark pre>code {
 	background-color: transparent;
 }
 
@@ -237,6 +275,7 @@ blockquote {
 html.dark .prose blockquote {
 	color: #9ca3af;
 }
+
 hr {
 	border: none;
 	border-top: 1px solid var(--border-color);
@@ -246,29 +285,70 @@ hr {
 	margin-top: 2em;
 	margin-bottom: 2em;
 }
+
 /* 移动端优化 */
 @media (max-width: 720px) {
 	body {
 		font-size: 16px;
 	}
-	
-	.prose {
-		font-size: 1rem; /* 移动端稍微小一点，16px */
+
+	/* 移动端标题大小优化 - 减小标题以节省屏幕空间 */
+	h1 {
+		font-size: 2em;
+		/* 从 2.5em 减小 */
 	}
-	
+
+	h2 {
+		font-size: 1.6em;
+		/* 从 2em 减小 */
+	}
+
+	h3 {
+		font-size: 1.35em;
+		/* 从 1.6em 减小 */
+	}
+
+	h4 {
+		font-size: 1.2em;
+	}
+
+	.prose {
+		font-size: 1rem;
+		/* 移动端稍微小一点，16px */
+	}
+
+	/* 移动端文章标题优化 */
+	.prose h1 {
+		font-size: 1.75em;
+		/* 进一步减小文章主标题 */
+		margin-bottom: 0.6em;
+	}
+
+	.prose h2 {
+		font-size: 1.5em;
+		margin-top: 2em;
+		/* 减少上方间距 */
+	}
+
+	.prose h3 {
+		font-size: 1.25em;
+		margin-top: 1.75em;
+	}
+
 	main {
 		padding-left: 1rem;
 		padding-right: 1rem;
 		padding-top: 2em;
 		padding-bottom: 2em;
 	}
-	
+
 	/* 确保所有图片在移动端响应式 */
 	img {
 		max-width: 100%;
 		height: auto;
 	}
 }
+
 
 .sr-only {
 	border: 0;

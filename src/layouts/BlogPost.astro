@@ -7,9 +7,20 @@ import Header from '../components/Header.astro';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	headings?: MarkdownHeading[];
+	body?: string;
 };
 
-const { title, description, pubDate, updatedDate, heroImage, headings = [] } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, headings = [], tags, category, body = '' } = Astro.props;
+
+// 计算阅读时间
+function calculateReadingTime(content: string): number {
+	const plainText = content.replace(/[#*`\[\]()]/g, '').replace(/<[^>]*>/g, '');
+	const chineseChars = (plainText.match(/[\u4e00-\u9fa5]/g) || []).length;
+	const englishWords = (plainText.match(/[a-zA-Z]+/g) || []).length;
+	const totalChars = chineseChars + englishWords;
+	const minutes = Math.ceil(totalChars / 300);
+	return minutes || 1;
+}
 ---
 
 <html lang="en">
@@ -20,7 +31,7 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				width: calc(100% - 2em);
 				max-width: 100%;
 				margin: 0;
-				padding-top: 0;
+				padding-top: 4rem;
 			}
 			.article-container {
 				display: flex;
@@ -45,18 +56,30 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				/* .prose 的 padding 由 Layout.astro 全局样式控制 */
 			}
 			.title {
-				margin-bottom: 1em;
+				margin-bottom: 2em;
 				padding: 1em 0;
 				text-align: center;
-				line-height: 1;
 			}
 			.title h1 {
-				margin: 0 0 0.5em 0;
+				margin: 0 0 0.75em 0;
+				font-size: 2.5rem;
+				line-height: 1.2;
+			}
+			.title hr {
+				margin: 0 0 1em 0;
+				border: none;
+				border-top: 1px solid var(--border-color);
 			}
 			.date {
-				margin-bottom: 0.5em;
+				margin-bottom: 0;
 				color: #666;
 				transition: color 0.2s ease;
+				display: flex;
+				align-items: baseline;
+				justify-content: center;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				font-size: 0.9375rem;
 			}
 			
 			html.dark .date {
@@ -64,6 +87,60 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 			}
 			.last-updated-on {
 				font-style: italic;
+			}
+			
+			/* Hero Image */
+			.hero-image {
+				width: 100%;
+				max-width: 100%;
+				height: auto;
+				max-height: 400px;
+				object-fit: cover;
+				border-radius: 8px;
+				margin-bottom: 2rem;
+			}
+			
+			/* Reading Time & Meta */
+			.post-meta-info {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				flex-wrap: wrap;
+				font-size: 0.875rem;
+				color: #888;
+				margin-top: 0.5rem;
+			}
+			
+			.meta-separator {
+				color: #ccc;
+			}
+			
+			html.dark .post-meta-info {
+				color: #aaa;
+			}
+			
+			/* Tags in post */
+			.post-tags {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				margin-top: 2rem;
+				padding-top: 2rem;
+				border-top: 1px solid var(--border-color);
+			}
+			
+			.post-tag {
+				font-size: 0.8125rem;
+				padding: 0.25rem 0.75rem;
+				background-color: rgba(99, 102, 241, 0.1);
+				color: #6366f1;
+				border-radius: 16px;
+				transition: all 0.2s ease;
+			}
+			
+			html.dark .post-tag {
+				background-color: rgba(99, 102, 241, 0.15);
+				color: #818cf8;
 			}
 			.toc {
 				position: sticky;
@@ -97,23 +174,29 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				margin-bottom: 0.5rem;
 			}
 			.toc-link {
-				color: #888;
+				color: #6b7280; /* Neutral gray */
 				text-decoration: none;
 				display: block;
-				transition: color 0.2s;
+				transition: all 0.2s ease;
+				padding: 0.25rem 0 0.25rem 0.75rem;
+				border-left: 2px solid transparent;
 			}
 			
 			html.dark .toc-link {
-				color: #aaaaaa;
+				color: #9ca3af;
 			}
 			
 			.toc-link:hover {
-				color: var(--text-color);
+				color: var(--accent);
+				border-left-color: rgba(35, 55, 255, 0.3);
+				background-color: rgba(35, 55, 255, 0.05); /* Slight background on hover */
 			}
 			
 			.toc-link.active {
-				color: var(--text-color);
-				font-weight: 500;
+				color: var(--accent);
+				font-weight: 600;
+				border-left-color: var(--accent);
+				background-color: rgba(35, 55, 255, 0.1);
 			}
 			.toc-item-h3 {
 				padding-left: 1rem;
@@ -137,6 +220,99 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				}
 			}
 			
+			/* Mobile TOC Button */
+			.mobile-toc-button {
+				position: fixed;
+				bottom: 5.5rem;
+				right: 1.5rem;
+				width: 48px;
+				height: 48px;
+				border-radius: 50%;
+				background-color: #6366f1;
+				color: #ffffff;
+				border: none;
+				cursor: pointer;
+				display: none;
+				align-items: center;
+				justify-content: center;
+				box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.5);
+				transition: all 0.2s ease;
+				z-index: 45;
+			}
+			
+			@media (max-width: 1024px) {
+				.mobile-toc-button {
+					display: flex;
+				}
+			}
+			
+			.mobile-toc-button:hover {
+				transform: scale(1.05);
+			}
+			
+			.mobile-toc-button:active {
+				transform: scale(0.95);
+			}
+			
+			/* Mobile TOC Overlay */
+			.mobile-toc-overlay {
+				position: fixed;
+				top: 0;
+				left: 0;
+				right: 0;
+				bottom: 0;
+				background-color: rgba(0, 0, 0, 0.5);
+				z-index: 48;
+				opacity: 0;
+				pointer-events: none;
+				transition: opacity 0.3s ease;
+			}
+			
+			.mobile-toc-overlay.active {
+				opacity: 1;
+				pointer-events: auto;
+			}
+			
+			.mobile-toc-panel {
+				position: fixed;
+				top: 0;
+				right: -300px;
+				width: 280px;
+				height: 100%;
+				background-color: var(--bg-color);
+				box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
+				z-index: 49;
+				overflow-y: auto;
+				padding: 2rem 1.5rem;
+				transition: right 0.3s ease;
+			}
+			
+			.mobile-toc-panel.active {
+				right: 0;
+			}
+			
+			.mobile-toc-header {
+				display: flex;
+				justify-content: space-between;
+				align-items: center;
+				margin-bottom: 1.5rem;
+			}
+			
+			.mobile-toc-close {
+				background: none;
+				border: none;
+				color: var(--text-color);
+				cursor: pointer;
+				padding: 0.5rem;
+				margin: -0.5rem;
+				opacity: 0.7;
+				transition: opacity 0.2s ease;
+			}
+			
+			.mobile-toc-close:hover {
+				opacity: 1;
+			}
+			
 			/* 回到顶部按钮 */
 			.back-to-top {
 				position: fixed;
@@ -152,7 +328,7 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				display: flex;
 				align-items: center;
 				justify-content: center;
-				box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+				box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.5); /* Added border ring for contrast */
 				opacity: 0;
 				pointer-events: none;
 				transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
@@ -201,6 +377,8 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 				<div class="article-container">
 					<div class="prose">
 						<div class="title">
+							<h1>{title}</h1>
+							<hr />
 							<div class="date">
 								<FormattedDate date={pubDate} />
 								{
@@ -210,11 +388,28 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 										</div>
 									)
 								}
+								<div class="post-meta-info">
+									<span>{calculateReadingTime(body)} 分钟阅读</span>
+									{category && (
+										<>
+											<span class="meta-separator">·</span>
+											<span>{category}</span>
+										</>
+									)}
+								</div>
 							</div>
-							<h1>{title}</h1>
-							<hr />
 						</div>
+						{heroImage && (
+							<img src={heroImage.src} alt={title} class="hero-image" />
+						)}
 						<slot />
+						{tags && tags.length > 0 && (
+							<div class="post-tags">
+								{tags.map((tag) => (
+									<span class="post-tag">#{tag}</span>
+								))}
+							</div>
+						)}
 					</div>
 					{headings.length > 0 && (
 						<nav class="toc" id="toc">
@@ -238,6 +433,51 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 			</article>
 		</main>
 		<Footer />
+		
+		<!-- Mobile TOC Button (only visible on mobile) -->
+		{headings.length > 0 && (
+			<>
+				<button id="mobile-toc-button" class="mobile-toc-button" aria-label="Table of Contents">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<line x1="8" y1="6" x2="21" y2="6"></line>
+						<line x1="8" y1="12" x2="21" y2="12"></line>
+						<line x1="8" y1="18" x2="21" y2="18"></line>
+						<line x1="3" y1="6" x2="3.01" y2="6"></line>
+						<line x1="3" y1="12" x2="3.01" y2="12"></line>
+						<line x1="3" y1="18" x2="3.01" y2="18"></line>
+					</svg>
+				</button>
+				
+				<!-- Mobile TOC Overlay -->
+				<div id="mobile-toc-overlay" class="mobile-toc-overlay"></div>
+				
+				<!-- Mobile TOC Panel -->
+				<div id="mobile-toc-panel" class="mobile-toc-panel">
+					<div class="mobile-toc-header">
+						<div class="toc-title">目录</div>
+						<button id="mobile-toc-close" class="mobile-toc-close" aria-label="Close">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+								<line x1="18" y1="6" x2="6" y2="18"></line>
+								<line x1="6" y1="6" x2="18" y2="18"></line>
+							</svg>
+						</button>
+					</div>
+					<ul class="toc-list">
+						{headings.map((heading) => {
+							const slug = heading.slug || heading.text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+							return (
+								<li class={`toc-item ${heading.depth === 3 ? 'toc-item-h3' : ''}`}>
+									<a href={`#${slug}`} class="toc-link mobile-toc-link" data-slug={slug}>
+										{heading.text}
+									</a>
+								</li>
+							);
+						})}
+					</ul>
+				</div>
+			</>
+		)}
+		
 		<button id="back-to-top" class="back-to-top" aria-label="Back to top">
 			<svg class="back-to-top-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 				<path d="m18 15-6-6-6 6"></path>
@@ -345,6 +585,36 @@ const { title, description, pubDate, updatedDate, heroImage, headings = [] } = A
 					window.scrollTo({
 						top: 0,
 						behavior: 'smooth'
+					});
+				});
+				
+				// Mobile TOC interactions
+				const mobileTocButton = document.getElementById('mobile-toc-button');
+				const mobileTocOverlay = document.getElementById('mobile-toc-overlay');
+				const mobileTocPanel = document.getElementById('mobile-toc-panel');
+				const mobileTocClose = document.getElementById('mobile-toc-close');
+				const mobileTocLinks = document.querySelectorAll('.mobile-toc-link');
+				
+				function openMobileToc() {
+					mobileTocOverlay?.classList.add('active');
+					mobileTocPanel?.classList.add('active');
+					document.body.style.overflow = 'hidden';
+				}
+				
+				function closeMobileToc() {
+					mobileTocOverlay?.classList.remove('active');
+					mobileTocPanel?.classList.remove('active');
+					document.body.style.overflow = '';
+				}
+				
+				mobileTocButton?.addEventListener('click', openMobileToc);
+				mobileTocClose?.addEventListener('click', closeMobileToc);
+				mobileTocOverlay?.addEventListener('click', closeMobileToc);
+				
+				// Close mobile TOC when clicking a link
+				mobileTocLinks.forEach((link) => {
+					link.addEventListener('click', () => {
+						closeMobileToc();
 					});
 				});
 			});
