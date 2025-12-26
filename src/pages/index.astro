@@ -284,6 +284,11 @@ function calculateReadingTime(content: string): number {
 				box-sizing: border-box;
 				/* 确保不会被其他样式覆盖 */
 				display: block;
+				display: -webkit-box;
+				-webkit-line-clamp: 3;
+				-webkit-box-orient: vertical;
+				overflow: hidden;
+				text-overflow: ellipsis;
 			}
 			
 			html.dark .post-description {
