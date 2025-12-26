@@ -1,10 +1,10 @@
-import { e as createAstro, c as createComponent, r as renderComponent, a as renderTemplate } from '../../chunks/astro/server_Bk1LWNsd.mjs';
+import { e as createAstro, c as createComponent, r as renderComponent, a as renderTemplate } from '../../chunks/astro/server_Dyr8R2c-.mjs';
 import 'piccolore';
-import { r as renderEntry, g as getCollection } from '../../chunks/_astro_content_D7HX2KOL.mjs';
-import { $ as $$BlogPost } from '../../chunks/BlogPost_2kUDLx6h.mjs';
+import { r as renderEntry, g as getCollection } from '../../chunks/_astro_content_8bfDrswT.mjs';
+import { $ as $$BlogPost } from '../../chunks/BlogPost_ColDs5GK.mjs';
 export { renderers } from '../../renderers.mjs';
 
-const $$Astro = createAstro("https://example.com");
+const $$Astro = createAstro("https://blocktom.com");
 async function getStaticPaths() {
   const posts = await getCollection("blog");
   return posts.map((post) => ({

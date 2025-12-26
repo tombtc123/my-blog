@@ -1,6 +1,6 @@
-import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_Bk1LWNsd.mjs';
+import { c as createComponent, r as renderComponent, a as renderTemplate, m as maybeRenderHead } from '../chunks/astro/server_Dyr8R2c-.mjs';
 import 'piccolore';
-import { $ as $$BlogPost } from '../chunks/BlogPost_2kUDLx6h.mjs';
+import { $ as $$BlogPost } from '../chunks/BlogPost_ColDs5GK.mjs';
 export { renderers } from '../renderers.mjs';
 
 const AboutHeroImage = new Proxy({"src":"/_astro/blog-placeholder-about.BtEdEmGp.jpg","width":960,"height":480,"format":"jpg"}, {

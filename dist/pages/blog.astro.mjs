@@ -1,10 +1,10 @@
-import { c as createComponent, r as renderComponent, b as renderHead, d as addAttribute, a as renderTemplate } from '../chunks/astro/server_Bk1LWNsd.mjs';
+import { c as createComponent, r as renderComponent, b as renderHead, d as addAttribute, a as renderTemplate } from '../chunks/astro/server_Dyr8R2c-.mjs';
 import 'piccolore';
-import { $ as $$Image } from '../chunks/_astro_assets_DwQfilHD.mjs';
-import { g as getCollection } from '../chunks/_astro_content_D7HX2KOL.mjs';
-import { $ as $$BaseHead, a as $$Footer } from '../chunks/Footer_CX72ZL9U.mjs';
-import { $ as $$Header, a as $$FormattedDate } from '../chunks/Header_Br44_m_n.mjs';
-import { S as SITE_DESCRIPTION, a as SITE_TITLE } from '../chunks/consts_BKVdSRqN.mjs';
+import { $ as $$Image } from '../chunks/_astro_assets_BUd8e-6z.mjs';
+import { g as getCollection } from '../chunks/_astro_content_8bfDrswT.mjs';
+import { $ as $$BaseHead, a as $$Header, b as $$Footer } from '../chunks/Header_DT8_dl2_.mjs';
+import { $ as $$FormattedDate } from '../chunks/FormattedDate_Yhpej4dw.mjs';
+import { S as SITE_DESCRIPTION, a as SITE_TITLE } from '../chunks/consts_DzhzC9iB.mjs';
 /* empty css                                 */
 export { renderers } from '../renderers.mjs';
 
