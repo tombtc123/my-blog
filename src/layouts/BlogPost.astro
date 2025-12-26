@@ -52,6 +52,16 @@ function calculateReadingTime(content: string): number {
 				.article-container {
 					padding-left: 0;
 					padding-right: 0;
+					flex-direction: column;
+				}
+				
+				.toc {
+					display: none;
+				}
+				
+				.prose {
+					width: 100%;
+					max-width: 100%;
 				}
 				/* .prose 的 padding 由 Layout.astro 全局样式控制 */
 			}
