@@ -4,7 +4,7 @@ import { SITE_TITLE } from '../consts';
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
 ---
 
-<header>
+<header class={isHomePage ? 'home-header' : 'sticky-header'}>
 	<div class="header-container">
 		{!isHomePage && (
 			<a href="/" class="brand-link" aria-label="Home">
@@ -51,7 +51,8 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 	}
 	
 	/* 首页特殊处理 - 绝对定位到右上角，与品牌行对齐 */
-	header {
+	/* 首页 Header - 绝对定位 */
+	header.home-header {
 		position: absolute;
 		top: 1.25rem;
 		right: 2rem;
@@ -59,10 +60,51 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 		border: none;
 		z-index: 101;
 	}
+
+	/* 文章页 Header - 吸顶和毛玻璃 */
+	header.sticky-header {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		width: 100%;
+		z-index: 50;
+		background: rgba(255, 255, 255, 0.8);
+		backdrop-filter: blur(10px);
+		-webkit-backdrop-filter: blur(10px);
+		padding: 0.25rem 2rem;
+		box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+	}
+	
+	/* 深色模式下的吸顶 Header */
+	html.dark header.sticky-header {
+		background: rgba(26, 26, 26, 0.8); /* base color #1a1a1a with opacity */
+		border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+		box-shadow: none;
+	}
+	
+	@media (max-width: 768px) {
+		header.sticky-header {
+			padding: 4px 1rem;
+		}
+
+		header.sticky-header .brand-link {
+			font-size: 0.9rem;
+		}
+
+		header.sticky-header .site-url {
+			font-size: 0.8rem;
+		}
+
+		header.sticky-header .icon {
+			width: 18px;
+			height: 18px;
+		}
+	}
 	
 	/* 移动端调整 - 精确对齐 */
 	@media (max-width: 768px) {
-		header {
+		header.home-header {
 			top: 0.6rem;
 			right: 1rem;
 		}

@@ -31,7 +31,11 @@ function calculateReadingTime(content: string): number {
 				width: 100%;
 				max-width: 100%;
 				margin: 0;
-				padding-top: 4rem;
+				width: 100%;
+				max-width: 100%;
+				margin: 0;
+				padding-top: 5rem;
+				overflow-x: hidden;
 				overflow-x: hidden;
 				box-sizing: border-box;
 			}
@@ -295,7 +299,7 @@ function calculateReadingTime(content: string): number {
 				right: 0;
 				bottom: 0;
 				background-color: rgba(0, 0, 0, 0.5);
-				z-index: 48;
+				z-index: 99;
 				opacity: 0;
 				pointer-events: none;
 				transition: opacity 0.3s ease;
@@ -314,7 +318,7 @@ function calculateReadingTime(content: string): number {
 				height: 100%;
 				background-color: var(--bg-color);
 				box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
-				z-index: 49;
+				z-index: 100;
 				overflow-y: auto;
 				padding: 2rem 1.5rem;
 				transition: right 0.3s ease;
