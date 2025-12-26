@@ -32,6 +32,7 @@ function calculateReadingTime(content: string): number {
 				max-width: 100%;
 				margin: 0;
 				padding-top: 4rem;
+				overflow-x: hidden;
 			}
 			.article-container {
 				display: flex;
@@ -53,6 +54,8 @@ function calculateReadingTime(content: string): number {
 					padding-left: 0;
 					padding-right: 0;
 					flex-direction: column;
+					overflow-x: hidden;
+					max-width: 100vw;
 				}
 				
 				.toc {
@@ -62,6 +65,22 @@ function calculateReadingTime(content: string): number {
 				.prose {
 					width: 100%;
 					max-width: 100%;
+					overflow-wrap: break-word;
+					word-wrap: break-word;
+					word-break: break-word;
+					hyphens: auto;
+				}
+				
+				.prose p,
+				.prose h1,
+				.prose h2,
+				.prose h3,
+				.prose h4,
+				.prose li,
+				.prose div {
+					overflow-wrap: break-word;
+					word-wrap: break-word;
+					word-break: break-word;
 				}
 				/* .prose 的 padding 由 Layout.astro 全局样式控制 */
 			}
