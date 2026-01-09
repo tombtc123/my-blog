@@ -7,12 +7,14 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 <header class={isHomePage ? 'home-header' : 'sticky-header'}>
 	<div class="header-container">
 		{!isHomePage && (
-			<a href="/" class="brand-link" aria-label="Home">
-				<span class="brand-text">{SITE_TITLE}</span>
+			<a href="https://x.com/blocktom" target="_blank" rel="noopener noreferrer" class="brand-link" aria-label="Follow on X">
+				<svg class="x-logo" width="22" height="22" viewBox="0 0 24 24" fill="currentColor">
+					<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+				</svg>
 			</a>
 		)}
 		{!isHomePage && (
-			<span class="site-url">blocktom.com</span>
+			<a href="/" class="site-url">blocktom.com</a>
 		)}
 		<div class="nav-icons">
 			{!isHomePage && (
@@ -59,6 +61,12 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 		background: transparent;
 		border: none;
 		z-index: 101;
+		pointer-events: none; /* 不拦截点击事件，让品牌链接可点击 */
+	}
+	
+	/* 确保首页 header 的子元素仍可点击 */
+	header.home-header .nav-icons {
+		pointer-events: auto;
 	}
 
 	/* 文章页 Header - 吸顶和毛玻璃 */
@@ -93,7 +101,7 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 		}
 
 		header.sticky-header .site-url {
-			font-size: 0.8rem;
+			font-size: 1rem;
 		}
 
 		header.sticky-header .icon {
@@ -117,6 +125,12 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 		padding: 0;
 		max-width: 100%;
 		position: relative;
+		pointer-events: none; /* 不拦截点击事件，让下面的品牌链接可点击 */
+	}
+	
+	/* 恢复子元素的点击事件 */
+	.header-container > * {
+		pointer-events: auto;
 	}
 	
 	.brand-link {
@@ -124,13 +138,20 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 		color: var(--text-color);
 		font-weight: 600;
 		font-size: 1rem;
-		display: none;
-		transition: opacity 0.2s ease;
+		display: flex;
+		align-items: center;
+		transition: opacity 0.2s ease, transform 0.2s ease;
 		z-index: 1;
 	}
 	
 	.brand-link:hover {
 		opacity: 0.7;
+		transform: scale(1.1);
+	}
+	
+	.x-logo {
+		width: 22px;
+		height: 22px;
 	}
 	
 	.brand-text {
@@ -145,15 +166,26 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 	.site-url {
 		position: absolute;
 		left: 50%;
-		transform: translateX(-50%);
-		font-size: 0.9rem;
-		color: #9ca3af;
-		pointer-events: none;
+		top: 50%;
+		transform: translate(-50%, -50%);
+		font-size: 1.5rem;
+		font-weight: 600;
+		background-image: linear-gradient(135deg, #34d399, #3b82f6);
+		background-clip: text;
+		-webkit-background-clip: text;
+		color: transparent;
+		text-decoration: none;
 		z-index: 0;
+		transition: opacity 0.2s ease;
+		line-height: 1;
 	}
 	
-	html.dark .site-url {
-		color: #6b7280;
+	.site-url:hover {
+		opacity: 0.7;
+	}
+	
+	html.dark .site-url:hover {
+		opacity: 0.7;
 	}
 	
 	.nav-icons {
@@ -165,6 +197,7 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 	}
 	
 	.home-link,
+	.social-link,
 	.dark-mode-toggle {
 		width: 40px;
 		height: 40px;
@@ -183,6 +216,7 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 	}
 	
 	.home-link:hover,
+	.social-link:hover,
 	.dark-mode-toggle:hover {
 		background-color: rgba(0, 0, 0, 0.05);
 		opacity: 1;
@@ -190,11 +224,13 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 	}
 	
 	html.dark .home-link:hover,
+	html.dark .social-link:hover,
 	html.dark .dark-mode-toggle:hover {
 		background-color: rgba(255, 255, 255, 0.1);
 	}
 	
 	.home-link:active,
+	.social-link:active,
 	.dark-mode-toggle:active {
 		transform: scale(0.95);
 	}

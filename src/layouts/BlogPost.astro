@@ -453,13 +453,6 @@ function calculateReadingTime(content: string): number {
 							<img src={heroImage.src} alt={title} class="hero-image" />
 						)}
 						<slot />
-						{tags && tags.length > 0 && (
-							<div class="post-tags">
-								{tags.map((tag) => (
-									<span class="post-tag">#{tag}</span>
-								))}
-							</div>
-						)}
 					</div>
 					{headings.length > 0 && (
 						<nav class="toc" id="toc">
