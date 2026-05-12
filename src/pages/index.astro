@@ -655,6 +655,121 @@ const latestApps = apps.slice(0, 3);
 					max-width: 100vw !important;
 				}
 			}
+
+			@media (max-width: 720px) {
+				body {
+					overflow-x: clip;
+				}
+
+				.brand-section {
+					padding: 0.75rem 1rem;
+				}
+
+				.brand-header-row {
+					display: block;
+					max-width: 100%;
+				}
+
+				.brand-left {
+					width: calc(100% - 5.25rem);
+					max-width: calc(100% - 5.25rem);
+					gap: 0.5rem;
+					overflow: visible;
+				}
+
+				.header-logo-title {
+					flex-direction: row !important;
+					gap: 0.5rem;
+					min-width: 0;
+					max-width: 100%;
+				}
+
+				.logos-group {
+					gap: 0.35rem;
+					flex-shrink: 0;
+				}
+
+				.header-logo {
+					height: 28px !important;
+				}
+
+				.x-icon {
+					width: 24px;
+					height: 24px;
+				}
+
+				.header-title {
+					font-size: 1.25rem !important;
+					white-space: nowrap;
+				}
+
+				.divider,
+				.header-subtitle {
+					display: none;
+				}
+
+				.post-list-container {
+					width: 100% !important;
+					max-width: 100% !important;
+					padding: 1.5rem 1rem 6rem !important;
+					overflow: visible !important;
+				}
+
+				.home-section {
+					margin-bottom: 3rem;
+				}
+
+				.section-heading {
+					align-items: center;
+					margin-bottom: 1rem;
+				}
+
+				.portal-link {
+					padding: 1rem;
+				}
+
+				.post-item {
+					margin-bottom: 2.5rem !important;
+					overflow: visible;
+				}
+
+				.post-item a {
+					margin: 0 !important;
+					padding: 0 !important;
+					overflow: visible;
+				}
+
+				.post-title {
+					font-size: clamp(1.45rem, 7.2vw, 2rem) !important;
+					line-height: 1.18;
+					letter-spacing: 0;
+					overflow-wrap: break-word;
+				}
+
+				.post-description {
+					padding-right: 0 !important;
+					font-size: 0.96rem;
+					line-height: 1.55;
+					-webkit-line-clamp: 4;
+				}
+
+				.post-meta {
+					gap: 0.45rem;
+					margin-bottom: 0.6rem;
+					font-size: 0.875rem;
+				}
+			}
+
+			@media (max-width: 390px) {
+				.brand-left {
+					width: calc(100% - 4.75rem);
+					max-width: calc(100% - 4.75rem);
+				}
+
+				.header-title {
+					font-size: 1.15rem !important;
+				}
+			}
 		</style>
 	</head>
 	<body>

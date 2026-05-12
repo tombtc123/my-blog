@@ -40,6 +40,7 @@ export const UI = {
 		contents: 'Contents',
 		tableOfContents: 'Table of Contents',
 		close: 'Close',
+		backToTop: 'Back to top',
 	},
 	zh: {
 		htmlLang: 'zh-CN',
@@ -74,6 +75,7 @@ export const UI = {
 		contents: '目录',
 		tableOfContents: '目录',
 		close: '关闭',
+		backToTop: '返回顶部',
 	},
 } as const;
 

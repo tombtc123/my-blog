@@ -19,6 +19,6 @@ const { Content, headings } = await render(post);
 const tocHeadings = headings.filter((heading) => heading.depth === 2 || heading.depth === 3);
 ---
 
-<BlogPost {...post.data} headings={tocHeadings}>
+<BlogPost {...post.data} headings={tocHeadings} body={post.body}>
 	<Content />
 </BlogPost>
