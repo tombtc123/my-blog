@@ -1,1 +1,9 @@
+# Dependencies
 node_modules/
+
+# Astro generated files
+.astro/
+dist/
+
+# Local system files
+.DS_Store
