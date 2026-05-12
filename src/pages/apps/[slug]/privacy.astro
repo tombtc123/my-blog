@@ -1,0 +1,134 @@
+---
+import { type CollectionEntry, getCollection, render } from 'astro:content';
+import BaseHead from '../../../components/BaseHead.astro';
+import Footer from '../../../components/Footer.astro';
+import Header from '../../../components/Header.astro';
+
+export async function getStaticPaths() {
+	const policies = await getCollection('privacy', ({ data }) => !data.draft);
+	const apps = await getCollection('apps', ({ data }) => !data.draft);
+
+	return policies.map((policy) => ({
+		params: { slug: policy.data.appSlug },
+		props: {
+			policy,
+			app: apps.find((app) => app.id === policy.data.appSlug),
+		},
+	}));
+}
+
+type Props = {
+	policy: CollectionEntry<'privacy'>;
+	app?: CollectionEntry<'apps'>;
+};
+
+const { policy, app } = Astro.props;
+const { Content } = await render(policy);
+
+function formatDate(date: Date): string {
+	return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+}
+---
+
+<!doctype html>
+<html lang="zh-CN">
+	<head>
+		<BaseHead title={policy.data.title} description={policy.data.description} />
+		<style>
+			main {
+				width: 100%;
+				max-width: 760px;
+				padding: 6rem 1.5rem 5rem;
+				box-sizing: border-box;
+			}
+
+			.policy-head {
+				margin-bottom: 2rem;
+				padding-bottom: 1.5rem;
+				border-bottom: 1px solid var(--border-color);
+			}
+
+			.meta {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				margin-bottom: 0.875rem;
+				color: #6b7280;
+				font-size: 0.875rem;
+			}
+
+			html.dark .meta {
+				color: #9ca3af;
+			}
+
+			h1 {
+				margin: 0 0 0.75rem;
+				font-size: 2.25rem;
+				line-height: 1.2;
+			}
+
+			.description {
+				margin: 0;
+				color: #6b7280;
+				font-size: 1rem;
+				line-height: 1.7;
+			}
+
+			html.dark .description {
+				color: #cbd5e1;
+			}
+
+			.prose {
+				max-width: 100%;
+				padding: 0;
+			}
+
+			.app-link {
+				display: inline-flex;
+				align-items: center;
+				min-height: 40px;
+				margin-top: 1.25rem;
+				padding: 0.5rem 0.875rem;
+				border: 1px solid var(--border-color);
+				border-radius: 8px;
+				color: var(--text-color);
+				text-decoration: none;
+				font-size: 0.9375rem;
+			}
+
+			.app-link:hover {
+				border-color: #6366f1;
+				background-color: rgba(99, 102, 241, 0.06);
+			}
+
+			@media (max-width: 720px) {
+				main {
+					padding: 5rem 1rem 4rem;
+				}
+
+				h1 {
+					font-size: 1.875rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<Header />
+		<main>
+			<header class="policy-head">
+				<div class="meta">
+					<span>{policy.data.appName}</span>
+					<span>生效日期：{formatDate(policy.data.effectiveDate)}</span>
+					<span>版本：{policy.data.version}</span>
+				</div>
+				<h1>{policy.data.title}</h1>
+				<p class="description">{policy.data.description}</p>
+				{app && <a class="app-link" href={`/apps/${app.id}/`}>返回产品介绍</a>}
+			</header>
+			<article class="prose">
+				<Content />
+			</article>
+		</main>
+		<Footer />
+	</body>
+</html>

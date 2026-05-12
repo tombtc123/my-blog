@@ -1,83 +1,144 @@
 ---
-import { Image } from 'astro:assets';
 import { getCollection } from 'astro:content';
 import BaseHead from '../../components/BaseHead.astro';
 import Footer from '../../components/Footer.astro';
-import FormattedDate from '../../components/FormattedDate.astro';
 import Header from '../../components/Header.astro';
 import { SITE_DESCRIPTION, SITE_TITLE } from '../../consts';
 
 const posts = (await getCollection('blog')).sort(
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
+
+function formatDate(date: Date): string {
+	return `${date.getFullYear()}年${date.getMonth() + 1}月${date.getDate()}日`;
+}
+
+function calculateReadingTime(content: string): number {
+	const plainText = content.replace(/[#*`\[\]()]/g, '').replace(/<[^>]*>/g, '');
+	const chineseChars = (plainText.match(/[\u4e00-\u9fa5]/g) || []).length;
+	const englishWords = (plainText.match(/[a-zA-Z]+/g) || []).length;
+	return Math.ceil((chineseChars + englishWords) / 300) || 1;
+}
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang="zh-CN">
 	<head>
-		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
+		<BaseHead title={`文章 - ${SITE_TITLE}`} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-				width: 960px;
+				width: 100%;
+				max-width: 800px;
+				padding: 6rem 1.5rem 5rem;
+				box-sizing: border-box;
 			}
-			ul {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 2rem;
-				list-style-type: none;
+
+			.page-head {
+				margin-bottom: 3rem;
+			}
+
+			.kicker {
+				margin: 0 0 0.75rem;
+				color: #6b7280;
+				font-size: 0.875rem;
+				font-weight: 600;
+				letter-spacing: 0.04em;
+			}
+
+			html.dark .kicker {
+				color: #9ca3af;
+			}
+
+			h1 {
+				margin: 0 0 0.75rem;
+				font-size: 2.25rem;
+				line-height: 1.2;
+			}
+
+			.lede {
+				margin: 0;
+				max-width: 640px;
+				color: #6b7280;
+				font-size: 1rem;
+				line-height: 1.7;
+			}
+
+			html.dark .lede {
+				color: #cbd5e1;
+			}
+
+			.post-list {
+				list-style: none;
 				margin: 0;
 				padding: 0;
 			}
-			ul li {
-				width: calc(50% - 1rem);
+
+			.post-item {
+				margin-bottom: 3rem;
 			}
-			ul li * {
-				text-decoration: none;
-				transition: 0.2s ease;
-			}
-			ul li:first-child {
-				width: 100%;
-				margin-bottom: 1rem;
-				text-align: center;
-			}
-			ul li:first-child img {
-				width: 100%;
-			}
-			ul li:first-child .title {
-				font-size: 2.369rem;
-			}
-			ul li img {
-				margin-bottom: 0.5rem;
-			}
-			ul li a {
+
+			.post-item a {
 				display: block;
+				margin: -1rem;
+				padding: 1rem;
+				border-radius: 8px;
+				color: inherit;
+				text-decoration: none;
+				transition: background-color 0.2s ease, transform 0.2s ease;
 			}
-			.title {
+
+			.post-item a:hover {
+				background-color: rgba(99, 102, 241, 0.04);
+				transform: translateY(-1px);
+			}
+
+			html.dark .post-item a:hover {
+				background-color: rgba(99, 102, 241, 0.08);
+			}
+
+			.post-meta {
+				display: flex;
+				gap: 0.5rem;
+				flex-wrap: wrap;
+				margin-bottom: 0.75rem;
+				color: #6b7280;
+				font-size: 0.875rem;
+			}
+
+			html.dark .post-meta {
+				color: #9ca3af;
+			}
+
+			.post-title {
+				margin: 0 0 0.5rem;
+				color: #6366f1;
+				font-size: 1.75rem;
+				line-height: 1.3;
+			}
+
+			.post-description {
 				margin: 0;
-				color: #333;
-				line-height: 1;
+				color: #6b7280;
+				font-size: 1rem;
+				line-height: 1.7;
 			}
-			.date {
-				margin: 0;
-				color: #666;
+
+			html.dark .post-description {
+				color: #cbd5e1;
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
-				color: rgb(var(--accent));
-			}
+
 			@media (max-width: 720px) {
-				ul {
-					gap: 0.5em;
+				main {
+					padding: 5rem 1rem 4rem;
 				}
-				ul li {
-					width: 100%;
-					text-align: center;
+
+				h1 {
+					font-size: 1.875rem;
 				}
-				ul li:first-child {
-					margin-bottom: 0;
-				}
-				ul li:first-child .title {
-					font-size: 1.563em;
+
+				.post-title {
+					font-size: 1.375rem;
+					overflow-wrap: anywhere;
 				}
 			}
 		</style>
@@ -85,25 +146,27 @@ const posts = (await getCollection('blog')).sort(
 	<body>
 		<Header />
 		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.id}/`}>
-									{post.data.heroImage && (
-										<Image width={720} height={360} src={post.data.heroImage} alt="" />
-									)}
-									<h4 class="title">{post.data.title}</h4>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
+			<section class="page-head">
+				<p class="kicker">Writing</p>
+				<h1>文章</h1>
+				<p class="lede">观点、记录和长期思考都放在这里。产品介绍与隐私声明则会独立收纳在各自栏目里。</p>
 			</section>
+
+			<ul class="post-list">
+				{posts.map((post) => (
+					<li class="post-item">
+						<a href={`/blog/${post.id}/`}>
+							<div class="post-meta">
+								<span>{formatDate(post.data.pubDate)}</span>
+								<span>·</span>
+								<span>{calculateReadingTime(post.body)} 分钟阅读</span>
+							</div>
+							<h2 class="post-title">{post.data.title}</h2>
+							<p class="post-description">{post.data.description}</p>
+						</a>
+					</li>
+				))}
+			</ul>
 		</main>
 		<Footer />
 	</body>

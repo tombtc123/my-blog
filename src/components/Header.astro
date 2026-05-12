@@ -2,6 +2,11 @@
 import { SITE_TITLE } from '../consts';
 // 检测当前是否在主页
 const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
+const currentPath = Astro.url.pathname;
+const navItems = [
+	{ href: '/blog/', label: '文章', active: currentPath.startsWith('/blog') },
+	{ href: '/apps/', label: '产品', active: currentPath.startsWith('/apps') },
+];
 ---
 
 <header class={isHomePage ? 'home-header' : 'sticky-header'}>
@@ -17,6 +22,13 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 			<a href="/" class="site-url">blocktom.com</a>
 		)}
 		<div class="nav-icons">
+			<nav class="section-nav" aria-label="站点栏目">
+				{navItems.map((item) => (
+					<a href={item.href} class={item.active ? 'section-link active' : 'section-link'}>
+						{item.label}
+					</a>
+				))}
+			</nav>
 			{!isHomePage && (
 				<a href="/" class="home-link" aria-label="Home">
 					<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -195,6 +207,40 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 		margin-left: auto;
 		z-index: 1;
 	}
+
+	.section-nav {
+		display: flex;
+		align-items: center;
+		gap: 0.25rem;
+		margin-right: 0.25rem;
+	}
+
+	.section-link {
+		display: inline-flex;
+		align-items: center;
+		min-height: 36px;
+		padding: 0 0.75rem;
+		border-radius: 18px;
+		color: var(--text-color);
+		text-decoration: none;
+		font-size: 0.9375rem;
+		font-weight: 500;
+		opacity: 0.72;
+		transition: background-color 0.2s ease, opacity 0.2s ease, color 0.2s ease;
+	}
+
+	.section-link:hover,
+	.section-link.active {
+		background-color: rgba(99, 102, 241, 0.08);
+		color: #4f46e5;
+		opacity: 1;
+	}
+
+	html.dark .section-link:hover,
+	html.dark .section-link.active {
+		background-color: rgba(129, 140, 248, 0.15);
+		color: #a5b4fc;
+	}
 	
 	.home-link,
 	.social-link,
@@ -254,6 +300,17 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 		.site-url {
 			font-size: 0.85rem;
 		}
+
+		.section-nav {
+			gap: 0;
+			margin-right: 0;
+		}
+
+		.section-link {
+			min-height: 32px;
+			padding: 0 0.5rem;
+			font-size: 0.8125rem;
+		}
 		
 		.home-link,
 		.dark-mode-toggle {
@@ -264,6 +321,16 @@ const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.
 		.icon {
 			width: 18px;
 			height: 18px;
+		}
+	}
+
+	@media (max-width: 520px) {
+		header.home-header .section-nav {
+			display: none;
+		}
+
+		header.sticky-header .site-url {
+			display: none;
 		}
 	}
 </style>

@@ -18,4 +18,42 @@ const blog = defineCollection({
 		}),
 });
 
-export const collections = { blog };
+const apps = defineCollection({
+	loader: glob({ base: './src/content/apps', pattern: '**/*.{md,mdx}' }),
+	schema: ({ image }) =>
+		z.object({
+			title: z.string(),
+			description: z.string(),
+			pubDate: z.coerce.date(),
+			updatedDate: z.coerce.date().optional(),
+			appName: z.string(),
+			platforms: z.array(z.string()).default([]),
+			status: z.string().default('开发中'),
+			heroImage: image().optional(),
+			icon: image().optional(),
+			website: z.string().url().optional(),
+			appStore: z.string().url().optional(),
+			supportEmail: z.string().email().optional(),
+			tags: z.array(z.string()).optional(),
+			draft: z.boolean().default(false),
+		}),
+});
+
+const privacy = defineCollection({
+	loader: glob({ base: './src/content/privacy', pattern: '**/*.{md,mdx}' }),
+	schema: z.object({
+		title: z.string(),
+		description: z.string(),
+		pubDate: z.coerce.date(),
+		updatedDate: z.coerce.date().optional(),
+		appName: z.string(),
+		effectiveDate: z.coerce.date(),
+		version: z.string().default('1.0'),
+		platforms: z.array(z.string()).default([]),
+		supportEmail: z.string().email().optional(),
+		appSlug: z.string(),
+		draft: z.boolean().default(false),
+	}),
+});
+
+export const collections = { blog, apps, privacy };
