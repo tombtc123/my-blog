@@ -88,7 +88,21 @@ draft: false
 		display: flex;
 		align-items: center;
 		gap: 12px;
+		width: fit-content;
+		max-width: 100%;
+		padding: 8px 12px 8px 8px;
+		border: 1px solid rgba(248, 250, 252, 0.18);
+		border-radius: 26px;
+		background: linear-gradient(135deg, rgba(16, 17, 20, 0.82), rgba(16, 17, 20, 0.6));
+		box-shadow: 0 18px 44px rgba(0, 0, 0, 0.2);
+		backdrop-filter: blur(12px);
 		margin-bottom: 28px;
+	}
+
+	.copyeasy-kicker-stack {
+		display: grid;
+		gap: 3px;
+		min-width: 0;
 	}
 
 	.copyeasy-icon {
@@ -100,11 +114,17 @@ draft: false
 
 	.copyeasy-kicker {
 		margin: 0;
-		color: rgba(248, 250, 252, 0.72);
+		color: #f8fafc;
 		font-size: 0.8rem;
 		font-weight: 800;
-		letter-spacing: 0.12em;
+		letter-spacing: 0.1em;
+		line-height: 1.25;
+		text-shadow: 0 1px 14px rgba(0, 0, 0, 0.42);
 		text-transform: uppercase;
+	}
+
+	.copyeasy-kicker + .copyeasy-kicker {
+		color: var(--ce-lime);
 	}
 
 	.copyeasy-hero h2 {
@@ -291,8 +311,11 @@ draft: false
 	}
 
 	.copyeasy-card {
-		min-height: 260px;
+		display: flex;
+		flex-direction: column;
+		min-height: 0;
 		padding: 22px;
+		overflow: hidden;
 		border: 1px solid var(--ce-line);
 		border-radius: 8px;
 		background: var(--ce-paper);
@@ -324,6 +347,67 @@ draft: false
 		color: var(--ce-muted);
 		font-size: 0.98rem;
 		line-height: 1.65;
+	}
+
+	.copyeasy-card-visual {
+		position: relative;
+		height: 142px;
+		margin-top: 18px;
+		overflow: hidden;
+		border: 1px solid rgba(16, 17, 20, 0.1);
+		border-radius: 8px;
+		background:
+			radial-gradient(circle at 20% 20%, rgba(215, 255, 95, 0.34), transparent 34%),
+			linear-gradient(135deg, #ffffff, #edf3ee);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
+	}
+
+	html.dark .copyeasy-card-visual {
+		border-color: rgba(248, 250, 252, 0.14);
+		background:
+			radial-gradient(circle at 20% 20%, rgba(215, 255, 95, 0.18), transparent 34%),
+			linear-gradient(135deg, #1a1f27, #111318);
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+	}
+
+	.copyeasy-card:nth-child(2) .copyeasy-card-visual {
+		border-color: rgba(248, 250, 252, 0.16);
+		background:
+			radial-gradient(circle at 22% 24%, rgba(215, 255, 95, 0.2), transparent 32%),
+			linear-gradient(135deg, #050507, #171b22);
+	}
+
+	.copyeasy-card-visual img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		margin: 0;
+		object-fit: cover;
+		border: 0;
+		border-radius: 0;
+		filter: saturate(0.98) contrast(1.02);
+	}
+
+	.copyeasy-card-visual::after {
+		position: absolute;
+		inset: 0;
+		content: "";
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.06), transparent 34%),
+			linear-gradient(0deg, rgba(16, 17, 20, 0.08), transparent 46%);
+		pointer-events: none;
+	}
+
+	.copyeasy-card-visual-list img {
+		object-position: 50% 20%;
+	}
+
+	.copyeasy-card-visual-copy img {
+		object-position: 50% 26%;
+	}
+
+	.copyeasy-card-visual-order img {
+		object-position: 50% 34%;
 	}
 
 	.copyeasy-gallery {
@@ -560,7 +644,9 @@ draft: false
 
 	@media (max-width: 720px) {
 		.copyeasy-page {
-			width: min(100%, calc(100vw - 24px));
+			width: 100%;
+			margin: 0;
+			transform: none;
 		}
 
 		.copyeasy-hero {
@@ -572,6 +658,7 @@ draft: false
 		.copyeasy-section h2,
 		.copyeasy-split h2 {
 			font-size: 2.65rem;
+			overflow-wrap: break-word;
 		}
 
 		.copyeasy-stage {
@@ -588,9 +675,34 @@ draft: false
 			border-radius: 18px;
 		}
 
+		.copyeasy-badge-row {
+			gap: 10px;
+			padding: 7px 10px 7px 7px;
+		}
+
+		.copyeasy-icon {
+			width: 56px;
+			height: 56px;
+			border-radius: 16px;
+		}
+
+		.copyeasy-kicker {
+			font-size: 0.74rem;
+			letter-spacing: 0.08em;
+		}
+
 		.copyeasy-metric-strip,
 		.copyeasy-card-grid {
 			grid-template-columns: 1fr;
+		}
+
+		.copyeasy-card {
+			padding: 20px;
+		}
+
+		.copyeasy-card-visual {
+			height: clamp(118px, 31vw, 142px);
+			margin-top: 16px;
 		}
 
 		.copyeasy-gallery {
@@ -615,7 +727,7 @@ draft: false
 <div class="copyeasy-hero-copy">
 <div class="copyeasy-badge-row">
 <img class="copyeasy-icon" src="/apps/copyeasy/app-icon.png" alt="CopyEasy app icon" />
-<div>
+<div class="copyeasy-kicker-stack">
 <p class="copyeasy-kicker">Private snippet manager</p>
 <p class="copyeasy-kicker">for iPhone</p>
 </div>
@@ -672,14 +784,23 @@ CopyEasy keeps the text you type again and again within reach: addresses, replie
 <div class="copyeasy-card">
 <h3>Keep reusable snippets tidy</h3>
 <p>Save a title, the full text, and an optional pin so the most important snippets stay easy to reach.</p>
+<div class="copyeasy-card-visual copyeasy-card-visual-list" aria-hidden="true">
+<img src="/apps/copyeasy/05-new-text.png" alt="" loading="lazy" decoding="async" />
+</div>
 </div>
 <div class="copyeasy-card">
 <h3>Copy without opening an editor</h3>
 <p>Tap a row to copy it immediately. A quick confirmation lets you know the text is ready to paste.</p>
+<div class="copyeasy-card-visual copyeasy-card-visual-copy" aria-hidden="true">
+<img src="/apps/copyeasy/03-copied.png" alt="" loading="lazy" decoding="async" />
+</div>
 </div>
 <div class="copyeasy-card">
 <h3>Use the order that fits your brain</h3>
 <p>Sort by recent copies or switch to custom order and drag snippets into a personal layout.</p>
+<div class="copyeasy-card-visual copyeasy-card-visual-order" aria-hidden="true">
+<img src="/apps/copyeasy/02-list.png" alt="" loading="lazy" decoding="async" />
+</div>
 </div>
 </div>
 </section>
