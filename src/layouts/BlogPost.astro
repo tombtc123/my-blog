@@ -1,4 +1,5 @@
 ---
+import { Image } from 'astro:assets';
 import type { CollectionEntry, MarkdownHeading } from 'astro:content';
 import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
@@ -10,13 +11,30 @@ type Props = CollectionEntry<'blog'>['data'] & {
 	body?: string;
 };
 
-const { title, description, pubDate, updatedDate, heroImage, headings = [], tags, category, body = '', lang = 'en' } = Astro.props;
+const {
+	title,
+	description,
+	pubDate,
+	updatedDate,
+	heroImage,
+	headings = [],
+	tags,
+	category,
+	body = '',
+	lang = 'en',
+} = Astro.props;
 const activeLang = lang as Lang;
 const text = UI[activeLang];
-
 const readingTime = calculateReadingTime(body, activeLang);
+const hasToc = headings.length > 0;
+const showBackToTop = hasToc || body.length > 2200;
+
+function getHeadingSlug(heading: MarkdownHeading): string {
+	return heading.slug || heading.text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+}
 ---
 
+<!doctype html>
 <html lang={text.htmlLang}>
 	<head>
 		<BaseHead title={title} description={description} image={heroImage} />
@@ -29,85 +47,49 @@ const readingTime = calculateReadingTime(body, activeLang);
 				overflow-x: clip;
 				box-sizing: border-box;
 			}
+
 			.article-container {
 				display: flex;
+				align-items: flex-start;
+				gap: 2rem;
 				width: 100%;
 				max-width: 1200px;
 				margin: 0 auto;
-				gap: 2rem;
-				align-items: flex-start;
 				box-sizing: border-box;
 			}
+
 			.prose {
 				flex: 1;
 				width: 100%;
-				max-width: 65ch; /* Astro Paper 风格：约65字符宽 */
+				max-width: 65ch;
 				min-width: 0;
 				margin: 0 auto;
-				line-height: 1.8; /* 宽松行高 */
-				font-size: 1.0625rem; /* 稍大的正文字号 */
+				font-size: 1.0625rem;
+				line-height: 1.8;
 				box-sizing: border-box;
 			}
-			
-			@media (max-width: 768px) {
-				.article-container {
-					padding-left: 0;
-					padding-right: 0;
-					flex-direction: column;
-					overflow-x: hidden;
-					width: 100%;
-					max-width: 100%;
-				}
-				
-				.toc {
-					display: none;
-				}
-				
-				.prose {
-					width: 100%;
-					max-width: 100%;
-					padding: 0 !important;
-					box-sizing: border-box;
-					overflow-wrap: break-word;
-					word-wrap: break-word;
-					word-break: break-word;
-					hyphens: auto;
-				}
-				
-				.prose p,
-				.prose h1,
-				.prose h2,
-				.prose h3,
-				.prose h4,
-				.prose li,
-				.prose div {
-					overflow-wrap: break-word;
-					word-wrap: break-word;
-					word-break: break-word;
-				}
-				/* .prose 的 padding 由 Layout.astro 全局样式控制 */
-			}
+
 			.title {
+				max-width: 100%;
 				margin-bottom: 2rem;
 				padding: 0;
-				text-align: left; /* 左对齐更现代 */
-				min-width: 0;
-				max-width: 100%;
+				text-align: left;
 			}
+
 			.title h1 {
 				margin: 0;
-				font-size: 1.875rem; /* text-3xl */
+				color: var(--text-color);
+				font-size: 1.875rem;
 				font-weight: 700;
 				line-height: 1.3;
-				color: var(--text-color);
 				overflow-wrap: anywhere;
 			}
 
 			.article-meta {
 				display: flex;
+				align-items: center;
 				gap: 0.5rem;
 				flex-wrap: wrap;
-				align-items: center;
 				margin-top: 0.875rem;
 				color: #6b7280;
 				font-size: 0.9375rem;
@@ -117,55 +99,9 @@ const readingTime = calculateReadingTime(body, activeLang);
 			html.dark .article-meta {
 				color: #9ca3af;
 			}
-			
-			/* Astro Paper 风格：H2 大间距 */
-			.prose :global(h2) {
-				margin-top: 3rem;
-				margin-bottom: 1rem;
-				font-size: 1.5rem;
-				font-weight: 600;
-				padding-bottom: 0.5rem;
-				border-bottom: 1px solid var(--border-color);
-			}
-			
-			/* H3 样式 */
-			.prose :global(h3) {
-				margin-top: 2rem;
-				margin-bottom: 0.75rem;
-				font-size: 1.25rem;
-				font-weight: 600;
-			}
-			
-			/* 段落间距 */
-			.prose :global(p) {
-				margin-bottom: 1.5rem;
-			}
-			.title hr {
-				margin: 0 0 1em 0;
-				border: none;
-				border-top: 1px solid var(--border-color);
-			}
-			.date {
-				margin-bottom: 0;
-				color: #666;
-				transition: color 0.2s ease;
-				display: flex;
-				align-items: baseline;
-				justify-content: center;
-				gap: 0.5rem;
-				flex-wrap: wrap;
-				font-size: 0.9375rem;
-			}
-			
-			html.dark .date {
-				color: #aaaaaa;
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
-			
-			/* Hero Image */
+
 			.hero-image {
+				display: block;
 				width: 100%;
 				max-width: 100%;
 				height: auto;
@@ -174,27 +110,32 @@ const readingTime = calculateReadingTime(body, activeLang);
 				border-radius: 8px;
 				margin-bottom: 2rem;
 			}
-			
-			/* Reading Time & Meta */
-			.post-meta-info {
-				display: flex;
-				align-items: center;
-				gap: 0.75rem;
-				flex-wrap: wrap;
-				font-size: 0.875rem;
-				color: #888;
-				margin-top: 0.5rem;
+
+			.prose :global(h2) {
+				margin-top: 3rem;
+				margin-bottom: 1rem;
+				padding-bottom: 0.5rem;
+				border-bottom: 1px solid var(--border-color);
+				font-size: 1.5rem;
+				font-weight: 600;
 			}
-			
-			.meta-separator {
-				color: #ccc;
+
+			.prose :global(h3) {
+				margin-top: 2rem;
+				margin-bottom: 0.75rem;
+				font-size: 1.25rem;
+				font-weight: 600;
 			}
-			
-			html.dark .post-meta-info {
-				color: #aaa;
+
+			.prose :global(p) {
+				margin-bottom: 1.5rem;
 			}
-			
-			/* Tags in post */
+
+			.prose :global(h2),
+			.prose :global(h3) {
+				scroll-margin-top: 5rem;
+			}
+
 			.post-tags {
 				display: flex;
 				gap: 0.5rem;
@@ -203,240 +144,192 @@ const readingTime = calculateReadingTime(body, activeLang);
 				padding-top: 2rem;
 				border-top: 1px solid var(--border-color);
 			}
-			
+
 			.post-tag {
-				font-size: 0.8125rem;
-				padding: 0.25rem 0.75rem;
+				border-radius: 999px;
 				background-color: rgba(99, 102, 241, 0.1);
 				color: #6366f1;
-				border-radius: 16px;
-				transition: all 0.2s ease;
+				font-size: 0.8125rem;
+				padding: 0.25rem 0.75rem;
 			}
-			
+
 			html.dark .post-tag {
 				background-color: rgba(99, 102, 241, 0.15);
-				color: #818cf8;
+				color: #a5b4fc;
 			}
+
 			.toc {
 				position: sticky;
-				top: 2rem;
-				width: 200px;
-				max-height: calc(100vh - 4rem);
+				top: 5rem;
+				width: 220px;
+				max-height: calc(100vh - 6rem);
 				overflow-y: auto;
 				padding: 1rem 0;
 				font-size: 0.875rem;
 				line-height: 1.6;
 			}
+
 			.toc-title {
+				margin-bottom: 0.75rem;
+				color: #6b7280;
 				font-size: 0.75rem;
 				font-weight: 600;
-				color: #888;
-				text-transform: uppercase;
 				letter-spacing: 0.05em;
-				margin-bottom: 0.75rem;
-				transition: color 0.2s ease;
+				text-transform: uppercase;
 			}
-			
+
 			html.dark .toc-title {
-				color: #aaaaaa;
+				color: #9ca3af;
 			}
+
 			.toc-list {
 				list-style: none;
 				padding: 0;
 				margin: 0;
 			}
+
 			.toc-item {
 				margin-bottom: 0.5rem;
 			}
-			.toc-link {
-				color: #6b7280; /* Neutral gray */
-				text-decoration: none;
-				display: block;
-				transition: all 0.2s ease;
-				padding: 0.25rem 0 0.25rem 0.75rem;
-				border-left: 2px solid transparent;
-			}
-			
-			html.dark .toc-link {
-				color: #9ca3af;
-			}
-			
-			.toc-link:hover {
-				color: var(--accent);
-				border-left-color: rgba(35, 55, 255, 0.3);
-				background-color: rgba(35, 55, 255, 0.05); /* Slight background on hover */
-			}
-			
-			.toc-link.active {
-				color: var(--accent);
-				font-weight: 600;
-				border-left-color: var(--accent);
-				background-color: rgba(35, 55, 255, 0.1);
-			}
+
 			.toc-item-h3 {
 				padding-left: 1rem;
 			}
-			.prose :global(h2),
-			.prose :global(h3) {
-				scroll-margin-top: 2rem;
+
+			.toc-link {
+				display: block;
+				padding: 0.25rem 0 0.25rem 0.75rem;
+				border-left: 2px solid transparent;
+				color: #6b7280;
+				text-decoration: none;
+				transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
 			}
-			@media (max-width: 1024px) {
-				.toc {
-					display: none;
-				}
-				.article-container {
-					flex-direction: column;
-					padding: 0;
-				}
-				.prose {
-					width: 100%;
-					max-width: 100%;
-					/* padding 由 Layout.astro 全局样式控制 */
-				}
+
+			html.dark .toc-link {
+				color: #9ca3af;
 			}
-			
-			/* Mobile TOC Button */
-			.mobile-toc-button {
+
+			.toc-link:hover {
+				border-left-color: rgba(99, 102, 241, 0.45);
+				background-color: rgba(99, 102, 241, 0.06);
+				color: #4f46e5;
+			}
+
+			html.dark .toc-link:hover {
+				color: #a5b4fc;
+			}
+
+			.mobile-toc-button,
+			.back-to-top {
 				position: fixed;
-				bottom: 6rem;
-				right: 2rem;
+				right: 1.5rem;
 				width: 48px;
 				height: 48px;
+				border: none;
 				border-radius: 50%;
 				background-color: #6366f1;
 				color: #ffffff;
-				border: none;
+				box-shadow: 0 4px 12px rgba(99, 102, 241, 0.35);
 				cursor: pointer;
-				display: none;
 				align-items: center;
 				justify-content: center;
-				box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.5);
-				transition: all 0.2s ease;
 				z-index: 45;
+				transition: transform 0.2s ease, box-shadow 0.2s ease;
 			}
-			
-			@media (max-width: 1024px) {
-				.mobile-toc-button {
-					display: flex;
-					right: 1.5rem;
-					bottom: 6.5rem;
-				}
+
+			.mobile-toc-button:hover,
+			.back-to-top:hover {
+				box-shadow: 0 6px 16px rgba(99, 102, 241, 0.45);
+				transform: translateY(-2px);
 			}
-			
-			.mobile-toc-button:hover {
-				transform: scale(1.05);
+
+			.mobile-toc-button {
+				bottom: 6.5rem;
+				display: none;
 			}
-			
-			.mobile-toc-button:active {
-				transform: scale(0.95);
+
+			.back-to-top {
+				bottom: 2rem;
+				display: flex;
+				text-decoration: none;
 			}
-			
-			/* Mobile TOC Overlay */
+
 			.mobile-toc-overlay {
 				position: fixed;
-				top: 0;
-				left: 0;
-				right: 0;
-				bottom: 0;
+				inset: 0;
 				background-color: rgba(0, 0, 0, 0.5);
 				z-index: 99;
 				opacity: 0;
 				pointer-events: none;
-				transition: opacity 0.3s ease;
+				transition: opacity 0.2s ease;
 			}
-			
+
 			.mobile-toc-overlay.active {
 				opacity: 1;
 				pointer-events: auto;
 			}
-			
+
 			.mobile-toc-panel {
 				position: fixed;
 				top: 0;
-				right: -300px;
-				width: 280px;
-				height: 100%;
-				background-color: var(--bg-color);
-				box-shadow: -4px 0 12px rgba(0, 0, 0, 0.1);
-				z-index: 100;
-				overflow-y: auto;
-				padding: 2rem 1.5rem;
-				transition: right 0.3s ease;
-			}
-			
-			.mobile-toc-panel.active {
 				right: 0;
+				width: min(280px, 86vw);
+				height: 100%;
+				padding: 2rem 1.5rem;
+				overflow-y: auto;
+				background-color: var(--bg-color);
+				box-shadow: -4px 0 12px rgba(0, 0, 0, 0.12);
+				transform: translateX(100%);
+				transition: transform 0.2s ease;
+				z-index: 100;
 			}
-			
+
+			.mobile-toc-panel.active {
+				transform: translateX(0);
+			}
+
 			.mobile-toc-header {
 				display: flex;
-				justify-content: space-between;
 				align-items: center;
+				justify-content: space-between;
 				margin-bottom: 1.5rem;
 			}
-			
+
 			.mobile-toc-close {
-				background: none;
+				margin: -0.5rem;
+				padding: 0.5rem;
 				border: none;
+				background: transparent;
 				color: var(--text-color);
 				cursor: pointer;
-				padding: 0.5rem;
-				margin: -0.5rem;
-				opacity: 0.7;
+				opacity: 0.72;
 				transition: opacity 0.2s ease;
 			}
-			
+
 			.mobile-toc-close:hover {
 				opacity: 1;
 			}
-			
-			/* 回到顶部按钮 */
-			.back-to-top {
-				position: fixed;
-				bottom: 2rem;
-				right: 2rem;
-				width: 48px;
-				height: 48px;
-				border-radius: 50%;
-				background-color: #6366f1;
-				color: #ffffff;
-				border: none;
-				cursor: pointer;
-				display: flex;
-				align-items: center;
-				justify-content: center;
-				box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4), 0 0 0 2px rgba(255, 255, 255, 0.5); /* Added border ring for contrast */
-				opacity: 0;
-				pointer-events: none;
-				transition: opacity 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
-				z-index: 40;
-			}
-			
-			.back-to-top.visible {
-				opacity: 1;
-				pointer-events: auto;
-			}
-			
-			.back-to-top:hover {
-				transform: translateY(-2px);
-				box-shadow: 0 6px 16px rgba(99, 102, 241, 0.5);
-			}
-			
-			.back-to-top:active {
-				transform: translateY(0);
-			}
-			
-			.back-to-top-icon {
-				width: 24px;
-				height: 24px;
-			}
-			
+
 			@media (max-width: 1024px) {
-				.back-to-top {
-					right: 1.5rem;
+				.article-container {
+					flex-direction: column;
+					padding: 0;
+				}
+
+				.prose {
+					width: 100%;
+					max-width: 100%;
+				}
+
+				.toc {
+					display: none;
+				}
+
+				.mobile-toc-button {
+					display: flex;
 				}
 			}
-			
+
 			@media (max-width: 768px) {
 				main {
 					padding: 4.75rem 1rem 5rem;
@@ -447,9 +340,8 @@ const readingTime = calculateReadingTime(body, activeLang);
 				}
 
 				.title h1 {
-					font-size: clamp(1.75rem, 8vw, 2.25rem) !important;
+					font-size: 2rem;
 					line-height: 1.18;
-					letter-spacing: 0;
 				}
 
 				.article-meta {
@@ -458,24 +350,22 @@ const readingTime = calculateReadingTime(body, activeLang);
 				}
 
 				.prose {
+					padding: 0;
 					font-size: 1.0625rem;
 					line-height: 1.78;
+					overflow-wrap: break-word;
+					word-break: break-word;
 				}
 
 				.prose :global(p) {
 					margin-bottom: 1.35rem;
 				}
 
+				.mobile-toc-button,
 				.back-to-top {
-					bottom: 2rem;
-					/* right: 1.5rem;  Inherited from 1024px media query */
-					width: 48px;
-					height: 48px; /* Unity size with TOC button */
-				}
-				
-				.back-to-top-icon {
-					width: 24px;
-					height: 24px;
+					right: 1rem;
+					width: 44px;
+					height: 44px;
 				}
 			}
 		</style>
@@ -483,16 +373,22 @@ const readingTime = calculateReadingTime(body, activeLang);
 
 	<body>
 		<Header />
-		<main>
+		<main id="top">
 			<article>
 				<div class="article-container">
 					<div class="prose">
 						<div class="title">
-							<h1 class="!text-xl md:!text-3xl font-bold !leading-snug">{title}</h1>
+							<h1>{title}</h1>
 							<div class="article-meta">
 								<time datetime={pubDate.toISOString()}>{formatDate(pubDate, activeLang)}</time>
 								<span>·</span>
 								<span>{readingTime} {text.minRead}</span>
+								{updatedDate && (
+									<>
+										<span>·</span>
+										<time datetime={updatedDate.toISOString()}>{formatDate(updatedDate, activeLang)}</time>
+									</>
+								)}
 								{category && (
 									<>
 										<span>·</span>
@@ -501,21 +397,39 @@ const readingTime = calculateReadingTime(body, activeLang);
 								)}
 							</div>
 						</div>
+
 						{heroImage && (
-							<img src={heroImage.src} alt={title} class="hero-image" />
+							<Image
+								src={heroImage}
+								alt={title}
+								class="hero-image"
+								widths={[640, 960]}
+								sizes="(max-width: 720px) calc(100vw - 2rem), 680px"
+								loading="eager"
+								fetchpriority="high"
+							/>
 						)}
+
 						<slot />
+
+						{tags && tags.length > 0 && (
+							<div class="post-tags" aria-label="Tags">
+								{tags.map((tag) => (
+									<span class="post-tag">{tag}</span>
+								))}
+							</div>
+						)}
 					</div>
-					{headings.length > 0 && (
-						<nav class="toc" id="toc">
+
+					{hasToc && (
+						<nav class="toc" id="toc" aria-label={text.tableOfContents}>
 							<div class="toc-title">{text.contents}</div>
 							<ul class="toc-list">
 								{headings.map((heading) => {
-									// 使用 heading.slug（如果存在），否则生成一个
-									const slug = heading.slug || heading.text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+									const slug = getHeadingSlug(heading);
 									return (
 										<li class={`toc-item ${heading.depth === 3 ? 'toc-item-h3' : ''}`}>
-											<a href={`#${slug}`} class="toc-link" data-slug={slug}>
+											<a href={`#${slug}`} class="toc-link">
 												{heading.text}
 											</a>
 										</li>
@@ -527,13 +441,13 @@ const readingTime = calculateReadingTime(body, activeLang);
 				</div>
 			</article>
 		</main>
+
 		<Footer />
-		
-		<!-- Mobile TOC Button (only visible on mobile) -->
-		{headings.length > 0 && (
+
+		{hasToc && (
 			<>
 				<button id="mobile-toc-button" class="mobile-toc-button" aria-label={text.tableOfContents}>
-					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 						<line x1="8" y1="6" x2="21" y2="6"></line>
 						<line x1="8" y1="12" x2="21" y2="12"></line>
 						<line x1="8" y1="18" x2="21" y2="18"></line>
@@ -542,16 +456,14 @@ const readingTime = calculateReadingTime(body, activeLang);
 						<line x1="3" y1="18" x2="3.01" y2="18"></line>
 					</svg>
 				</button>
-				
-				<!-- Mobile TOC Overlay -->
+
 				<div id="mobile-toc-overlay" class="mobile-toc-overlay"></div>
-				
-				<!-- Mobile TOC Panel -->
+
 				<div id="mobile-toc-panel" class="mobile-toc-panel">
 					<div class="mobile-toc-header">
 						<div class="toc-title">{text.contents}</div>
 						<button id="mobile-toc-close" class="mobile-toc-close" aria-label={text.close}>
-							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
 								<line x1="18" y1="6" x2="6" y2="18"></line>
 								<line x1="6" y1="6" x2="18" y2="18"></line>
 							</svg>
@@ -559,10 +471,10 @@ const readingTime = calculateReadingTime(body, activeLang);
 					</div>
 					<ul class="toc-list">
 						{headings.map((heading) => {
-							const slug = heading.slug || heading.text.toLowerCase().replace(/[^\w\s-]/g, '').replace(/\s+/g, '-').replace(/-+/g, '-').trim();
+							const slug = getHeadingSlug(heading);
 							return (
 								<li class={`toc-item ${heading.depth === 3 ? 'toc-item-h3' : ''}`}>
-									<a href={`#${slug}`} class="toc-link mobile-toc-link" data-slug={slug}>
+									<a href={`#${slug}`} class="toc-link mobile-toc-link">
 										{heading.text}
 									</a>
 								</li>
@@ -570,149 +482,45 @@ const readingTime = calculateReadingTime(body, activeLang);
 						})}
 					</ul>
 				</div>
+
+				<script>
+					document.addEventListener('DOMContentLoaded', () => {
+						const button = document.getElementById('mobile-toc-button');
+						const overlay = document.getElementById('mobile-toc-overlay');
+						const panel = document.getElementById('mobile-toc-panel');
+						const closeButton = document.getElementById('mobile-toc-close');
+						const links = document.querySelectorAll('.mobile-toc-link');
+
+						function openToc() {
+							overlay?.classList.add('active');
+							panel?.classList.add('active');
+							document.body.style.overflow = 'hidden';
+						}
+
+						function closeToc() {
+							overlay?.classList.remove('active');
+							panel?.classList.remove('active');
+							document.body.style.overflow = '';
+						}
+
+						button?.addEventListener('click', openToc);
+						closeButton?.addEventListener('click', closeToc);
+						overlay?.addEventListener('click', closeToc);
+						links.forEach((link) => link.addEventListener('click', closeToc));
+						document.addEventListener('keydown', (event) => {
+							if (event.key === 'Escape') closeToc();
+						});
+					});
+				</script>
 			</>
 		)}
-		
-		<button id="back-to-top" class="back-to-top" aria-label={text.backToTop}>
-			<svg class="back-to-top-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-				<path d="m18 15-6-6-6 6"></path>
-			</svg>
-		</button>
-		<script>
-			// 生成 slug（与 Astro 默认行为一致）
-			function generateSlug(text) {
-				return text
-					.toLowerCase()
-					.replace(/[^\w\s-]/g, '')
-					.replace(/\s+/g, '-')
-					.replace(/-+/g, '-')
-					.trim();
-			}
 
-			// 为标题添加 ID（如果还没有）
-			document.addEventListener('DOMContentLoaded', () => {
-				const headings = document.querySelectorAll('.prose h2, .prose h3');
-				headings.forEach((heading) => {
-					if (!heading.id) {
-						const text = heading.textContent || '';
-						heading.id = generateSlug(text);
-					}
-				});
-
-				// 平滑滚动
-				const tocLinks = document.querySelectorAll('.toc-link');
-				tocLinks.forEach((link) => {
-					link.addEventListener('click', (e) => {
-						e.preventDefault();
-						const targetId = link.getAttribute('href')?.slice(1) || '';
-						const targetElement = document.getElementById(targetId);
-						if (targetElement) {
-							const headerOffset = 80;
-							const elementPosition = targetElement.getBoundingClientRect().top;
-							const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-							
-							window.scrollTo({
-								top: offsetPosition,
-								behavior: 'smooth'
-							});
-							// 更新 URL 但不触发滚动
-							window.history.pushState(null, '', `#${targetId}`);
-						}
-					});
-				});
-
-				// 高亮当前阅读位置
-				const updateActiveTocLink = () => {
-					const headings = document.querySelectorAll('.prose h2, .prose h3');
-					const tocLinks = document.querySelectorAll('.toc-link');
-					
-					let current = '';
-					const scrollPosition = window.scrollY + 200; // 提前触发距离
-					
-					headings.forEach((heading) => {
-						const headingTop = heading.getBoundingClientRect().top + window.pageYOffset;
-						if (scrollPosition >= headingTop) {
-							current = heading.id;
-						}
-					});
-
-					tocLinks.forEach((link) => {
-						const slug = link.getAttribute('data-slug');
-						if (slug === current) {
-							link.classList.add('active');
-						} else {
-							link.classList.remove('active');
-						}
-					});
-				};
-
-				// 回到顶部按钮
-				const backToTopButton = document.getElementById('back-to-top');
-				const scrollThreshold = 300;
-				
-				function toggleBackToTop() {
-					if (window.scrollY > scrollThreshold) {
-						backToTopButton?.classList.add('visible');
-					} else {
-						backToTopButton?.classList.remove('visible');
-					}
-				}
-				
-				// 使用 throttle 优化滚动性能（合并多个滚动处理）
-				let ticking = false;
-				window.addEventListener('scroll', () => {
-					if (!ticking) {
-						window.requestAnimationFrame(() => {
-							updateActiveTocLink();
-							toggleBackToTop();
-							ticking = false;
-						});
-						ticking = true;
-					}
-				});
-				
-				// 初始调用
-				updateActiveTocLink();
-				toggleBackToTop();
-				
-				// 点击回到顶部
-				backToTopButton?.addEventListener('click', () => {
-					window.scrollTo({
-						top: 0,
-						behavior: 'smooth'
-					});
-				});
-				
-				// Mobile TOC interactions
-				const mobileTocButton = document.getElementById('mobile-toc-button');
-				const mobileTocOverlay = document.getElementById('mobile-toc-overlay');
-				const mobileTocPanel = document.getElementById('mobile-toc-panel');
-				const mobileTocClose = document.getElementById('mobile-toc-close');
-				const mobileTocLinks = document.querySelectorAll('.mobile-toc-link');
-				
-				function openMobileToc() {
-					mobileTocOverlay?.classList.add('active');
-					mobileTocPanel?.classList.add('active');
-					document.body.style.overflow = 'hidden';
-				}
-				
-				function closeMobileToc() {
-					mobileTocOverlay?.classList.remove('active');
-					mobileTocPanel?.classList.remove('active');
-					document.body.style.overflow = '';
-				}
-				
-				mobileTocButton?.addEventListener('click', openMobileToc);
-				mobileTocClose?.addEventListener('click', closeMobileToc);
-				mobileTocOverlay?.addEventListener('click', closeMobileToc);
-				
-				// Close mobile TOC when clicking a link
-				mobileTocLinks.forEach((link) => {
-					link.addEventListener('click', () => {
-						closeMobileToc();
-					});
-				});
-			});
-		</script>
+		{showBackToTop && (
+			<a href="#top" class="back-to-top" aria-label={text.backToTop}>
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+					<path d="m18 15-6-6-6 6"></path>
+				</svg>
+			</a>
+		)}
 	</body>
 </html>

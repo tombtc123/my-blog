@@ -1,0 +1,514 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import BaseHead from './BaseHead.astro';
+import Footer from './Footer.astro';
+import Header from './Header.astro';
+import { SITE_TITLE } from '../consts';
+import { calculateReadingTime, formatDate, getEntrySlug, localizePath, UI, type Lang } from '../i18n';
+import logo from '../assets/logo.png';
+
+interface Props {
+	lang: Lang;
+}
+
+const { lang } = Astro.props;
+const text = UI[lang];
+
+const posts = (await getCollection('blog', ({ data }) => data.lang === lang)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const apps = (await getCollection('apps', ({ data }) => !data.draft && data.lang === lang)).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+const latestApps = apps.slice(0, 3);
+const latestPosts = posts.slice(0, 3);
+---
+
+<!doctype html>
+<html lang={text.htmlLang}>
+	<head>
+		<BaseHead title={SITE_TITLE} description={text.siteDescription} />
+		<style>
+			body {
+				background: var(--bg-color);
+				margin: 0;
+				padding: 0;
+				transition: background-color 0.2s ease, color 0.2s ease;
+			}
+
+			.brand-section {
+				position: sticky;
+				top: 0;
+				z-index: 100;
+				padding: 1.25rem 2rem;
+				background: color-mix(in srgb, var(--bg-color) 92%, transparent);
+				border-bottom: 1px solid var(--border-color);
+				backdrop-filter: blur(12px);
+				-webkit-backdrop-filter: blur(12px);
+			}
+
+			.brand-header-row {
+				max-width: 1400px;
+				margin: 0 auto;
+			}
+
+			.brand-left {
+				display: flex;
+				align-items: center;
+				gap: 2rem;
+				max-width: calc(100% - 18rem);
+				min-width: 0;
+			}
+
+			.header-logo-title {
+				position: relative;
+				z-index: 2;
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				color: inherit;
+				text-decoration: none;
+				transition: opacity 0.2s ease;
+			}
+
+			.header-logo-title:hover {
+				opacity: 0.85;
+			}
+
+			.logos-group {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				flex-shrink: 0;
+			}
+
+			.header-logo {
+				display: block;
+				width: auto;
+				height: 36px;
+				object-fit: contain;
+			}
+
+			.x-icon {
+				width: 28px;
+				height: 28px;
+				flex-shrink: 0;
+			}
+
+			.header-title {
+				margin: 0;
+				color: transparent;
+				background-image: linear-gradient(135deg, #34d399, #3b82f6);
+				background-clip: text;
+				-webkit-background-clip: text;
+				font-family: Georgia, 'Times New Roman', serif;
+				font-size: 1.5rem;
+				font-weight: 700;
+				line-height: 1.2;
+				white-space: nowrap;
+			}
+
+			.divider {
+				width: 1px;
+				height: 30px;
+				flex-shrink: 0;
+				background: var(--border-color);
+				opacity: 0.5;
+			}
+
+			.header-subtitle {
+				margin: 0;
+				color: #6b7280;
+				font-size: 0.9375rem;
+				line-height: 1.35;
+			}
+
+			html.dark .header-subtitle {
+				color: #aaaaaa;
+			}
+
+			.post-list-container {
+				width: 100%;
+				max-width: 800px;
+				margin: 0 auto;
+				padding: 2rem 2rem 8rem;
+			}
+
+			.home-section {
+				margin-bottom: 4rem;
+			}
+
+			.section-heading {
+				display: flex;
+				align-items: baseline;
+				justify-content: space-between;
+				gap: 1rem;
+				margin-bottom: 1.25rem;
+			}
+
+			.section-title {
+				margin: 0;
+				color: var(--text-color);
+				font-size: 1rem;
+				font-weight: 700;
+			}
+
+			.section-link {
+				color: #6366f1;
+				font-size: 0.9375rem;
+				text-decoration: none;
+			}
+
+			.section-link:hover {
+				color: #4f46e5;
+			}
+
+			.portal-grid {
+				display: grid;
+				grid-template-columns: repeat(2, minmax(0, 1fr));
+				gap: 1rem;
+			}
+
+			.portal-link.wide {
+				grid-column: 1 / -1;
+			}
+
+			.portal-link {
+				display: block;
+				min-width: 0;
+				padding: 1.25rem;
+				border: 1px solid var(--border-color);
+				border-radius: 8px;
+				background: rgba(255, 255, 255, 0.4);
+				color: inherit;
+				text-decoration: none;
+				transition: border-color 0.2s ease, transform 0.2s ease, background-color 0.2s ease;
+			}
+
+			html.dark .portal-link {
+				background: rgba(255, 255, 255, 0.03);
+			}
+
+			.portal-link:hover {
+				border-color: #6366f1;
+				background-color: rgba(99, 102, 241, 0.04);
+				transform: translateY(-1px);
+			}
+
+			.portal-meta,
+			.post-meta {
+				color: #6b7280;
+				font-size: 0.875rem;
+			}
+
+			html.dark .portal-meta,
+			html.dark .post-meta {
+				color: #9ca3af;
+			}
+
+			.portal-meta {
+				margin: 0 0 0.5rem;
+			}
+
+			.portal-title {
+				margin: 0 0 0.5rem;
+				color: #6366f1;
+				font-size: 1.25rem;
+				line-height: 1.3;
+				overflow-wrap: anywhere;
+			}
+
+			.portal-description {
+				margin: 0;
+				color: #4b5563;
+				font-size: 0.9375rem;
+				line-height: 1.6;
+				overflow-wrap: anywhere;
+			}
+
+			html.dark .portal-description {
+				color: #cbd5e1;
+			}
+
+			.post-list {
+				list-style: none;
+				padding: 0;
+				margin: 0;
+			}
+
+			.post-item {
+				margin-bottom: 4rem;
+			}
+
+			.post-item a {
+				display: block;
+				min-width: 0;
+				width: 100%;
+				margin: -1.5rem;
+				padding: 1.5rem;
+				border-radius: 8px;
+				color: inherit;
+				text-decoration: none;
+				transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+			}
+
+			.post-item a:hover {
+				background-color: rgba(99, 102, 241, 0.03);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+				transform: translateY(-2px);
+			}
+
+			html.dark .post-item a:hover {
+				background-color: rgba(99, 102, 241, 0.08);
+				box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+			}
+
+			.post-meta {
+				display: flex;
+				align-items: center;
+				gap: 0.75rem;
+				flex-wrap: wrap;
+				margin-bottom: 0.75rem;
+				letter-spacing: 0.01em;
+			}
+
+			.post-meta-separator {
+				color: #d1d5db;
+			}
+
+			html.dark .post-meta-separator {
+				color: #4b5563;
+			}
+
+			.post-title {
+				margin: 0 0 0.5rem;
+				color: #6366f1;
+				font-size: 2.25rem;
+				font-weight: 700;
+				line-height: 1.3;
+				overflow-wrap: anywhere;
+				transition: color 0.2s ease;
+			}
+
+			.post-item a:hover .post-title {
+				color: #4f46e5;
+			}
+
+			.post-description {
+				display: -webkit-box;
+				margin: 0 0 0.5rem;
+				overflow: hidden;
+				color: #4b5563;
+				font-size: 1rem;
+				font-style: italic;
+				line-height: 1.6;
+				-webkit-box-orient: vertical;
+				-webkit-line-clamp: 3;
+				overflow-wrap: anywhere;
+				text-overflow: ellipsis;
+			}
+
+			html.dark .post-description {
+				color: #cbd5e1;
+			}
+
+			@media (max-width: 720px) {
+				.brand-section {
+					padding: 0.75rem 1rem;
+				}
+
+				.brand-left {
+					width: calc(100% - 5.25rem);
+					max-width: calc(100% - 5.25rem);
+					gap: 0.5rem;
+					flex-wrap: wrap;
+				}
+
+				.header-logo-title {
+					gap: 0.5rem;
+					min-width: 0;
+					max-width: 100%;
+				}
+
+				.logos-group {
+					gap: 0.35rem;
+				}
+
+				.header-logo {
+					height: 28px;
+				}
+
+				.x-icon {
+					width: 24px;
+					height: 24px;
+				}
+
+				.header-title {
+					font-size: 1.25rem;
+				}
+
+				.divider {
+					display: none;
+				}
+
+				.header-subtitle {
+					flex: 0 0 100%;
+					margin-top: 0.125rem;
+					font-size: 0.75rem;
+					white-space: normal;
+				}
+
+				.post-list-container {
+					max-width: 100%;
+					padding: 1.5rem 1rem 6rem;
+				}
+
+				.home-section {
+					margin-bottom: 3rem;
+				}
+
+				.section-heading {
+					align-items: center;
+					margin-bottom: 1rem;
+				}
+
+				.portal-grid {
+					grid-template-columns: 1fr;
+				}
+
+				.portal-link {
+					padding: 1rem;
+				}
+
+				.post-item {
+					margin-bottom: 2.5rem;
+				}
+
+				.post-item a {
+					margin: 0;
+					padding: 0;
+					border-radius: 0;
+				}
+
+				.post-item a:hover {
+					background: transparent;
+					box-shadow: none;
+					transform: none;
+				}
+
+				.post-title {
+					font-size: 1.75rem;
+					line-height: 1.2;
+				}
+
+				.post-description {
+					font-size: 0.96rem;
+					line-height: 1.55;
+					-webkit-line-clamp: 4;
+				}
+
+				.post-meta {
+					gap: 0.45rem;
+					margin-bottom: 0.6rem;
+				}
+			}
+
+			@media (max-width: 390px) {
+				.brand-left {
+					width: calc(100% - 4.75rem);
+					max-width: calc(100% - 4.75rem);
+				}
+
+				.header-title {
+					font-size: 1.15rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div class="brand-section">
+			<div class="brand-header-row">
+				<div class="brand-left">
+					<a href="https://x.com/blocktom" target="_blank" rel="noopener noreferrer" class="header-logo-title" aria-label="Follow on X">
+						<div class="logos-group">
+							<Image
+								src={logo}
+								alt="Tom Blog Logo"
+								class="header-logo"
+								width={72}
+								height={72}
+								loading="eager"
+								fetchpriority="high"
+							/>
+							<svg class="x-icon" width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+								<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+							</svg>
+						</div>
+						<span class="header-title">{SITE_TITLE}</span>
+					</a>
+					<div class="divider"></div>
+					<p class="header-subtitle">{text.homeSubtitle}</p>
+				</div>
+			</div>
+		</div>
+
+		<Header />
+
+		<main class="post-list-container">
+			<section class="home-section" aria-label={text.productsAndPrivacy}>
+				<div class="section-heading">
+					<h2 class="section-title">{text.productsAndPrivacy}</h2>
+					<a class="section-link" href={localizePath('/apps/', lang)}>{text.viewAll}</a>
+				</div>
+				<div class="portal-grid">
+					{latestApps.length > 0 ? (
+						latestApps.map((app) => (
+							<a class="portal-link" href={localizePath(`/apps/${getEntrySlug(app)}/`, lang)}>
+								<p class="portal-meta">{app.data.status}{app.data.platforms.length > 0 ? ` · ${app.data.platforms.join(' / ')}` : ''}</p>
+								<h3 class="portal-title">{app.data.appName}</h3>
+								<p class="portal-description">{app.data.description}</p>
+							</a>
+						))
+					) : (
+						<a class="portal-link wide" href={localizePath('/apps/', lang)}>
+							<p class="portal-meta">{text.products}</p>
+							<h3 class="portal-title">{text.productCenter}</h3>
+							<p class="portal-description">{text.productCenterDescription}</p>
+						</a>
+					)}
+				</div>
+			</section>
+
+			<section class="home-section" aria-label={text.latestWriting}>
+				<div class="section-heading">
+					<h2 class="section-title">{text.latestWriting}</h2>
+					<a class="section-link" href={localizePath('/blog/', lang)}>{text.more}</a>
+				</div>
+				<ul class="post-list">
+					{latestPosts.map((post) => (
+						<li class="post-item">
+							<a href={localizePath(`/blog/${getEntrySlug(post)}/`, lang)}>
+								<div class="post-meta">
+									<span>{formatDate(post.data.pubDate, lang)}</span>
+									<span class="post-meta-separator">·</span>
+									<span>{calculateReadingTime(post.body, lang)} {text.minRead}</span>
+									{post.data.category && (
+										<>
+											<span class="post-meta-separator">·</span>
+											<span>{post.data.category}</span>
+										</>
+									)}
+								</div>
+								<h2 class="post-title">{post.data.title}</h2>
+								<p class="post-description">{post.data.description}</p>
+							</a>
+						</li>
+					))}
+				</ul>
+			</section>
+		</main>
+
+		<Footer />
+	</body>
+</html>
