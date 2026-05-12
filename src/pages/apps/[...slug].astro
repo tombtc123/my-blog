@@ -30,6 +30,7 @@ const appImage = app.data.seoImage ?? app.data.heroImage ?? app.data.icon;
 const appTitle = app.data.seoTitle ?? `${app.data.appName} - ${text.products}`;
 const appDescription = app.data.seoDescription ?? app.data.description;
 const supportTarget = app.data.supportUrl ?? (app.data.supportEmail ? `mailto:${app.data.supportEmail}` : undefined);
+const sameAsLinks = [app.data.appStore, supportTarget].filter(Boolean);
 const structuredData = [
 	{
 		'@context': 'https://schema.org',
@@ -41,9 +42,20 @@ const structuredData = [
 		url: productUrl,
 		image: appImage ? new URL(typeof appImage === 'string' ? appImage : appImage.src, Astro.site).href : undefined,
 		screenshot: app.data.screenshots.map((screenshot) => new URL(screenshot, Astro.site).href),
+		downloadUrl: app.data.appStore,
+		installUrl: app.data.appStore,
 		isAccessibleForFree: false,
+		offers: app.data.appStore
+			? {
+					'@type': 'Offer',
+					price: '0.99',
+					priceCurrency: 'USD',
+					url: app.data.appStore,
+					availability: 'https://schema.org/InStock',
+				}
+			: undefined,
 		privacyPolicy: privacyUrl,
-		sameAs: supportTarget ? [supportTarget] : undefined,
+		sameAs: sameAsLinks.length > 0 ? sameAsLinks : undefined,
 	},
 	{
 		'@context': 'https://schema.org',

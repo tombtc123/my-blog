@@ -11,7 +11,8 @@ seoDescription: 'CopyEasy helps iPhone users save reusable text snippets, copy t
 seoImage: '/apps/copyeasy/03-copied.png'
 appName: 'CopyEasy'
 platforms: ['iOS']
-status: 'Preparing for App Store'
+status: 'Available on the App Store'
+appStore: 'https://apps.apple.com/us/app/copyeasy-text-snippets/id6767789668'
 supportUrl: 'https://x.com/blocktom'
 screenshots:
   - '/apps/copyeasy/01-onboarding-en.png'
@@ -134,6 +135,37 @@ draft: false
 		color: #f8fafc;
 		font-size: 0.84rem;
 		font-weight: 700;
+	}
+
+	.copyeasy-hero-actions {
+		display: flex;
+		gap: 10px;
+		flex-wrap: wrap;
+		margin-top: 24px;
+	}
+
+	.copyeasy-app-store-link,
+	.copyeasy-secondary-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 46px;
+		padding: 10px 16px;
+		border-radius: 999px;
+		font-size: 0.96rem;
+		font-weight: 800;
+		text-decoration: none !important;
+	}
+
+	.copyeasy-app-store-link {
+		background: var(--ce-lime);
+		color: #101114 !important;
+		box-shadow: 0 16px 40px rgba(215, 255, 95, 0.22);
+	}
+
+	.copyeasy-secondary-link {
+		border: 1px solid rgba(248, 250, 252, 0.2);
+		color: #f8fafc !important;
 	}
 
 	.copyeasy-stage {
@@ -513,7 +545,9 @@ draft: false
 		}
 
 		.copyeasy-privacy-actions,
-		.copyeasy-support-link {
+		.copyeasy-support-link,
+		.copyeasy-app-store-link,
+		.copyeasy-secondary-link {
 			width: 100%;
 		}
 	}
@@ -538,6 +572,10 @@ CopyEasy keeps the text you type again and again within reach: addresses, replie
 <span>No account</span>
 <span>No tracking</span>
 <span>English + Chinese</span>
+</div>
+<div class="copyeasy-hero-actions">
+<a class="copyeasy-app-store-link" href="https://apps.apple.com/us/app/copyeasy-text-snippets/id6767789668" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
+<a class="copyeasy-secondary-link" href="/apps/copyeasy/privacy/">Privacy Policy</a>
 </div>
 </div>
 <div class="copyeasy-stage" aria-label="CopyEasy app screenshots">
@@ -640,6 +678,7 @@ CopyEasy keeps the text you type again and again within reach: addresses, replie
 <p>Your snippets are stored locally on your device. CopyEasy has no account system, no third-party analytics, no ads, and no network service for saved text.</p>
 </div>
 <div class="copyeasy-privacy-actions">
+<a class="copyeasy-privacy-link" href="https://apps.apple.com/us/app/copyeasy-text-snippets/id6767789668" target="_blank" rel="noopener noreferrer">Download on the App Store</a>
 <a class="copyeasy-privacy-link" href="/apps/copyeasy/privacy/">Read the privacy policy</a>
 <a class="copyeasy-support-link" href="https://x.com/blocktom" target="_blank" rel="noopener noreferrer">Support on X</a>
 </div>
