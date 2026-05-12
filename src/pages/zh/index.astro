@@ -18,6 +18,7 @@ const apps = (await getCollection('apps', ({ data }) => !data.draft && data.lang
 	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 const latestApps = apps.slice(0, 3);
+const latestPosts = posts.slice(0, 3);
 ---
 
 <!doctype html>
@@ -846,11 +847,11 @@ const latestApps = apps.slice(0, 3);
 			<section class="home-section" aria-label={text.latestWriting}>
 				<div class="section-heading">
 					<h2 class="section-title">{text.latestWriting}</h2>
-					<a class="section-link" href={localizePath('/blog/', lang)}>{text.writingArchive}</a>
+					<a class="section-link" href={localizePath('/blog/', lang)}>{text.more}</a>
 				</div>
 				<ul class="post-list">
 					{
-						posts.map((post) => (
+						latestPosts.map((post) => (
 							<li class="post-item">
 								<a href={localizePath(`/blog/${getEntrySlug(post)}/`, lang)}>
 
