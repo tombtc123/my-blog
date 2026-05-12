@@ -1,14 +1,24 @@
 ---
 title: 'CopyEasy'
-description: 'A private iPhone text snippet manager for one-tap copying.'
+description: 'CopyEasy is a private iPhone text snippet manager for saving reusable replies, addresses, signatures, templates, and one-tap clipboard copying.'
 pubDate: '2026-05-12'
 updatedDate: '2026-05-12'
 lang: 'en'
 routeSlug: 'copyeasy'
 translationKey: 'copyeasy'
+seoTitle: 'CopyEasy - Private iPhone Text Snippet Manager'
+seoDescription: 'CopyEasy helps iPhone users save reusable text snippets, copy them in one tap, search, pin, reorder, and keep everything local with no account or tracking.'
+seoImage: '/apps/copyeasy/03-copied.png'
 appName: 'CopyEasy'
 platforms: ['iOS']
 status: 'Preparing for App Store'
+supportUrl: 'https://x.com/blocktom'
+screenshots:
+  - '/apps/copyeasy/01-onboarding-en.png'
+  - '/apps/copyeasy/02-list.png'
+  - '/apps/copyeasy/03-copied.png'
+  - '/apps/copyeasy/05-new-text.png'
+  - '/apps/copyeasy/04-settings.png'
 tags: ['Productivity', 'Utilities', 'Clipboard', 'Snippets']
 draft: false
 ---

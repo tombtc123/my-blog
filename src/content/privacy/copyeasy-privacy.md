@@ -6,10 +6,14 @@ updatedDate: '2026-05-12'
 lang: 'en'
 routeSlug: 'copyeasy'
 translationKey: 'copyeasy'
+seoTitle: 'CopyEasy Privacy Policy - Local Text Snippets'
+seoDescription: 'Read how CopyEasy stores snippets locally on iPhone, uses the clipboard only for user-directed actions, and does not collect personal data, analytics, or tracking data.'
+seoImage: '/apps/copyeasy/03-copied.png'
 appName: 'CopyEasy'
 effectiveDate: '2026-05-12'
 version: '1.0'
 platforms: ['iOS']
+supportUrl: 'https://x.com/blocktom'
 appSlug: 'copyeasy'
 draft: false
 ---

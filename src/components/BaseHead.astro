@@ -10,6 +10,8 @@ interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata | string;
+	type?: 'website' | 'article' | 'profile' | 'product';
+	structuredData?: unknown | unknown[];
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -19,7 +21,30 @@ const englishURL = new URL(localizePath(strippedPath, 'en'), Astro.site);
 const chineseURL = new URL(localizePath(strippedPath, 'zh'), Astro.site);
 const rssURL = new URL(lang === 'zh' ? 'zh/rss.xml' : 'rss.xml', Astro.site);
 
-const { title, description, image } = Astro.props;
+const { title, description, image, type = 'website', structuredData } = Astro.props;
+const locale = lang === 'zh' ? 'zh_CN' : 'en_US';
+const siteIdentityData = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: SITE_TITLE,
+		url: new URL('/', Astro.site).href,
+		inLanguage: lang === 'zh' ? 'zh-CN' : 'en',
+		sameAs: ['https://x.com/blocktom'],
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: 'Tom',
+		url: new URL('/', Astro.site).href,
+		sameAs: ['https://x.com/blocktom'],
+	},
+];
+const structuredDataItems = Array.isArray(structuredData)
+	? [...siteIdentityData, ...structuredData]
+	: structuredData
+		? [...siteIdentityData, structuredData]
+		: siteIdentityData;
 
 // 确定使用的图片 URL
 // 如果有传入的图片，使用它；否则使用 Logo 作为默认
@@ -72,6 +97,7 @@ if (image) {
 	href={rssURL}
 />
 <meta name="generator" content={Astro.generator} />
+<meta name="robots" content="index,follow,max-image-preview:large" />
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
@@ -85,11 +111,14 @@ if (image) {
 <meta name="description" content={description} />
 
 <!-- Open Graph / Facebook -->
-<meta property="og:type" content="website" />
+<meta property="og:type" content={type} />
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageUrl} />
+<meta property="og:image:alt" content={title} />
+<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:locale" content={locale} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
@@ -97,3 +126,9 @@ if (image) {
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={ogImageUrl} />
+<meta property="twitter:image:alt" content={title} />
+<meta property="twitter:site" content="@blocktom" />
+
+{structuredDataItems.map((item) => (
+	<script type="application/ld+json" set:html={JSON.stringify(item)} />
+))}

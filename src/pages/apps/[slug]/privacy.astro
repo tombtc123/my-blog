@@ -27,12 +27,63 @@ const { policy, app } = Astro.props;
 const { Content } = await render(policy);
 const lang = policy.data.lang;
 const text = UI[lang];
+const policyUrl = new URL(localizePath(`/apps/${policy.data.appSlug}/privacy/`, lang), Astro.site).href;
+const productUrl = new URL(localizePath(`/apps/${policy.data.appSlug}/`, lang), Astro.site).href;
+const policyTitle = policy.data.seoTitle ?? policy.data.title;
+const policyDescription = policy.data.seoDescription ?? policy.data.description;
+const structuredData = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: policyTitle,
+		description: policyDescription,
+		url: policyUrl,
+		isPartOf: {
+			'@type': 'WebSite',
+			name: 'Tom Blog',
+			url: new URL('/', Astro.site).href,
+		},
+		about: {
+			'@type': 'SoftwareApplication',
+			name: policy.data.appName,
+			url: productUrl,
+			operatingSystem: policy.data.platforms.join(', ') || 'iOS',
+			applicationCategory: 'ProductivityApplication',
+		},
+		datePublished: policy.data.pubDate.toISOString(),
+		dateModified: (policy.data.updatedDate ?? policy.data.pubDate).toISOString(),
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{
+				'@type': 'ListItem',
+				position: 1,
+				name: text.products,
+				item: new URL(localizePath('/apps/', lang), Astro.site).href,
+			},
+			{
+				'@type': 'ListItem',
+				position: 2,
+				name: policy.data.appName,
+				item: productUrl,
+			},
+			{
+				'@type': 'ListItem',
+				position: 3,
+				name: text.privacyPolicy,
+				item: policyUrl,
+			},
+		],
+	},
+];
 ---
 
 <!doctype html>
 <html lang={text.htmlLang}>
 	<head>
-		<BaseHead title={policy.data.title} description={policy.data.description} />
+		<BaseHead title={policyTitle} description={policyDescription} image={policy.data.seoImage} structuredData={structuredData} />
 		<style>
 			main {
 				width: 100%;
