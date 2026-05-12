@@ -101,15 +101,95 @@ const structuredData = [
 
 			.meta {
 				display: flex;
-				gap: 0.5rem;
+				align-items: center;
+				gap: 0.625rem;
 				flex-wrap: wrap;
-				margin-bottom: 0.875rem;
+				margin-bottom: 1rem;
 				color: #6b7280;
 				font-size: 0.875rem;
 			}
 
 			html.dark .meta {
 				color: #9ca3af;
+			}
+
+			.store-status,
+			.status-pill,
+			.platform-pill {
+				display: inline-flex;
+				align-items: center;
+				min-height: 34px;
+				border-radius: 999px;
+				font-size: 0.875rem;
+				font-weight: 700;
+				line-height: 1;
+			}
+
+			.store-status {
+				gap: 0.5rem;
+				padding: 0.5rem 0.75rem 0.5rem 0.625rem;
+				border: 1px solid rgba(16, 185, 129, 0.28);
+				background:
+					linear-gradient(135deg, rgba(215, 255, 95, 0.95), rgba(94, 234, 212, 0.48)),
+					#ffffff;
+				color: #101114;
+				text-decoration: none;
+				box-shadow: 0 12px 28px rgba(16, 185, 129, 0.14), inset 0 1px 0 rgba(255, 255, 255, 0.68);
+				transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+			}
+
+			a.store-status:hover {
+				border-color: rgba(16, 185, 129, 0.5);
+				color: #101114;
+				box-shadow: 0 16px 34px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.72);
+				transform: translateY(-1px);
+			}
+
+			html.dark .store-status {
+				border-color: rgba(215, 255, 95, 0.32);
+				background:
+					linear-gradient(135deg, rgba(215, 255, 95, 0.96), rgba(94, 234, 212, 0.58)),
+					#111318;
+				box-shadow: 0 14px 36px rgba(215, 255, 95, 0.1);
+			}
+
+			.store-status-mark {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 22px;
+				height: 22px;
+				border-radius: 50%;
+				background: #101114;
+				color: #d7ff5f;
+				box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+			}
+
+			.store-status-mark svg,
+			.store-status-arrow {
+				width: 14px;
+				height: 14px;
+				flex: 0 0 auto;
+			}
+
+			.platform-pill {
+				padding: 0.5rem 0.75rem;
+				border: 1px solid var(--border-color);
+				background: rgba(99, 102, 241, 0.06);
+				color: #4b5563;
+			}
+
+			.status-pill {
+				padding: 0.5rem 0.75rem;
+				border: 1px solid var(--border-color);
+				background: rgba(107, 114, 128, 0.06);
+				color: #4b5563;
+			}
+
+			html.dark .platform-pill,
+			html.dark .status-pill {
+				background: rgba(255, 255, 255, 0.05);
+				color: #cbd5e1;
 			}
 
 			h1 {
@@ -177,8 +257,24 @@ const structuredData = [
 		<main>
 			<header class="product-head">
 				<div class="meta">
-					<span>{app.data.status}</span>
-					{app.data.platforms.length > 0 && <span>{app.data.platforms.join(' / ')}</span>}
+					{
+						app.data.appStore ? (
+							<a class="store-status" href={app.data.appStore} target="_blank" rel="noopener noreferrer" aria-label={`Open ${app.data.appName} on the App Store`}>
+								<span class="store-status-mark" aria-hidden="true">
+									<svg viewBox="0 0 24 24" fill="none">
+										<path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" />
+									</svg>
+								</span>
+								<span>{app.data.status}</span>
+								<svg class="store-status-arrow" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+									<path d="M7 17 17 7M9 7h8v8" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+								</svg>
+							</a>
+						) : (
+							<span class="status-pill">{app.data.status}</span>
+						)
+					}
+					{app.data.platforms.length > 0 && <span class="platform-pill">{app.data.platforms.join(' / ')}</span>}
 				</div>
 				<h1>{app.data.appName}</h1>
 				<p class="description">{app.data.description}</p>
