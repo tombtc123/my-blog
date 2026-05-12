@@ -4,6 +4,7 @@
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import { SITE_TITLE } from '../consts';
+import { getLangFromPath, localizePath, stripLangPrefix } from '../i18n';
 
 interface Props {
 	title: string;
@@ -12,6 +13,11 @@ interface Props {
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const lang = getLangFromPath(Astro.url.pathname);
+const strippedPath = stripLangPrefix(Astro.url.pathname);
+const englishURL = new URL(localizePath(strippedPath, 'en'), Astro.site);
+const chineseURL = new URL(localizePath(strippedPath, 'zh'), Astro.site);
+const rssURL = new URL(lang === 'zh' ? 'zh/rss.xml' : 'rss.xml', Astro.site);
 
 const { title, description, image } = Astro.props;
 
@@ -63,7 +69,7 @@ if (image) {
 	rel="alternate"
 	type="application/rss+xml"
 	title={SITE_TITLE}
-	href={new URL('rss.xml', Astro.site)}
+	href={rssURL}
 />
 <meta name="generator" content={Astro.generator} />
 
@@ -74,6 +80,9 @@ if (image) {
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
+<link rel="alternate" hreflang="en" href={englishURL} />
+<link rel="alternate" hreflang="zh-CN" href={chineseURL} />
+<link rel="alternate" hreflang="x-default" href={englishURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>

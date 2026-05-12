@@ -1,0 +1,32 @@
+---
+import AboutHeroImage from '../../assets/blog-placeholder-about.jpg';
+import Layout from '../../layouts/BlogPost.astro';
+---
+
+<Layout
+	title="关于 Block Tom"
+	description="一个英文优先的个人网站，收纳文章、App 产品页，以及每个 App 独立的隐私政策。"
+	pubDate={new Date('2026-05-12')}
+	heroImage={AboutHeroImage}
+	lang="zh"
+>
+	<p>
+		Block Tom 是我的英文优先个人网站。这里会收纳长文章、产品说明，以及 App 需要公开展示的页面，尤其是每个 App
+		各自独立的隐私政策。
+	</p>
+
+	<h2>这里放什么</h2>
+	<p>
+		文章栏目用于保存观点、读书笔记和不适合只停留在社交媒体时间线里的长期内容。产品栏目用于展示 App 和工具，包括产品介绍、平台说明、下载入口、支持信息和隐私政策链接。
+	</p>
+
+	<h2>语言策略</h2>
+	<p>
+		这个网站以英文为主站语言。中文版本统一放在 <code>/zh/</code> 路径下，这样同一份内容可以保留中英文两套版本，同时不影响英文主站的阅读和搜索索引。
+	</p>
+
+	<h2>产品与隐私</h2>
+	<p>
+		每个 App 都可以拥有自己的产品介绍页和自己的隐私政策页。这样隐私声明会按产品拆分，而不是把不同 App 混在一份泛泛的文档里。
+	</p>
+</Layout>

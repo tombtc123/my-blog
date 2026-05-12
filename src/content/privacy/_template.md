@@ -1,8 +1,11 @@
 ---
-title: 'App 名称隐私声明'
-description: 'App 名称的隐私声明，说明数据收集、使用、存储与用户权利。'
+title: 'App Name Privacy Policy'
+description: 'Privacy policy for App Name, including data collection, use, storage, and user rights.'
 pubDate: '2026-05-12'
-appName: 'App 名称'
+lang: 'en'
+routeSlug: 'app-slug'
+translationKey: 'app-slug'
+appName: 'App Name'
 effectiveDate: '2026-05-12'
 version: '1.0'
 platforms: ['iOS']
@@ -11,26 +14,26 @@ appSlug: 'app-slug'
 draft: true
 ---
 
-## 我们收集哪些信息
+## Information We Collect
 
-说明 App 实际收集的数据。没有收集就明确写不收集。
+Describe the data the app actually collects. If it does not collect data, state that clearly.
 
-## 我们如何使用这些信息
+## How We Use Information
 
-说明数据用途，例如提供核心功能、同步、故障诊断或用户支持。
+Explain data use, such as core functionality, sync, diagnostics, or user support.
 
-## 权限使用
+## Permissions
 
-列出相册、相机、麦克风、通知、网络等权限及用途。
+List permissions such as photos, camera, microphone, notifications, and network access, and explain why each is needed.
 
-## 第三方服务
+## Third-Party Services
 
-列出实际使用的 SDK、分析服务、云服务或支付服务。
+List any SDKs, analytics services, cloud services, or payment services actually used.
 
-## 数据保存与删除
+## Data Retention and Deletion
 
-说明数据存储位置、保存期限，以及用户如何删除数据。
+Explain where data is stored, how long it is kept, and how users can delete it.
 
-## 联系方式
+## Contact
 
-如有隐私相关问题，可以通过支持邮箱联系。
+For privacy questions, contact the support email.

@@ -1,25 +1,28 @@
 ---
-title: 'App 名称'
-description: '一句话说明这个 App 解决什么问题。'
+title: 'App Name'
+description: 'One sentence explaining what this app helps people do.'
 pubDate: '2026-05-12'
-appName: 'App 名称'
+lang: 'en'
+routeSlug: 'app-slug'
+translationKey: 'app-slug'
+appName: 'App Name'
 platforms: ['iOS']
-status: '开发中'
+status: 'In development'
 supportEmail: 'support@example.com'
-tags: ['效率工具']
+tags: ['Productivity']
 draft: true
 ---
 
-## 它解决什么问题
+## What It Solves
 
-写清楚目标用户、核心场景和 App 的边界。
+Describe the target user, core use case, and product boundary.
 
-## 核心功能
+## Core Features
 
-- 功能一
-- 功能二
-- 功能三
+- Feature one
+- Feature two
+- Feature three
 
-## 下载与支持
+## Download and Support
 
-上线后补充 App Store 或官网链接。
+Add the App Store or product website link after launch.

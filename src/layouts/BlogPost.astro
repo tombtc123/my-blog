@@ -4,13 +4,15 @@ import BaseHead from '../components/BaseHead.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import Header from '../components/Header.astro';
+import { UI, type Lang } from '../i18n';
 
 type Props = CollectionEntry<'blog'>['data'] & {
 	headings?: MarkdownHeading[];
 	body?: string;
 };
 
-const { title, description, pubDate, updatedDate, heroImage, headings = [], tags, category, body = '' } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, headings = [], tags, category, body = '', lang = 'en' } = Astro.props;
+const text = UI[lang as Lang];
 
 // 计算阅读时间
 function calculateReadingTime(content: string): number {
@@ -23,7 +25,7 @@ function calculateReadingTime(content: string): number {
 }
 ---
 
-<html lang="en">
+<html lang={text.htmlLang}>
 	<head>
 		<BaseHead title={title} description={description} image={heroImage} />
 		<style>
@@ -456,7 +458,7 @@ function calculateReadingTime(content: string): number {
 					</div>
 					{headings.length > 0 && (
 						<nav class="toc" id="toc">
-							<div class="toc-title">目录</div>
+							<div class="toc-title">{text.contents}</div>
 							<ul class="toc-list">
 								{headings.map((heading) => {
 									// 使用 heading.slug（如果存在），否则生成一个
@@ -480,7 +482,7 @@ function calculateReadingTime(content: string): number {
 		<!-- Mobile TOC Button (only visible on mobile) -->
 		{headings.length > 0 && (
 			<>
-				<button id="mobile-toc-button" class="mobile-toc-button" aria-label="Table of Contents">
+				<button id="mobile-toc-button" class="mobile-toc-button" aria-label={text.tableOfContents}>
 					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<line x1="8" y1="6" x2="21" y2="6"></line>
 						<line x1="8" y1="12" x2="21" y2="12"></line>
@@ -497,8 +499,8 @@ function calculateReadingTime(content: string): number {
 				<!-- Mobile TOC Panel -->
 				<div id="mobile-toc-panel" class="mobile-toc-panel">
 					<div class="mobile-toc-header">
-						<div class="toc-title">目录</div>
-						<button id="mobile-toc-close" class="mobile-toc-close" aria-label="Close">
+						<div class="toc-title">{text.contents}</div>
+						<button id="mobile-toc-close" class="mobile-toc-close" aria-label={text.close}>
 							<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 								<line x1="18" y1="6" x2="6" y2="18"></line>
 								<line x1="6" y1="6" x2="18" y2="18"></line>

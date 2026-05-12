@@ -1,12 +1,18 @@
 ---
 import { SITE_TITLE } from '../consts';
+import { alternateLangPath, getLangFromPath, localizePath, stripLangPrefix, UI } from '../i18n';
 // 检测当前是否在主页
-const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/index.html';
+const lang = getLangFromPath(Astro.url.pathname);
+const text = UI[lang];
 const currentPath = Astro.url.pathname;
+const normalizedPath = stripLangPrefix(currentPath);
+const isHomePage = normalizedPath === '/' || normalizedPath === '/index.html';
 const navItems = [
-	{ href: '/blog/', label: '文章', active: currentPath.startsWith('/blog') },
-	{ href: '/apps/', label: '产品', active: currentPath.startsWith('/apps') },
+	{ href: localizePath('/blog/', lang), label: text.writing, active: normalizedPath.startsWith('/blog') },
+	{ href: localizePath('/apps/', lang), label: text.products, active: normalizedPath.startsWith('/apps') },
 ];
+const homeHref = localizePath('/', lang);
+const alternateHref = alternateLangPath(currentPath);
 ---
 
 <header class={isHomePage ? 'home-header' : 'sticky-header'}>
@@ -19,10 +25,10 @@ const navItems = [
 			</a>
 		)}
 		{!isHomePage && (
-			<a href="/" class="site-url">blocktom.com</a>
+			<a href={homeHref} class="site-url">blocktom.com</a>
 		)}
 		<div class="nav-icons">
-			<nav class="section-nav" aria-label="站点栏目">
+			<nav class="section-nav" aria-label={text.navLabel}>
 				{navItems.map((item) => (
 					<a href={item.href} class={item.active ? 'section-link active' : 'section-link'}>
 						{item.label}
@@ -30,13 +36,14 @@ const navItems = [
 				))}
 			</nav>
 			{!isHomePage && (
-				<a href="/" class="home-link" aria-label="Home">
+				<a href={homeHref} class="home-link" aria-label={text.home}>
 					<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 						<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
 						<polyline points="9 22 9 12 15 12 15 22"></polyline>
 					</svg>
 				</a>
 			)}
+			<a href={alternateHref} class="language-link" aria-label="Switch language">{text.languageSwitch}</a>
 			<button id="dark-mode-toggle" class="dark-mode-toggle" aria-label="Toggle dark mode">
 				<svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
 					<path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
@@ -244,6 +251,7 @@ const navItems = [
 	
 	.home-link,
 	.social-link,
+	.language-link,
 	.dark-mode-toggle {
 		width: 40px;
 		height: 40px;
@@ -260,9 +268,19 @@ const navItems = [
 		opacity: 0.8;
 		text-decoration: none;
 	}
+
+	.language-link {
+		width: auto;
+		min-width: 40px;
+		padding: 0 0.75rem;
+		border-radius: 20px;
+		font-size: 0.875rem;
+		font-weight: 600;
+	}
 	
 	.home-link:hover,
 	.social-link:hover,
+	.language-link:hover,
 	.dark-mode-toggle:hover {
 		background-color: rgba(0, 0, 0, 0.05);
 		opacity: 1;
@@ -271,12 +289,14 @@ const navItems = [
 	
 	html.dark .home-link:hover,
 	html.dark .social-link:hover,
+	html.dark .language-link:hover,
 	html.dark .dark-mode-toggle:hover {
 		background-color: rgba(255, 255, 255, 0.1);
 	}
 	
 	.home-link:active,
 	.social-link:active,
+	.language-link:active,
 	.dark-mode-toggle:active {
 		transform: scale(0.95);
 	}
@@ -313,9 +333,17 @@ const navItems = [
 		}
 		
 		.home-link,
+		.language-link,
 		.dark-mode-toggle {
 			width: 36px;
 			height: 36px;
+		}
+
+		.language-link {
+			width: auto;
+			min-width: 36px;
+			padding: 0 0.5rem;
+			font-size: 0.8125rem;
 		}
 		
 		.icon {

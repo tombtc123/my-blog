@@ -1,10 +1,10 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BlogPost from '../../layouts/BlogPost.astro';
-import { getEntrySlug } from '../../i18n';
+import BlogPost from '../../../layouts/BlogPost.astro';
+import { getEntrySlug } from '../../../i18n';
 
 export async function getStaticPaths() {
-	const posts = await getCollection('blog', ({ data }) => data.lang === 'en');
+	const posts = await getCollection('blog', ({ data }) => data.lang === 'zh');
 	return posts.map((post) => ({
 		params: { slug: getEntrySlug(post) },
 		props: post,

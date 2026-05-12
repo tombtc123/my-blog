@@ -1,13 +1,13 @@
 ---
 import { type CollectionEntry, getCollection, render } from 'astro:content';
-import BaseHead from '../../../components/BaseHead.astro';
-import Footer from '../../../components/Footer.astro';
-import Header from '../../../components/Header.astro';
-import { formatDate, getEntrySlug, localizePath, UI } from '../../../i18n';
+import BaseHead from '../../../../components/BaseHead.astro';
+import Footer from '../../../../components/Footer.astro';
+import Header from '../../../../components/Header.astro';
+import { formatDate, getEntrySlug, localizePath, UI } from '../../../../i18n';
 
 export async function getStaticPaths() {
-	const policies = await getCollection('privacy', ({ data }) => !data.draft && data.lang === 'en');
-	const apps = await getCollection('apps', ({ data }) => !data.draft && data.lang === 'en');
+	const policies = await getCollection('privacy', ({ data }) => !data.draft && data.lang === 'zh');
+	const apps = await getCollection('apps', ({ data }) => !data.draft && data.lang === 'zh');
 
 	return policies.map((policy) => ({
 		params: { slug: policy.data.appSlug },
