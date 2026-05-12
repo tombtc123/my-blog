@@ -4,7 +4,7 @@
 import '../styles/global.css';
 import type { ImageMetadata } from 'astro';
 import { SITE_TITLE } from '../consts';
-import { getLangFromPath, localizePath, stripLangPrefix } from '../i18n';
+import { getLangFromPath, localizePath, stripLangPrefix, type Lang } from '../i18n';
 
 interface Props {
 	title: string;
@@ -12,6 +12,8 @@ interface Props {
 	image?: ImageMetadata | string;
 	type?: 'website' | 'article' | 'profile' | 'product';
 	structuredData?: unknown | unknown[];
+	appStoreId?: string;
+	alternateLanguages?: Partial<Record<Lang, string>>;
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -21,8 +23,26 @@ const englishURL = new URL(localizePath(strippedPath, 'en'), Astro.site);
 const chineseURL = new URL(localizePath(strippedPath, 'zh'), Astro.site);
 const rssURL = new URL(lang === 'zh' ? 'zh/rss.xml' : 'rss.xml', Astro.site);
 
-const { title, description, image, type = 'website', structuredData } = Astro.props;
+const { title, description, image, type = 'website', structuredData, appStoreId, alternateLanguages } = Astro.props;
 const locale = lang === 'zh' ? 'zh_CN' : 'en_US';
+const languageLabels: Record<Lang, string> = {
+	en: 'en',
+	zh: 'zh-CN',
+};
+const defaultAlternateLanguages: Record<Lang, string> = {
+	en: englishURL.href,
+	zh: chineseURL.href,
+};
+const alternateLanguageEntries = Object.entries(alternateLanguages ?? defaultAlternateLanguages)
+	.filter((entry): entry is [Lang, string] => Boolean(entry[1]))
+	.map(([entryLang, href]) => ({
+		lang: entryLang,
+		href: new URL(href, Astro.site).href,
+	}));
+const xDefaultURL = new URL(alternateLanguages?.en ?? defaultAlternateLanguages.en, Astro.site).href;
+const alternateOgLocales = alternateLanguageEntries
+	.filter((entry) => entry.lang !== lang)
+	.map((entry) => entry.lang === 'zh' ? 'zh_CN' : 'en_US');
 const siteIdentityData = [
 	{
 		'@context': 'https://schema.org',
@@ -98,12 +118,12 @@ if (image) {
 />
 <meta name="generator" content={Astro.generator} />
 <meta name="robots" content="index,follow,max-image-preview:large" />
+{appStoreId && <meta name="apple-itunes-app" content={`app-id=${appStoreId}`} />}
 
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
-<link rel="alternate" hreflang="en" href={englishURL} />
-<link rel="alternate" hreflang="zh-CN" href={chineseURL} />
-<link rel="alternate" hreflang="x-default" href={englishURL} />
+{alternateLanguageEntries.map(({ lang: entryLang, href }) => <link rel="alternate" hreflang={languageLabels[entryLang]} href={href} />)}
+<link rel="alternate" hreflang="x-default" href={xDefaultURL} />
 
 <!-- Primary Meta Tags -->
 <title>{title}</title>
@@ -112,17 +132,18 @@ if (image) {
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content={type} />
-<meta property="og:url" content={Astro.url} />
+<meta property="og:url" content={canonicalURL} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageUrl} />
 <meta property="og:image:alt" content={title} />
 <meta property="og:site_name" content={SITE_TITLE} />
 <meta property="og:locale" content={locale} />
+{alternateOgLocales.map((alternateLocale) => <meta property="og:locale:alternate" content={alternateLocale} />)}
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
-<meta property="twitter:url" content={Astro.url} />
+<meta property="twitter:url" content={canonicalURL} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={ogImageUrl} />

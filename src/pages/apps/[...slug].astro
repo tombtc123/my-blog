@@ -22,6 +22,17 @@ const text = UI[lang];
 const appSlug = getEntrySlug(app);
 const privacyPolicies = await getCollection('privacy', ({ data }) => !data.draft && data.lang === lang);
 const privacyPolicy = privacyPolicies.find((policy) => policy.data.appSlug === appSlug);
+const appTranslations = await getCollection(
+	'apps',
+	({ data }) => !data.draft && data.translationKey === (app.data.translationKey ?? app.id)
+);
+const alternateLanguages = Object.fromEntries(
+	appTranslations.map((translation) => [
+		translation.data.lang,
+		new URL(localizePath(`/apps/${getEntrySlug(translation)}/`, translation.data.lang), Astro.site).href,
+	])
+);
+const alternateHref = alternateLanguages[lang === 'en' ? 'zh' : 'en'] ?? null;
 const productUrl = new URL(localizePath(`/apps/${appSlug}/`, lang), Astro.site).href;
 const privacyUrl = privacyPolicy
 	? new URL(localizePath(`/apps/${appSlug}/privacy/`, lang), Astro.site).href
@@ -31,31 +42,67 @@ const appTitle = app.data.seoTitle ?? `${app.data.appName} - ${text.products}`;
 const appDescription = app.data.seoDescription ?? app.data.description;
 const supportTarget = app.data.supportUrl ?? (app.data.supportEmail ? `mailto:${app.data.supportEmail}` : undefined);
 const sameAsLinks = [app.data.appStore, supportTarget].filter(Boolean);
+const structuredAppName = app.data.appStoreName ?? app.data.appName;
+const structuredLanguage = lang === 'zh' ? 'zh-CN' : 'en';
+const alternateNames = Array.from(new Set([app.data.appStoreName, ...(app.data.alternateNames ?? [])].filter(Boolean)));
+const appImageUrl = appImage ? new URL(typeof appImage === 'string' ? appImage : appImage.src, Astro.site).href : undefined;
+const screenshotUrls = app.data.screenshots.map((screenshot) => new URL(screenshot, Astro.site).href);
+const appIdentifier = [
+	app.data.appStoreId ? { '@type': 'PropertyValue', propertyID: 'App Store ID', value: app.data.appStoreId } : undefined,
+	app.data.bundleId ? { '@type': 'PropertyValue', propertyID: 'iOS Bundle ID', value: app.data.bundleId } : undefined,
+].filter(Boolean);
 const structuredData = [
 	{
 		'@context': 'https://schema.org',
-		'@type': 'SoftwareApplication',
-		name: app.data.appName,
-		applicationCategory: 'ProductivityApplication',
-		operatingSystem: app.data.platforms.join(', ') || 'iOS',
+		'@type': ['SoftwareApplication', 'MobileApplication'],
+		name: structuredAppName,
+		alternateName: alternateNames.length > 0 ? alternateNames : undefined,
+		applicationCategory: app.data.applicationCategory,
+		applicationSubCategory: app.data.tags?.join(', '),
+		operatingSystem: app.data.minimumOsVersion ?? (app.data.platforms.join(', ') || 'iOS'),
 		description: appDescription,
 		url: productUrl,
-		image: appImage ? new URL(typeof appImage === 'string' ? appImage : appImage.src, Astro.site).href : undefined,
-		screenshot: app.data.screenshots.map((screenshot) => new URL(screenshot, Astro.site).href),
+		mainEntityOfPage: productUrl,
+		image: appImageUrl,
+		screenshot: screenshotUrls,
 		downloadUrl: app.data.appStore,
 		installUrl: app.data.appStore,
-		isAccessibleForFree: false,
+		softwareVersion: app.data.softwareVersion,
+		releaseDate: app.data.releaseDate,
+		identifier: appIdentifier.length > 0 ? appIdentifier : undefined,
+		keywords: app.data.keywords?.join(', '),
+		isAccessibleForFree: typeof app.data.price === 'number' ? app.data.price === 0 : undefined,
+		publisher: {
+			'@type': 'Person',
+			name: 'Tom',
+			url: new URL('/', Astro.site).href,
+			sameAs: ['https://x.com/blocktom'],
+		},
 		offers: app.data.appStore
 			? {
 					'@type': 'Offer',
-					price: '0.99',
-					priceCurrency: 'USD',
+					price: typeof app.data.price === 'number' ? String(app.data.price) : '0.99',
+					priceCurrency: app.data.priceCurrency ?? 'USD',
 					url: app.data.appStore,
 					availability: 'https://schema.org/InStock',
 				}
 			: undefined,
 		privacyPolicy: privacyUrl,
 		sameAs: sameAsLinks.length > 0 ? sameAsLinks : undefined,
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: appTitle,
+		description: appDescription,
+		url: productUrl,
+		inLanguage: structuredLanguage,
+		primaryImageOfPage: appImageUrl,
+		about: {
+			'@type': 'SoftwareApplication',
+			name: structuredAppName,
+			url: productUrl,
+		},
 	},
 	{
 		'@context': 'https://schema.org',
@@ -81,7 +128,15 @@ const structuredData = [
 <!doctype html>
 <html lang={text.htmlLang}>
 	<head>
-		<BaseHead title={appTitle} description={appDescription} image={appImage} type="product" structuredData={structuredData} />
+		<BaseHead
+			title={appTitle}
+			description={appDescription}
+			image={appImage}
+			type="product"
+			structuredData={structuredData}
+			appStoreId={app.data.appStoreId}
+			alternateLanguages={alternateLanguages}
+		/>
 		<style>
 			main {
 				width: 100%;
@@ -253,7 +308,7 @@ const structuredData = [
 		</style>
 	</head>
 	<body>
-		<Header />
+		<Header alternateHref={alternateHref} />
 		<main>
 			<header class="product-head">
 				<div class="meta">

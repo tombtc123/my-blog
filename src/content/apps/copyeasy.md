@@ -1,17 +1,26 @@
 ---
 title: 'CopyEasy'
-description: 'CopyEasy is a private iPhone text snippet manager for saving reusable replies, addresses, signatures, templates, and one-tap clipboard copying.'
+description: 'CopyEasy Text Snippets is a private iPhone text snippet manager for saving reusable replies, addresses, signatures, templates, short notes, and one-tap clipboard copying.'
 pubDate: '2026-05-12'
 updatedDate: '2026-05-12'
 lang: 'en'
 routeSlug: 'copyeasy'
 translationKey: 'copyeasy'
-seoTitle: 'CopyEasy - Private iPhone Text Snippet Manager'
-seoDescription: 'CopyEasy helps iPhone users save reusable text snippets, copy them in one tap, search, pin, reorder, and keep everything local with no account or tracking.'
+seoTitle: 'CopyEasy Text Snippets - Private iPhone Text Snippet Manager'
+seoDescription: 'CopyEasy Text Snippets helps iPhone users save reusable replies, addresses, signatures, templates, and short notes, then copy them in one tap with no account, tracking, ads, or cloud sync.'
 seoImage: '/apps/copyeasy/03-copied.png'
 appName: 'CopyEasy'
+appStoreName: 'CopyEasy Text Snippets'
+appStoreId: '6767789668'
+bundleId: 'com.tom.copyeasy'
 platforms: ['iOS']
 status: 'Available on the App Store'
+applicationCategory: 'UtilitiesApplication'
+price: 0.99
+priceCurrency: 'USD'
+minimumOsVersion: 'iOS 17.0 or later'
+softwareVersion: '1.0'
+releaseDate: '2026-05-11'
 appStore: 'https://apps.apple.com/us/app/copyeasy-text-snippets/id6767789668'
 supportUrl: 'https://x.com/blocktom'
 screenshots:
@@ -21,6 +30,19 @@ screenshots:
   - '/apps/copyeasy/05-new-text.png'
   - '/apps/copyeasy/04-settings.png'
 tags: ['Productivity', 'Utilities', 'Clipboard', 'Snippets']
+keywords:
+  - iPhone text snippets
+  - iOS text snippet manager
+  - clipboard snippets app
+  - reusable text app
+  - canned replies for iPhone
+  - address template app
+  - signature snippets
+  - private clipboard utility
+alternateNames:
+  - CopyEasy Text Snippets
+  - CopyEasy iPhone snippets
+  - CopyEasy clipboard snippets
 draft: false
 ---
 
@@ -550,6 +572,103 @@ draft: false
 		box-shadow: 0 24px 70px rgba(16, 17, 20, 0.24);
 	}
 
+	.copyeasy-search-panel {
+		margin: 4rem 0;
+		padding: clamp(22px, 4vw, 42px);
+		border: 1px solid var(--ce-line);
+		border-radius: 8px;
+		background:
+			linear-gradient(135deg, rgba(215, 255, 95, 0.16), transparent 42%),
+			linear-gradient(180deg, var(--ce-paper), var(--ce-panel));
+	}
+
+	html.dark .copyeasy-search-panel {
+		background:
+			linear-gradient(135deg, rgba(215, 255, 95, 0.08), transparent 42%),
+			linear-gradient(180deg, #141820, #101318);
+	}
+
+	.copyeasy-search-panel h2 {
+		max-width: 780px;
+		margin: 0 0 16px;
+		color: var(--ce-ink);
+		font-size: clamp(2rem, 4.6vw, 4.3rem);
+		line-height: 0.98;
+		letter-spacing: 0;
+	}
+
+	.copyeasy-search-panel > p {
+		max-width: 760px;
+		margin: 0 0 22px;
+		color: var(--ce-muted);
+		font-size: 1rem;
+		line-height: 1.7;
+	}
+
+	.copyeasy-use-grid {
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: 12px;
+		margin-top: 18px;
+	}
+
+	.copyeasy-use-case {
+		padding: 18px;
+		border: 1px solid var(--ce-line);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.5);
+	}
+
+	html.dark .copyeasy-use-case {
+		background: rgba(255, 255, 255, 0.05);
+	}
+
+	.copyeasy-use-case h3 {
+		margin: 0 0 8px;
+		color: var(--ce-ink);
+		font-size: 1.05rem;
+		line-height: 1.25;
+	}
+
+	.copyeasy-use-case p {
+		margin: 0;
+		color: var(--ce-muted);
+		font-size: 0.95rem;
+		line-height: 1.6;
+	}
+
+	.copyeasy-faq {
+		display: grid;
+		gap: 10px;
+		margin-top: 24px;
+	}
+
+	.copyeasy-faq details {
+		border: 1px solid var(--ce-line);
+		border-radius: 8px;
+		background: rgba(255, 255, 255, 0.48);
+	}
+
+	html.dark .copyeasy-faq details {
+		background: rgba(255, 255, 255, 0.05);
+	}
+
+	.copyeasy-faq summary {
+		cursor: pointer;
+		padding: 14px 16px;
+		color: var(--ce-ink);
+		font-weight: 800;
+		line-height: 1.35;
+	}
+
+	.copyeasy-faq details p {
+		margin: 0;
+		padding: 0 16px 16px;
+		color: var(--ce-muted);
+		font-size: 0.95rem;
+		line-height: 1.65;
+	}
+
 	.copyeasy-privacy-band {
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) auto;
@@ -692,7 +811,8 @@ draft: false
 		}
 
 		.copyeasy-metric-strip,
-		.copyeasy-card-grid {
+		.copyeasy-card-grid,
+		.copyeasy-use-grid {
 			grid-template-columns: 1fr;
 		}
 
@@ -848,6 +968,45 @@ CopyEasy keeps the text you type again and again within reach: addresses, replie
 <figure class="copyeasy-feature-image">
 <img src="/apps/copyeasy/05-new-text.png" alt="CopyEasy snippet editor with clipboard fill action" />
 </figure>
+</section>
+
+<section class="copyeasy-search-panel" aria-label="CopyEasy search and app discovery details">
+<h2>CopyEasy Text Snippets for iPhone.</h2>
+<p>
+CopyEasy Text Snippets is an iOS utility for people who type the same text again and again. It is built for saved replies, addresses, email signatures, form answers, customer support notes, short templates, and other reusable text you want ready before you open Messages, Mail, Safari, Notes, or a web form.
+</p>
+<div class="copyeasy-use-grid">
+<div class="copyeasy-use-case">
+<h3>Reusable replies</h3>
+<p>Keep polite message replies, customer support answers, appointment notes, and short canned responses ready to copy without rebuilding them every time.</p>
+</div>
+<div class="copyeasy-use-case">
+<h3>Addresses and signatures</h3>
+<p>Save frequently used addresses, phone labels, email signatures, social links, and contact templates in a clean private list on your iPhone.</p>
+</div>
+<div class="copyeasy-use-case">
+<h3>Private clipboard utility</h3>
+<p>Use CopyEasy as a focused text snippet manager, not a clipboard history tracker. Your snippets stay local, with no account, ads, analytics, or cloud sync.</p>
+</div>
+</div>
+<div class="copyeasy-faq">
+<details>
+<summary>What is CopyEasy?</summary>
+<p>CopyEasy is a private iPhone text snippet manager. You save reusable text once, then tap a saved item to copy it to the iOS clipboard and paste it into another app.</p>
+</details>
+<details>
+<summary>Is CopyEasy a clipboard history app?</summary>
+<p>No. CopyEasy does not monitor everything you copy. It only stores snippets you choose to save, and it reads the current clipboard only when you tap the clipboard fill action while editing a snippet.</p>
+</details>
+<details>
+<summary>Does CopyEasy require an account or cloud sync?</summary>
+<p>No. CopyEasy has no sign-in system, no developer cloud account, no advertising SDK, and no third-party analytics. Saved snippets are stored locally on your device.</p>
+</details>
+<details>
+<summary>Who is CopyEasy for?</summary>
+<p>CopyEasy is useful for anyone who repeatedly types addresses, signatures, standard replies, templates, form answers, or short notes on iPhone and wants a fast one-tap way to copy them.</p>
+</details>
+</div>
 </section>
 
 <section class="copyeasy-privacy-band">
