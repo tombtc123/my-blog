@@ -30,6 +30,8 @@ draft: false
 		--ce-muted: #656b76;
 		--ce-paper: #f7f8f4;
 		--ce-line: rgba(16, 17, 20, 0.12);
+		--ce-panel: #e9eef4;
+		--ce-panel-strong: #dbe4ee;
 		--ce-blue: #2563eb;
 		--ce-lime: #d7ff5f;
 		--ce-coral: #ff6f61;
@@ -45,6 +47,8 @@ draft: false
 		--ce-muted: #b7beca;
 		--ce-paper: #111318;
 		--ce-line: rgba(248, 250, 252, 0.16);
+		--ce-panel: #171b22;
+		--ce-panel-strong: #202632;
 	}
 
 	.copyeasy-page * {
@@ -64,7 +68,9 @@ draft: false
 		border-radius: 8px;
 		background:
 			linear-gradient(135deg, rgba(215, 255, 95, 0.95) 0 22%, transparent 22%),
-			linear-gradient(120deg, #101114 0 56%, #f7f8f4 56.2% 100%);
+			radial-gradient(circle at 78% 47%, rgba(37, 99, 235, 0.16), transparent 34%),
+			radial-gradient(circle at 83% 72%, rgba(94, 234, 212, 0.18), transparent 36%),
+			linear-gradient(120deg, #101114 0 56%, #e2e9df 56.2% 100%);
 	}
 
 	html.dark .copyeasy-hero {
@@ -75,6 +81,7 @@ draft: false
 
 	.copyeasy-hero-copy {
 		color: #f8fafc;
+		min-width: 0;
 	}
 
 	.copyeasy-badge-row {
@@ -104,9 +111,11 @@ draft: false
 		max-width: 520px;
 		margin: 0 0 18px;
 		color: #ffffff;
-		font-size: clamp(3rem, 8vw, 6.6rem);
-		line-height: 0.86;
+		font-size: clamp(3rem, 6.4vw, 5.6rem);
+		line-height: 0.9;
 		letter-spacing: 0;
+		overflow-wrap: normal;
+		word-break: normal;
 	}
 
 	.copyeasy-hero-copy p.copyeasy-lede {
@@ -142,6 +151,7 @@ draft: false
 		gap: 10px;
 		flex-wrap: wrap;
 		margin-top: 24px;
+		max-width: 390px;
 	}
 
 	.copyeasy-app-store-link,
@@ -165,12 +175,14 @@ draft: false
 
 	.copyeasy-secondary-link {
 		border: 1px solid rgba(248, 250, 252, 0.2);
+		background: rgba(16, 17, 20, 0.7);
 		color: #f8fafc !important;
 	}
 
 	.copyeasy-stage {
 		position: relative;
 		min-height: 520px;
+		min-width: 0;
 	}
 
 	.copyeasy-phone {
@@ -261,6 +273,8 @@ draft: false
 		font-size: clamp(2rem, 5vw, 4.5rem);
 		line-height: 0.94;
 		letter-spacing: 0;
+		overflow-wrap: normal;
+		word-break: normal;
 	}
 
 	.copyeasy-section-head p {
@@ -316,12 +330,26 @@ draft: false
 		display: grid;
 		grid-template-columns: repeat(5, minmax(0, 1fr));
 		gap: clamp(10px, 1.6vw, 18px);
-		align-items: start;
+		align-items: stretch;
 		margin-top: 22px;
 	}
 
 	.copyeasy-shot {
 		margin: 0;
+		padding: 12px;
+		border: 1px solid rgba(16, 17, 20, 0.12);
+		border-radius: 8px;
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.68)),
+			var(--ce-panel);
+		box-shadow: 0 18px 48px rgba(16, 17, 20, 0.08);
+	}
+
+	html.dark .copyeasy-shot {
+		border-color: rgba(248, 250, 252, 0.14);
+		background:
+			linear-gradient(180deg, rgba(255, 255, 255, 0.08), rgba(255, 255, 255, 0.03)),
+			var(--ce-panel);
 	}
 
 	.copyeasy-shot img {
@@ -342,6 +370,21 @@ draft: false
 		text-align: center;
 	}
 
+	.copyeasy-screen-section {
+		padding: clamp(20px, 3vw, 34px);
+		border: 1px solid var(--ce-line);
+		border-radius: 8px;
+		background:
+			radial-gradient(circle at 12% 28%, rgba(215, 255, 95, 0.2), transparent 28%),
+			linear-gradient(135deg, #eef3f8, #f7f8f4 48%, #e8f1ea);
+	}
+
+	html.dark .copyeasy-screen-section {
+		background:
+			radial-gradient(circle at 12% 28%, rgba(215, 255, 95, 0.13), transparent 28%),
+			linear-gradient(135deg, #101318, #151a22 52%, #111318);
+	}
+
 	.copyeasy-split {
 		display: grid;
 		grid-template-columns: minmax(0, 0.92fr) minmax(300px, 1.08fr);
@@ -353,7 +396,7 @@ draft: false
 		border-radius: 8px;
 		background:
 			linear-gradient(90deg, rgba(37, 99, 235, 0.11), transparent 42%),
-			var(--ce-paper);
+			linear-gradient(135deg, var(--ce-panel), var(--ce-paper));
 	}
 
 	.copyeasy-split h2 {
@@ -398,6 +441,19 @@ draft: false
 		margin: 0;
 		justify-self: center;
 		width: min(100%, 360px);
+		padding: 22px;
+		border: 1px solid var(--ce-line);
+		border-radius: 8px;
+		background:
+			radial-gradient(circle at 50% 18%, rgba(37, 99, 235, 0.2), transparent 36%),
+			linear-gradient(180deg, #e8eef8, #f8fafc);
+		box-shadow: 0 26px 70px rgba(16, 17, 20, 0.08);
+	}
+
+	html.dark .copyeasy-feature-image {
+		background:
+			radial-gradient(circle at 50% 18%, rgba(37, 99, 235, 0.18), transparent 36%),
+			linear-gradient(180deg, #171b22, #0f1115);
 	}
 
 	.copyeasy-feature-image img {
@@ -485,7 +541,8 @@ draft: false
 			min-height: auto;
 			background:
 				linear-gradient(135deg, rgba(215, 255, 95, 0.95) 0 16%, transparent 16%),
-				linear-gradient(180deg, #101114 0 52%, #f7f8f4 52.2% 100%);
+				radial-gradient(circle at 76% 67%, rgba(37, 99, 235, 0.16), transparent 34%),
+				linear-gradient(180deg, #101114 0 52%, #e2e9df 52.2% 100%);
 		}
 
 		.copyeasy-stage {
@@ -627,7 +684,7 @@ CopyEasy keeps the text you type again and again within reach: addresses, replie
 </div>
 </section>
 
-<section class="copyeasy-section" aria-label="CopyEasy screenshot gallery">
+<section class="copyeasy-section copyeasy-screen-section" aria-label="CopyEasy screenshot gallery">
 <div class="copyeasy-section-head">
 <h2>Five screens. No clutter.</h2>
 <p>The interface is direct, native, and calm. It is made for repeat use, not for becoming another place to manage.</p>
