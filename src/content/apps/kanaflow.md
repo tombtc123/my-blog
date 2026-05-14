@@ -85,7 +85,20 @@ audience:
 draft: false
 ---
 
-<style>@import url('/apps/kanaflow/kanaflow.css');</style>
+<style>
+@import url('/apps/kanaflow/kanaflow-20260514-v2.css');
+.prose .kf-page a.kf-primary,
+.prose .kf-page a.kf-secondary {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	text-decoration: none;
+}
+.prose .kf-page a.kf-primary {
+	background: #0f172a;
+	color: #ffffff;
+}
+</style>
 
 <div class="kf-page">
 <section class="kf-hero">
@@ -199,6 +212,6 @@ draft: false
 <a class="kf-secondary" href="/apps/kanaflow/privacy/">Read Privacy Policy</a>
 </div>
 </div>
-<p>For support or privacy questions, use the public X account: <a href="https://x.com/blocktom">https://x.com/blocktom</a>.</p>
+<p class="kf-support-note">For support or privacy questions, use the public X account <a class="kf-inline-link" href="https://x.com/blocktom">@blocktom on X</a>.</p>
 </section>
 </div>
