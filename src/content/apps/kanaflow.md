@@ -100,7 +100,7 @@ draft: false
 <h2>Build kana recall in short, focused loops.</h2>
 <p class="kf-lede">KanaFlow Practice turns hiragana and katakana practice into a clean recall drill: see the kana, type the romaji, hear the Japanese sound, and review only the characters that tripped you up.</p>
 <div class="kf-actions">
-<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Get KanaFlow Practice on the App Store</a>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Download KanaFlow Practice</a>
 <a class="kf-secondary" href="/apps/kanaflow/privacy/">Privacy Policy</a>
 <a class="kf-secondary" href="https://x.com/blocktom">Support</a>
 </div>
@@ -150,7 +150,7 @@ draft: false
 </section>
 
 <section>
-<h2>A kana trainer for real beginner search intent</h2>
+<h2>Built for the beginner kana stage</h2>
 <p>If you are searching for a hiragana practice app, a katakana practice app, a romaji quiz, or a simple Japanese alphabet trainer for iPhone and iPad, KanaFlow Practice is built around that exact job. It is for the stage where you already know that Japanese uses kana, but you still need faster recognition before reading words feels natural.</p>
 <p>The app is useful for first-time Japanese learners, classroom students reviewing gojuon charts, self-study learners who want short daily drills, and anyone returning to hiragana and katakana after a break.</p>
 </section>
@@ -177,10 +177,10 @@ draft: false
 <h2>Frequently asked questions</h2>
 <div class="kf-faq-grid">
 <div class="kf-faq"><h3>What is KanaFlow Practice?</h3><p>KanaFlow Practice is an iPhone and iPad app for practicing hiragana and katakana recognition with romaji answers, timed drills, Japanese voice playback, and local mistake review.</p></div>
-<div class="kf-faq"><h3>Does KanaFlow collect learning data?</h3><p>No. Mistakes and preferences are stored locally on your device. The developer does not receive them.</p></div>
-<div class="kf-faq"><h3>Does it require an account?</h3><p>No. KanaFlow has no sign-in, no developer server, no advertising SDK, and no analytics SDK.</p></div>
+<div class="kf-faq"><h3>Does KanaFlow Practice collect learning data?</h3><p>No. Mistakes and preferences are stored locally on your device. The developer does not receive them.</p></div>
+<div class="kf-faq"><h3>Does it require an account?</h3><p>No. KanaFlow Practice has no sign-in, no developer server, no advertising SDK, and no analytics SDK.</p></div>
 <div class="kf-faq"><h3>Can I practice only katakana?</h3><p>Yes. You can practice hiragana, katakana, or both, and choose which kana categories appear in drills.</p></div>
-<div class="kf-faq"><h3>Does it teach vocabulary or grammar?</h3><p>No. KanaFlow is deliberately focused on kana recall. It pairs well with a textbook, course, tutor, or broader Japanese learning app.</p></div>
+<div class="kf-faq"><h3>Does it teach vocabulary or grammar?</h3><p>No. KanaFlow Practice is deliberately focused on kana recall. It pairs well with a textbook, course, tutor, or broader Japanese learning app.</p></div>
 <div class="kf-faq"><h3>Does it work offline?</h3><p>The core practice flow is local and does not require a developer account or developer server.</p></div>
 <div class="kf-faq"><h3>Is Chinese still available?</h3><p>Yes. The App Store-facing product is English-first, and Simplified Chinese is available as an in-app language option.</p></div>
 </div>

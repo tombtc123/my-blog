@@ -95,7 +95,7 @@ draft: false
 <h2>用短而集中的循环建立假名反应。</h2>
 <p class="kf-lede">KanaFlow Practice 把平假名和片假名练习压缩成一个清爽的记忆闭环：看假名、输入罗马音、听日语发音，然后只复习真正答错的字符。</p>
 <div class="kf-actions">
-<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">在 App Store 下载 KanaFlow Practice</a>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">下载 KanaFlow Practice</a>
 <a class="kf-secondary" href="/zh/apps/kanaflow/privacy/">隐私政策</a>
 <a class="kf-secondary" href="https://x.com/blocktom">支持</a>
 </div>
@@ -145,7 +145,7 @@ draft: false
 </section>
 
 <section>
-<h2>面向真实搜索需求的假名训练器</h2>
+<h2>为假名入门阶段设计</h2>
 <p>如果你正在找平假名练习 App、片假名练习 App、罗马音测试、五十音练习或 iPhone/iPad 上的日语假名训练工具，KanaFlow Practice 做的正是这件事。它适合已经知道日语使用假名、但还需要更快识别速度的阶段。</p>
 <p>它适合日语初学者、课堂里复习五十音的学生、自学日语的人，以及隔了一段时间重新捡起平假名和片假名的人。</p>
 </section>
@@ -172,10 +172,10 @@ draft: false
 <h2>常见问题</h2>
 <div class="kf-faq-grid">
 <div class="kf-faq"><h3>KanaFlow Practice 是什么？</h3><p>KanaFlow Practice 是一款 iPhone 和 iPad 上的平假名、片假名练习 App，支持罗马音答题、限时训练、日语发音和本地错题复习。</p></div>
-<div class="kf-faq"><h3>KanaFlow 会收集学习数据吗？</h3><p>不会。错题和偏好保存在你的设备上，开发者不会收到这些数据。</p></div>
-<div class="kf-faq"><h3>需要账号吗？</h3><p>不需要。KanaFlow 没有登录系统，没有开发者服务器，没有广告 SDK，也没有分析 SDK。</p></div>
+<div class="kf-faq"><h3>KanaFlow Practice 会收集学习数据吗？</h3><p>不会。错题和偏好保存在你的设备上，开发者不会收到这些数据。</p></div>
+<div class="kf-faq"><h3>需要账号吗？</h3><p>不需要。KanaFlow Practice 没有登录系统，没有开发者服务器，没有广告 SDK，也没有分析 SDK。</p></div>
 <div class="kf-faq"><h3>可以只练片假名吗？</h3><p>可以。你可以只练平假名、只练片假名，或两者一起练，也可以选择出现哪些假名分类。</p></div>
-<div class="kf-faq"><h3>它会教词汇或语法吗？</h3><p>不会。KanaFlow 专注假名回忆，适合搭配教材、课程、老师或更完整的日语学习 App 使用。</p></div>
+<div class="kf-faq"><h3>它会教词汇或语法吗？</h3><p>不会。KanaFlow Practice 专注假名回忆，适合搭配教材、课程、老师或更完整的日语学习 App 使用。</p></div>
 <div class="kf-faq"><h3>可以离线使用吗？</h3><p>核心练习流程在本地运行，不需要开发者账号或开发者服务器。</p></div>
 <div class="kf-faq"><h3>中文还保留吗？</h3><p>保留。App Store 面向英文版本，但 App 内可以在设置里切换简体中文。</p></div>
 </div>
