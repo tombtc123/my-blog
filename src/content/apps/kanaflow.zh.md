@@ -1,5 +1,5 @@
 ---
-title: 'KanaFlow'
+title: 'KanaFlow Practice'
 description: 'KanaFlow Practice 是一款英文优先的 iPhone 和 iPad 平假名、片假名练习 App，用于假名识别、罗马音回忆、限时挑战、日语发音和私密错题复习。'
 pubDate: '2026-05-14'
 updatedDate: '2026-05-14'
@@ -12,7 +12,7 @@ seoImage: '/apps/kanaflow/og.png'
 seoImageAlt: 'KanaFlow Practice iPhone 练习界面，显示平假名题目、罗马音输入、限时挑战、随机练习和错题复习控件'
 seoImageWidth: 1320
 seoImageHeight: 2868
-appName: 'KanaFlow'
+appName: 'KanaFlow Practice'
 appStoreName: 'KanaFlow Practice'
 bundleId: 'tom.KanaTrainer'
 appStoreId: '6749825593'
@@ -86,7 +86,7 @@ draft: false
 <section class="kf-hero">
 <div class="kf-hero-copy">
 <div class="kf-badge-row">
-<img class="kf-icon" src="/apps/kanaflow/app-icon.png" alt="KanaFlow App 图标" />
+<img class="kf-icon" src="/apps/kanaflow/app-icon.png" alt="KanaFlow Practice App 图标" />
 <div>
 <p class="kf-kicker">iPhone 和 iPad</p>
 <p class="kf-price">$2.99 · 无需账号</p>
@@ -95,7 +95,7 @@ draft: false
 <h2>用短而集中的循环建立假名反应。</h2>
 <p class="kf-lede">KanaFlow Practice 把平假名和片假名练习压缩成一个清爽的记忆闭环：看假名、输入罗马音、听日语发音，然后只复习真正答错的字符。</p>
 <div class="kf-actions">
-<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">前往 App Store 下载</a>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">在 App Store 下载 KanaFlow Practice</a>
 <a class="kf-secondary" href="/zh/apps/kanaflow/privacy/">隐私政策</a>
 <a class="kf-secondary" href="https://x.com/blocktom">支持</a>
 </div>
@@ -106,21 +106,21 @@ draft: false
 <span>可离线使用</span>
 </div>
 </div>
-<div class="kf-stage" aria-label="KanaFlow 界面预览">
+<div class="kf-stage" aria-label="KanaFlow Practice 界面预览">
 <figure class="kf-phone">
-<img src="/apps/kanaflow/main.png" alt="KanaFlow 练习界面，显示平假名题目、罗马音输入框和练习模式按钮" />
+<img src="/apps/kanaflow/main.png" alt="KanaFlow Practice 练习界面，显示平假名题目、罗马音输入框和练习模式按钮" />
 </figure>
 </div>
 </section>
 
-<section class="kf-metrics" aria-label="KanaFlow 产品信息">
+<section class="kf-metrics" aria-label="KanaFlow Practice 产品信息">
 <div><strong>208 个题目</strong><span>覆盖平假名与片假名中的清音、浊音、半浊音和拗音。</span></div>
 <div><strong>3 种模式</strong><span>完整练习、随机 50 个和 3 分钟挑战。</span></div>
 <div><strong>私密</strong><span>错题保存在本设备上，用来做针对性复习。</span></div>
 <div><strong>双语</strong><span>英文优先，设置中可切换为简体中文。</span></div>
 </section>
 
-<section class="kf-cta-band" aria-label="下载 KanaFlow">
+<section class="kf-cta-band" aria-label="下载 KanaFlow Practice">
 <div>
 <h2>现在就开始一小轮假名练习。</h2>
 <p>在 App Store 下载 KanaFlow Practice，用短而集中的方式练习平假名与片假名。</p>
@@ -190,7 +190,7 @@ draft: false
 <p>一次购买，无需账号，无广告，也没有开发者追踪。</p>
 </div>
 <div class="kf-download-actions">
-<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">前往 App Store 下载</a>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">在 App Store 下载 KanaFlow Practice</a>
 <a class="kf-secondary" href="/zh/apps/kanaflow/privacy/">查看隐私政策</a>
 </div>
 </div>

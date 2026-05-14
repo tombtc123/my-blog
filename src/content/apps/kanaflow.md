@@ -1,5 +1,5 @@
 ---
-title: 'KanaFlow'
+title: 'KanaFlow Practice'
 description: 'KanaFlow Practice is an English-first hiragana and katakana trainer for iPhone and iPad, built for kana recognition, romaji recall, timed drills, voice playback, and private mistake review.'
 pubDate: '2026-05-14'
 updatedDate: '2026-05-14'
@@ -12,7 +12,7 @@ seoImage: '/apps/kanaflow/og.png'
 seoImageAlt: 'KanaFlow Practice iPhone screen showing a hiragana prompt, romaji input, timed challenge, random practice, and mistake review controls'
 seoImageWidth: 1320
 seoImageHeight: 2868
-appName: 'KanaFlow'
+appName: 'KanaFlow Practice'
 appStoreName: 'KanaFlow Practice'
 bundleId: 'tom.KanaTrainer'
 appStoreId: '6749825593'
@@ -91,7 +91,7 @@ draft: false
 <section class="kf-hero">
 <div class="kf-hero-copy">
 <div class="kf-badge-row">
-<img class="kf-icon" src="/apps/kanaflow/app-icon.png" alt="KanaFlow app icon" />
+<img class="kf-icon" src="/apps/kanaflow/app-icon.png" alt="KanaFlow Practice app icon" />
 <div>
 <p class="kf-kicker">iPhone and iPad</p>
 <p class="kf-price">$2.99 · no account</p>
@@ -100,7 +100,7 @@ draft: false
 <h2>Build kana recall in short, focused loops.</h2>
 <p class="kf-lede">KanaFlow Practice turns hiragana and katakana practice into a clean recall drill: see the kana, type the romaji, hear the Japanese sound, and review only the characters that tripped you up.</p>
 <div class="kf-actions">
-<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Get KanaFlow on the App Store</a>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Get KanaFlow Practice on the App Store</a>
 <a class="kf-secondary" href="/apps/kanaflow/privacy/">Privacy Policy</a>
 <a class="kf-secondary" href="https://x.com/blocktom">Support</a>
 </div>
@@ -111,21 +111,21 @@ draft: false
 <span>Works offline</span>
 </div>
 </div>
-<div class="kf-stage" aria-label="KanaFlow interface preview">
+<div class="kf-stage" aria-label="KanaFlow Practice interface preview">
 <figure class="kf-phone">
-<img src="/apps/kanaflow/main.png" alt="KanaFlow practice screen showing a hiragana prompt, romaji input, and practice mode buttons" />
+<img src="/apps/kanaflow/main.png" alt="KanaFlow Practice screen showing a hiragana prompt, romaji input, and practice mode buttons" />
 </figure>
 </div>
 </section>
 
-<section class="kf-metrics" aria-label="KanaFlow product facts">
+<section class="kf-metrics" aria-label="KanaFlow Practice product facts">
 <div><strong>208 prompts</strong><span>Hiragana and katakana across seion, dakuon, handakuon, and yoon.</span></div>
 <div><strong>3 modes</strong><span>Full practice, random 50, and a three-minute challenge.</span></div>
 <div><strong>Private</strong><span>Saved mistakes stay on your device for focused review.</span></div>
 <div><strong>Bilingual</strong><span>English-first interface with Simplified Chinese available in Settings.</span></div>
 </section>
 
-<section class="kf-cta-band" aria-label="Download KanaFlow">
+<section class="kf-cta-band" aria-label="Download KanaFlow Practice">
 <div>
 <h2>Ready for a short kana session?</h2>
 <p>Download KanaFlow Practice on the App Store and start practicing hiragana and katakana in focused, private drills.</p>
@@ -195,7 +195,7 @@ draft: false
 <p>One purchase, no account, no ads, and no developer tracking.</p>
 </div>
 <div class="kf-download-actions">
-<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Download on the App Store</a>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Download KanaFlow Practice on the App Store</a>
 <a class="kf-secondary" href="/apps/kanaflow/privacy/">Read Privacy Policy</a>
 </div>
 </div>
