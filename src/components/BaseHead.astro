@@ -10,6 +10,9 @@ interface Props {
 	title: string;
 	description: string;
 	image?: ImageMetadata | string;
+	imageAlt?: string;
+	imageWidth?: number;
+	imageHeight?: number;
 	type?: 'website' | 'article' | 'profile' | 'product';
 	structuredData?: unknown | unknown[];
 	appStoreId?: string;
@@ -23,7 +26,18 @@ const englishURL = new URL(localizePath(strippedPath, 'en'), Astro.site);
 const chineseURL = new URL(localizePath(strippedPath, 'zh'), Astro.site);
 const rssURL = new URL(lang === 'zh' ? 'zh/rss.xml' : 'rss.xml', Astro.site);
 
-const { title, description, image, type = 'website', structuredData, appStoreId, alternateLanguages } = Astro.props;
+const {
+	title,
+	description,
+	image,
+	imageAlt,
+	imageWidth,
+	imageHeight,
+	type = 'website',
+	structuredData,
+	appStoreId,
+	alternateLanguages,
+} = Astro.props;
 const locale = lang === 'zh' ? 'zh_CN' : 'en_US';
 const languageLabels: Record<Lang, string> = {
 	en: 'en',
@@ -136,7 +150,9 @@ if (image) {
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
 <meta property="og:image" content={ogImageUrl} />
-<meta property="og:image:alt" content={title} />
+<meta property="og:image:alt" content={imageAlt ?? title} />
+{imageWidth && <meta property="og:image:width" content={String(imageWidth)} />}
+{imageHeight && <meta property="og:image:height" content={String(imageHeight)} />}
 <meta property="og:site_name" content={SITE_TITLE} />
 <meta property="og:locale" content={locale} />
 {alternateOgLocales.map((alternateLocale) => <meta property="og:locale:alternate" content={alternateLocale} />)}
@@ -147,8 +163,9 @@ if (image) {
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={ogImageUrl} />
-<meta property="twitter:image:alt" content={title} />
+<meta property="twitter:image:alt" content={imageAlt ?? title} />
 <meta property="twitter:site" content="@blocktom" />
+<meta property="twitter:creator" content="@blocktom" />
 
 {structuredDataItems.map((item) => (
 	<script type="application/ld+json" set:html={JSON.stringify(item)} />

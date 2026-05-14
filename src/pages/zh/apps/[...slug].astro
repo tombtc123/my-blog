@@ -47,6 +47,11 @@ const structuredLanguage = lang === 'zh' ? 'zh-CN' : 'en';
 const alternateNames = Array.from(new Set([app.data.appStoreName, ...(app.data.alternateNames ?? [])].filter(Boolean)));
 const appImageUrl = appImage ? new URL(typeof appImage === 'string' ? appImage : appImage.src, Astro.site).href : undefined;
 const screenshotUrls = app.data.screenshots.map((screenshot) => new URL(screenshot, Astro.site).href);
+const pageEntityId = `${productUrl}#webpage`;
+const appEntityId = `${productUrl}#software`;
+const breadcrumbEntityId = `${productUrl}#breadcrumb`;
+const faqEntityId = `${productUrl}#faq`;
+const formatDate = (date?: Date) => date?.toISOString().slice(0, 10);
 const mobilePlatforms = new Set(['iOS', 'iPadOS', 'watchOS', 'tvOS']);
 const softwareApplicationType = app.data.platforms.some((platform) => mobilePlatforms.has(platform))
 	? ['SoftwareApplication', 'MobileApplication']
@@ -63,28 +68,54 @@ const appOffer =
 				priceCurrency: app.data.priceCurrency ?? 'USD',
 				url: app.data.appStore ?? productUrl,
 				availability: app.data.appStore ? 'https://schema.org/InStock' : undefined,
+				seller: {
+					'@type': 'Person',
+					name: 'Tom',
+					url: new URL('/', Astro.site).href,
+				},
+			}
+		: undefined;
+const faqStructuredData =
+	app.data.faq.length > 0
+		? {
+				'@context': 'https://schema.org',
+				'@type': 'FAQPage',
+				'@id': faqEntityId,
+				mainEntity: app.data.faq.map((item) => ({
+					'@type': 'Question',
+					name: item.question,
+					acceptedAnswer: {
+						'@type': 'Answer',
+						text: item.answer,
+					},
+				})),
 			}
 		: undefined;
 const structuredData = [
 	{
 		'@context': 'https://schema.org',
 		'@type': softwareApplicationType,
+		'@id': appEntityId,
 		name: structuredAppName,
 		alternateName: alternateNames.length > 0 ? alternateNames : undefined,
 		applicationCategory: app.data.applicationCategory,
 		applicationSubCategory: app.data.tags?.join(', '),
-		operatingSystem: app.data.minimumOsVersion ?? (app.data.platforms.join(', ') || 'iOS'),
+		operatingSystem: app.data.platforms.join(', ') || undefined,
+		softwareRequirements: app.data.minimumOsVersion,
 		description: appDescription,
 		url: productUrl,
-		mainEntityOfPage: productUrl,
+		mainEntityOfPage: { '@id': pageEntityId },
 		image: appImageUrl,
 		screenshot: screenshotUrls,
 		downloadUrl: app.data.appStore,
 		installUrl: app.data.appStore,
 		softwareVersion: app.data.softwareVersion,
-		releaseDate: app.data.releaseDate,
+		releaseDate: formatDate(app.data.releaseDate),
+		datePublished: formatDate(app.data.pubDate),
+		dateModified: formatDate(app.data.updatedDate ?? app.data.pubDate),
 		identifier: appIdentifier.length > 0 ? appIdentifier : undefined,
 		keywords: app.data.keywords?.join(', '),
+		featureList: app.data.featureList.length > 0 ? app.data.featureList : undefined,
 		isAccessibleForFree: typeof app.data.price === 'number' ? app.data.price === 0 : undefined,
 		publisher: {
 			'@type': 'Person',
@@ -95,24 +126,32 @@ const structuredData = [
 		offers: appOffer,
 		privacyPolicy: privacyUrl,
 		sameAs: sameAsLinks.length > 0 ? sameAsLinks : undefined,
+		potentialAction: app.data.appStore
+			? {
+					'@type': 'InstallAction',
+					target: app.data.appStore,
+				}
+			: undefined,
 	},
 	{
 		'@context': 'https://schema.org',
 		'@type': 'WebPage',
+		'@id': pageEntityId,
 		name: appTitle,
 		description: appDescription,
 		url: productUrl,
 		inLanguage: structuredLanguage,
 		primaryImageOfPage: appImageUrl,
-		about: {
-			'@type': 'SoftwareApplication',
-			name: structuredAppName,
-			url: productUrl,
-		},
+		datePublished: formatDate(app.data.pubDate),
+		dateModified: formatDate(app.data.updatedDate ?? app.data.pubDate),
+		about: { '@id': appEntityId },
+		mainEntity: { '@id': appEntityId },
+		breadcrumb: { '@id': breadcrumbEntityId },
 	},
 	{
 		'@context': 'https://schema.org',
 		'@type': 'BreadcrumbList',
+		'@id': breadcrumbEntityId,
 		itemListElement: [
 			{
 				'@type': 'ListItem',
@@ -128,7 +167,8 @@ const structuredData = [
 			},
 		],
 	},
-];
+	faqStructuredData,
+].filter(Boolean);
 ---
 
 <!doctype html>
@@ -138,6 +178,9 @@ const structuredData = [
 			title={appTitle}
 			description={appDescription}
 			image={appImage}
+			imageAlt={app.data.seoImageAlt}
+			imageWidth={app.data.seoImageWidth}
+			imageHeight={app.data.seoImageHeight}
 			type="product"
 			structuredData={structuredData}
 			appStoreId={app.data.appStoreId}

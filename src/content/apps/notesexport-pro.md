@@ -6,9 +6,12 @@ updatedDate: '2026-05-14'
 lang: 'en'
 routeSlug: 'notesexport-pro'
 translationKey: 'notesexport-pro'
-seoTitle: 'NotesExport Pro - Export Apple Notes to Markdown, PDF, DOCX, JSON, and More'
-seoDescription: 'NotesExport Pro for macOS exports Apple Notes notebooks, folders, individual notes, attachments, timestamps, and hierarchy into Markdown, HTML, PDF, RTFD, TextBundle, TextPack, DOCX, TXT, JSON, and NDJSON.'
+seoTitle: 'NotesExport Pro - Export Apple Notes to Markdown, PDF, DOCX & JSON'
+seoDescription: 'Export Apple Notes on Mac to Markdown, PDF, DOCX, HTML, TextBundle, JSON, and more while preserving folders, timestamps, attachments, and iCloud hierarchy.'
 seoImage: '/apps/notesexport-pro/og.jpg'
+seoImageAlt: 'NotesExport Pro preview showing Apple Notes hierarchy and export formats on macOS'
+seoImageWidth: 1600
+seoImageHeight: 900
 appName: 'NotesExport Pro'
 appStoreName: 'NotesExport Pro'
 appStoreId: '6757329761'
@@ -45,6 +48,20 @@ alternateNames:
   - Notes Export Pro
   - NotesExporter
   - Apple Notes Exporter for Mac
+featureList:
+  - Export Apple Notes to Markdown, HTML, PDF, DOCX, RTFD, TextBundle, TextPack, TXT, JSON, and NDJSON.
+  - Preserve nested folder hierarchy, account-wide sources, timestamps, and supported attachments.
+  - Select entire notebooks, parent folders, child folders, or individual notes.
+  - Save exports locally on macOS without analytics, accounts, or developer servers.
+faq:
+  - question: 'Does NotesExport Pro upload my notes?'
+    answer: 'No. NotesExport Pro reads selected Apple Notes data on your Mac and writes export files to a folder you choose. It does not use a developer server, analytics SDK, advertising SDK, or account system.'
+  - question: 'Why can an iCloud export be incomplete?'
+    answer: 'NotesExport Pro can export the notes and attachments that Apple Notes has already synced to this Mac. If iCloud is still downloading content, counts, notes, or attachments may be incomplete until Notes.app finishes syncing locally.'
+  - question: 'Can I export a parent folder without selecting every child row?'
+    answer: 'Yes. Parent folders are selectable sources. Child folders and notes can show inherited coverage without becoming separate explicit selections, keeping the hierarchy easier to reason about.'
+  - question: 'Can I export one note instead of a whole notebook?'
+    answer: "Yes. Open a folder's note list from the selection screen, choose individual notes, and export them alongside or instead of folder-level selections."
 draft: false
 ---
 
@@ -845,19 +862,19 @@ NotesExport Pro turns Apple Notes into durable files you can keep, search, migra
 <section class="ne-faq-panel" aria-label="NotesExport Pro use cases and frequently asked questions">
 <h2>Built for people leaving notes better than they found them.</h2>
 <p>
-NotesExport Pro is for writers, researchers, students, operators, builders, and anyone who has years of Apple Notes that should not be trapped in one app forever.
+NotesExport Pro is for writers, researchers, students, operators, builders, and anyone who has years of Apple Notes that should not be trapped in one app forever. It is designed for common Apple Notes export workflows: backing up notes before a cleanup, moving Apple Notes to Markdown, sharing notes as PDF or DOCX, and preparing structured JSON or NDJSON for automation.
 </p>
 <div class="ne-use-grid">
 <div class="ne-use-card">
-<h3>Backup before a cleanup</h3>
+<h3>Apple Notes backup before a cleanup</h3>
 <p>Create readable local copies before reorganizing, deleting, or moving large Notes libraries.</p>
 </div>
 <div class="ne-use-card">
-<h3>Move into a knowledge base</h3>
+<h3>Apple Notes to Markdown for knowledge bases</h3>
 <p>Export Markdown, TextBundle, or structured JSON for tools like Obsidian, static sites, and custom scripts.</p>
 </div>
 <div class="ne-use-card">
-<h3>Share without Notes</h3>
+<h3>Apple Notes to PDF, HTML, DOCX, or RTFD</h3>
 <p>Use PDF, HTML, RTFD, DOCX, or TXT when the recipient does not need Apple Notes.</p>
 </div>
 </div>
@@ -878,6 +895,21 @@ NotesExport Pro is for writers, researchers, students, operators, builders, and 
 <summary>Can I export one note instead of a whole notebook?</summary>
 <p>Yes. Open a folder's note list from the selection screen, choose individual notes, and export them alongside or instead of folder-level selections.</p>
 </details>
+</div>
+</section>
+
+<section class="ne-section">
+<div class="ne-section-head">
+<h2>Compatibility and product facts.</h2>
+<p>These details are included here so people and search engines can understand exactly what the Mac App Store listing provides.</p>
+</div>
+<div class="ne-format-grid" aria-label="NotesExport Pro compatibility and product facts">
+<div class="ne-format"><strong>App name</strong><span>NotesExport Pro, also searchable as Notes Export Pro and NotesExporter.</span></div>
+<div class="ne-format"><strong>Platform</strong><span>macOS 12.0 or later, distributed through the Mac App Store.</span></div>
+<div class="ne-format"><strong>App Store ID</strong><span>6757329761, bundle identifier com.tom.NotesExporter.</span></div>
+<div class="ne-format"><strong>Price</strong><span>USD 5.99 where available on the App Store.</span></div>
+<div class="ne-format"><strong>Privacy</strong><span>Local export, no developer account, no analytics, no tracking, and no developer server for note content.</span></div>
+<div class="ne-format"><strong>Best fit</strong><span>Apple Notes backup, Markdown migration, PDF sharing, DOCX handoff, and JSON automation.</span></div>
 </div>
 </section>
 
