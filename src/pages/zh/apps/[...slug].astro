@@ -43,6 +43,7 @@ const appDescription = app.data.seoDescription ?? app.data.description;
 const supportTarget = app.data.supportUrl ?? (app.data.supportEmail ? `mailto:${app.data.supportEmail}` : undefined);
 const sameAsLinks = [app.data.appStore, supportTarget].filter(Boolean);
 const structuredAppName = app.data.appStoreName ?? app.data.appName;
+const publisherName = app.data.publisherName ?? 'Tom';
 const structuredLanguage = lang === 'zh' ? 'zh-CN' : 'en';
 const alternateNames = Array.from(new Set([app.data.appStoreName, ...(app.data.alternateNames ?? [])].filter(Boolean)));
 const appImageUrl = appImage ? new URL(typeof appImage === 'string' ? appImage : appImage.src, Astro.site).href : undefined;
@@ -70,7 +71,7 @@ const appOffer =
 				availability: app.data.appStore ? 'https://schema.org/InStock' : undefined,
 				seller: {
 					'@type': 'Person',
-					name: 'Tom',
+					name: publisherName,
 					url: new URL('/', Astro.site).href,
 				},
 			}
@@ -102,6 +103,7 @@ const structuredData = [
 		applicationSubCategory: app.data.tags?.join(', '),
 		operatingSystem: app.data.platforms.join(', ') || undefined,
 		softwareRequirements: app.data.minimumOsVersion,
+		contentRating: app.data.contentRating,
 		description: appDescription,
 		url: productUrl,
 		mainEntityOfPage: { '@id': pageEntityId },
@@ -116,10 +118,20 @@ const structuredData = [
 		identifier: appIdentifier.length > 0 ? appIdentifier : undefined,
 		keywords: app.data.keywords?.join(', '),
 		featureList: app.data.featureList.length > 0 ? app.data.featureList : undefined,
+		learningResourceType: app.data.learningResourceType.length > 0 ? app.data.learningResourceType : undefined,
+		educationalUse: app.data.educationalUse,
+		teaches: app.data.teaches.length > 0 ? app.data.teaches : undefined,
+		audience: app.data.audience.length > 0
+			? app.data.audience.map((audienceName) => ({
+					'@type': 'Audience',
+					audienceType: audienceName,
+				}))
+			: undefined,
+		inLanguage: structuredLanguage,
 		isAccessibleForFree: typeof app.data.price === 'number' ? app.data.price === 0 : undefined,
 		publisher: {
 			'@type': 'Person',
-			name: 'Tom',
+			name: publisherName,
 			url: new URL('/', Astro.site).href,
 			sameAs: ['https://x.com/blocktom'],
 		},
