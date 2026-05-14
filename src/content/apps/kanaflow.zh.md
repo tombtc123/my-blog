@@ -51,7 +51,8 @@ draft: false
 <h2>用短而集中的循环建立假名反应。</h2>
 <p class="kf-lede">KanaFlow 把平假名和片假名练习压缩成一个清爽的记忆闭环：看假名、输入罗马音、听日语发音，然后只复习真正答错的字符。</p>
 <div class="kf-actions">
-<a class="kf-primary" href="/zh/apps/kanaflow/privacy/">隐私政策</a>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">前往 App Store 下载</a>
+<a class="kf-secondary" href="/zh/apps/kanaflow/privacy/">隐私政策</a>
 <a class="kf-secondary" href="https://x.com/blocktom">支持</a>
 </div>
 <div class="kf-tags">
@@ -73,6 +74,14 @@ draft: false
 <div><strong>3 种模式</strong><span>完整练习、随机 50 个和 3 分钟挑战。</span></div>
 <div><strong>私密</strong><span>错题保存在本设备上，用来做针对性复习。</span></div>
 <div><strong>双语</strong><span>英文优先，设置中可切换为简体中文。</span></div>
+</section>
+
+<section class="kf-cta-band" aria-label="下载 KanaFlow">
+<div>
+<h2>现在就开始一小轮假名练习。</h2>
+<p>在 App Store 下载 KanaFlow，用短而集中的方式练习平假名与片假名。</p>
+</div>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">打开 App Store</a>
 </section>
 
 <section class="kf-split">
@@ -103,6 +112,16 @@ draft: false
 <section>
 <h2>下载与支持</h2>
 <p>KanaFlow 已在 App Store 提供 iPhone 和 iPad 版，价格为 $2.99 USD。</p>
+<div class="kf-download-card">
+<div>
+<h3>在 iPhone 或 iPad 上练习假名</h3>
+<p>一次购买，无需账号，无广告，也没有开发者追踪。</p>
+</div>
+<div class="kf-download-actions">
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">前往 App Store 下载</a>
+<a class="kf-secondary" href="/zh/apps/kanaflow/privacy/">查看隐私政策</a>
+</div>
+</div>
 <p>支持或隐私问题可以通过公开 X 账号联系：<a href="https://x.com/blocktom">https://x.com/blocktom</a>。</p>
 </section>
 </div>

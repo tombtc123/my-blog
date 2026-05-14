@@ -56,7 +56,8 @@ draft: false
 <h2>Build kana recall in short, focused loops.</h2>
 <p class="kf-lede">KanaFlow turns hiragana and katakana practice into a clean recall drill: see the kana, type the romaji, hear the Japanese sound, and review only the characters that tripped you up.</p>
 <div class="kf-actions">
-<a class="kf-primary" href="/apps/kanaflow/privacy/">Privacy Policy</a>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Get KanaFlow on the App Store</a>
+<a class="kf-secondary" href="/apps/kanaflow/privacy/">Privacy Policy</a>
 <a class="kf-secondary" href="https://x.com/blocktom">Support</a>
 </div>
 <div class="kf-tags">
@@ -78,6 +79,14 @@ draft: false
 <div><strong>3 modes</strong><span>Full practice, random 50, and a three-minute challenge.</span></div>
 <div><strong>Private</strong><span>Saved mistakes stay on your device for focused review.</span></div>
 <div><strong>Bilingual</strong><span>English-first interface with Simplified Chinese available in Settings.</span></div>
+</section>
+
+<section class="kf-cta-band" aria-label="Download KanaFlow">
+<div>
+<h2>Ready for a short kana session?</h2>
+<p>Download KanaFlow on the App Store and start practicing hiragana and katakana in focused, private drills.</p>
+</div>
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Open in App Store</a>
 </section>
 
 <section class="kf-split">
@@ -117,6 +126,16 @@ draft: false
 <section>
 <h2>Download and support</h2>
 <p>KanaFlow is available on the App Store for iPhone and iPad at $2.99 USD.</p>
+<div class="kf-download-card">
+<div>
+<h3>Practice kana on iPhone or iPad</h3>
+<p>One purchase, no account, no ads, and no developer tracking.</p>
+</div>
+<div class="kf-download-actions">
+<a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Download on the App Store</a>
+<a class="kf-secondary" href="/apps/kanaflow/privacy/">Read Privacy Policy</a>
+</div>
+</div>
 <p>For support or privacy questions, use the public X account: <a href="https://x.com/blocktom">https://x.com/blocktom</a>.</p>
 </section>
 </div>
