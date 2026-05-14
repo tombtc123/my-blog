@@ -3,6 +3,7 @@ import { type CollectionEntry, getCollection, render } from 'astro:content';
 import BaseHead from '../../../components/BaseHead.astro';
 import Footer from '../../../components/Footer.astro';
 import Header from '../../../components/Header.astro';
+import { APP_SITE_TITLE } from '../../../consts';
 import { getEntrySlug, localizePath, UI } from '../../../i18n';
 
 export async function getStaticPaths() {
@@ -197,6 +198,8 @@ const structuredData = [
 			structuredData={structuredData}
 			appStoreId={app.data.appStoreId}
 			alternateLanguages={alternateLanguages}
+			siteName={APP_SITE_TITLE}
+			identityName={publisherName}
 		/>
 		<style>
 			main {

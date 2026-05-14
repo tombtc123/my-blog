@@ -3,3 +3,4 @@
 
 export const SITE_TITLE = 'Tom Blog';
 export const SITE_DESCRIPTION = 'Tom’s English-first personal site for essays, app product pages, and app-specific privacy policies.';
+export const APP_SITE_TITLE = 'BlockTom Apps';

@@ -17,6 +17,9 @@ interface Props {
 	structuredData?: unknown | unknown[];
 	appStoreId?: string;
 	alternateLanguages?: Partial<Record<Lang, string>>;
+	siteName?: string;
+	identityName?: string;
+	identityType?: 'Person' | 'Organization';
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -37,6 +40,9 @@ const {
 	structuredData,
 	appStoreId,
 	alternateLanguages,
+	siteName = SITE_TITLE,
+	identityName = 'Tom',
+	identityType = 'Person',
 } = Astro.props;
 const locale = lang === 'zh' ? 'zh_CN' : 'en_US';
 const languageLabels: Record<Lang, string> = {
@@ -61,15 +67,15 @@ const siteIdentityData = [
 	{
 		'@context': 'https://schema.org',
 		'@type': 'WebSite',
-		name: SITE_TITLE,
+		name: siteName,
 		url: new URL('/', Astro.site).href,
 		inLanguage: lang === 'zh' ? 'zh-CN' : 'en',
 		sameAs: ['https://x.com/blocktom'],
 	},
 	{
 		'@context': 'https://schema.org',
-		'@type': 'Person',
-		name: 'Tom',
+		'@type': identityType,
+		name: identityName,
 		url: new URL('/', Astro.site).href,
 		sameAs: ['https://x.com/blocktom'],
 	},
@@ -127,7 +133,7 @@ if (image) {
 <link
 	rel="alternate"
 	type="application/rss+xml"
-	title={SITE_TITLE}
+	title={siteName}
 	href={rssURL}
 />
 <meta name="generator" content={Astro.generator} />
@@ -155,7 +161,7 @@ if (image) {
 <meta property="og:image:type" content={ogImageUrl.endsWith('.jpg') || ogImageUrl.endsWith('.jpeg') ? 'image/jpeg' : 'image/png'} />
 {imageWidth && <meta property="og:image:width" content={String(imageWidth)} />}
 {imageHeight && <meta property="og:image:height" content={String(imageHeight)} />}
-<meta property="og:site_name" content={SITE_TITLE} />
+<meta property="og:site_name" content={siteName} />
 <meta property="og:locale" content={locale} />
 {alternateOgLocales.map((alternateLocale) => <meta property="og:locale:alternate" content={alternateLocale} />)}
 
