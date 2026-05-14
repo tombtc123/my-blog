@@ -47,14 +47,18 @@ const structuredLanguage = lang === 'zh' ? 'zh-CN' : 'en';
 const alternateNames = Array.from(new Set([app.data.appStoreName, ...(app.data.alternateNames ?? [])].filter(Boolean)));
 const appImageUrl = appImage ? new URL(typeof appImage === 'string' ? appImage : appImage.src, Astro.site).href : undefined;
 const screenshotUrls = app.data.screenshots.map((screenshot) => new URL(screenshot, Astro.site).href);
+const mobilePlatforms = new Set(['iOS', 'iPadOS', 'watchOS', 'tvOS']);
+const softwareApplicationType = app.data.platforms.some((platform) => mobilePlatforms.has(platform))
+	? ['SoftwareApplication', 'MobileApplication']
+	: 'SoftwareApplication';
 const appIdentifier = [
 	app.data.appStoreId ? { '@type': 'PropertyValue', propertyID: 'App Store ID', value: app.data.appStoreId } : undefined,
-	app.data.bundleId ? { '@type': 'PropertyValue', propertyID: 'iOS Bundle ID', value: app.data.bundleId } : undefined,
+	app.data.bundleId ? { '@type': 'PropertyValue', propertyID: 'Bundle ID', value: app.data.bundleId } : undefined,
 ].filter(Boolean);
 const structuredData = [
 	{
 		'@context': 'https://schema.org',
-		'@type': ['SoftwareApplication', 'MobileApplication'],
+		'@type': softwareApplicationType,
 		name: structuredAppName,
 		alternateName: alternateNames.length > 0 ? alternateNames : undefined,
 		applicationCategory: app.data.applicationCategory,
@@ -303,6 +307,22 @@ const structuredData = [
 
 				h1 {
 					font-size: 1.875rem;
+				}
+
+				.meta {
+					align-items: flex-start;
+				}
+
+				.store-status {
+					flex: 1 1 100%;
+					justify-content: center;
+					max-width: 100%;
+					white-space: normal;
+				}
+
+				.status-pill,
+				.platform-pill {
+					max-width: 100%;
 				}
 			}
 		</style>
