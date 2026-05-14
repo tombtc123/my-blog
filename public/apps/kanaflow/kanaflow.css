@@ -1,0 +1,305 @@
+.kf-page {
+	color: var(--text-color);
+	max-width: 100%;
+	overflow-x: clip;
+}
+
+.kf-page section {
+	margin: 4rem 0;
+}
+
+.kf-page p,
+.kf-page li,
+.kf-page span,
+.kf-page a,
+.kf-page strong,
+.kf-page h2,
+.kf-page h3 {
+	overflow-wrap: anywhere;
+}
+
+.kf-hero {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+	gap: 2.5rem;
+	align-items: center;
+	margin-top: 0;
+	min-width: 0;
+	max-width: 100%;
+}
+
+.kf-hero > *,
+.kf-split > * {
+	min-width: 0;
+}
+
+.kf-badge-row {
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+	gap: 0.875rem;
+	margin-bottom: 1.5rem;
+}
+
+.kf-icon {
+	flex: 0 0 auto;
+	width: 68px;
+	height: 68px;
+	border-radius: 16px;
+	box-shadow: 0 16px 36px rgba(34, 51, 84, 0.22);
+}
+
+.kf-kicker,
+.kf-price {
+	margin: 0;
+}
+
+.kf-kicker {
+	color: #0f766e;
+	font-size: 0.82rem;
+	font-weight: 800;
+	letter-spacing: 0;
+	text-transform: uppercase;
+}
+
+.kf-price {
+	color: #64748b;
+	font-size: 0.95rem;
+}
+
+.kf-hero h2 {
+	max-width: 12ch;
+	margin: 0;
+	font-size: 4.8rem;
+	line-height: 0.98;
+}
+
+.kf-lede {
+	max-width: 34rem;
+	margin: 1.25rem 0 0;
+	color: #475569;
+	font-size: 1.08rem;
+	line-height: 1.75;
+}
+
+.kf-actions,
+.kf-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.75rem;
+	margin-top: 1.5rem;
+}
+
+.kf-actions a {
+	display: inline-flex;
+	align-items: center;
+	min-height: 42px;
+	padding: 0.55rem 0.95rem;
+	border-radius: 8px;
+	font-weight: 750;
+	text-decoration: none;
+}
+
+.kf-primary {
+	background: #0f172a;
+	color: #ffffff;
+}
+
+.kf-secondary {
+	border: 1px solid var(--border-color);
+	color: var(--text-color);
+}
+
+.kf-tags span {
+	display: inline-flex;
+	align-items: center;
+	min-height: 30px;
+	padding: 0.35rem 0.65rem;
+	border: 1px solid rgba(15, 118, 110, 0.18);
+	border-radius: 999px;
+	background: rgba(20, 184, 166, 0.08);
+	color: #115e59;
+	font-size: 0.82rem;
+	font-weight: 700;
+}
+
+.kf-stage {
+	display: flex;
+	justify-content: center;
+}
+
+.kf-phone {
+	width: min(100%, 320px);
+	max-width: 100%;
+	margin: 0;
+	padding: 0.7rem;
+	border: 1px solid rgba(15, 23, 42, 0.12);
+	border-radius: 32px;
+	background: #111827;
+	box-shadow: 0 30px 70px rgba(15, 23, 42, 0.26);
+}
+
+.kf-phone img {
+	display: block;
+	width: 100%;
+	aspect-ratio: 9 / 19.5;
+	border-radius: 24px;
+	object-fit: cover;
+	object-position: top center;
+}
+
+.kf-metrics {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(0, 1fr));
+	gap: 1rem;
+	min-width: 0;
+}
+
+.kf-metrics div,
+.kf-feature,
+.kf-faq,
+.kf-panel {
+	border: 1px solid var(--border-color);
+	border-radius: 8px;
+	background: rgba(248, 250, 252, 0.8);
+}
+
+.kf-metrics div {
+	padding: 1rem;
+}
+
+.kf-metrics strong {
+	display: block;
+	margin-bottom: 0.35rem;
+	font-size: 1.25rem;
+}
+
+.kf-metrics span,
+.kf-feature p,
+.kf-faq p,
+.kf-panel li {
+	color: #475569;
+	line-height: 1.65;
+}
+
+.kf-split {
+	display: grid;
+	grid-template-columns: minmax(0, 1.1fr) minmax(240px, 0.9fr);
+	gap: 1.5rem;
+	align-items: start;
+	min-width: 0;
+}
+
+.kf-panel {
+	padding: 1.25rem;
+}
+
+.kf-panel h3,
+.kf-feature h3,
+.kf-faq h3 {
+	margin-top: 0;
+}
+
+.kf-feature-grid,
+.kf-faq-grid {
+	display: grid;
+	grid-template-columns: repeat(3, minmax(0, 1fr));
+	gap: 1rem;
+	min-width: 0;
+}
+
+.kf-feature,
+.kf-faq {
+	padding: 1.1rem;
+}
+
+html.dark .kf-lede,
+html.dark .kf-price,
+html.dark .kf-metrics span,
+html.dark .kf-feature p,
+html.dark .kf-faq p,
+html.dark .kf-panel li {
+	color: #cbd5e1;
+}
+
+html.dark .kf-metrics div,
+html.dark .kf-feature,
+html.dark .kf-faq,
+html.dark .kf-panel {
+	background: rgba(15, 23, 42, 0.7);
+}
+
+html.dark .kf-tags span {
+	border-color: rgba(45, 212, 191, 0.25);
+	background: rgba(20, 184, 166, 0.12);
+	color: #99f6e4;
+}
+
+html.dark .kf-primary {
+	background: #f8fafc;
+	color: #0f172a;
+}
+
+@media (max-width: 860px) {
+	.kf-hero,
+	.kf-split {
+		grid-template-columns: 1fr;
+	}
+
+	.kf-hero h2 {
+		max-width: 14ch;
+		font-size: 3rem;
+	}
+
+	.kf-stage {
+		justify-content: center;
+	}
+
+	.kf-metrics,
+	.kf-feature-grid,
+	.kf-faq-grid {
+		grid-template-columns: 1fr;
+	}
+}
+
+@media (max-width: 520px) {
+	.kf-page section {
+		margin: 3rem 0;
+	}
+
+	.kf-badge-row {
+		align-items: flex-start;
+	}
+
+	.kf-badge-row > div {
+		flex: 1 1 180px;
+		min-width: 0;
+	}
+
+	.kf-icon {
+		width: 56px;
+		height: 56px;
+		border-radius: 14px;
+	}
+
+	.kf-hero h2 {
+		font-size: 2.45rem;
+		line-height: 1.05;
+	}
+
+	.kf-lede {
+		font-size: 1rem;
+		line-height: 1.7;
+	}
+
+	.kf-actions a {
+		justify-content: center;
+		flex: 1 1 140px;
+		text-align: center;
+	}
+
+	.kf-phone {
+		width: min(100%, 260px);
+		border-radius: 28px;
+	}
+}

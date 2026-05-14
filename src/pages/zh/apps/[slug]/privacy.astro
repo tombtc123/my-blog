@@ -27,12 +27,83 @@ const { policy, app } = Astro.props;
 const { Content } = await render(policy);
 const lang = policy.data.lang;
 const text = UI[lang];
+const policyUrl = new URL(localizePath(`/apps/${policy.data.appSlug}/privacy/`, lang), Astro.site).href;
+const productUrl = new URL(localizePath(`/apps/${policy.data.appSlug}/`, lang), Astro.site).href;
+const policyTitle = policy.data.seoTitle ?? policy.data.title;
+const policyDescription = policy.data.seoDescription ?? policy.data.description;
+const appOperatingSystem = app?.data.minimumOsVersion ?? (policy.data.platforms.join(', ') || 'iOS');
+const structuredAppName = app?.data.appStoreName ?? policy.data.appName;
+const policyTranslations = await getCollection(
+	'privacy',
+	({ data }) => !data.draft && data.translationKey === (policy.data.translationKey ?? policy.id)
+);
+const alternateLanguages = Object.fromEntries(
+	policyTranslations.map((translation) => [
+		translation.data.lang,
+		new URL(localizePath(`/apps/${translation.data.appSlug}/privacy/`, translation.data.lang), Astro.site).href,
+	])
+);
+const alternateHref = alternateLanguages[lang === 'en' ? 'zh' : 'en'] ?? null;
+const structuredData = [
+	{
+		'@context': 'https://schema.org',
+		'@type': 'WebPage',
+		name: policyTitle,
+		description: policyDescription,
+		url: policyUrl,
+		isPartOf: {
+			'@type': 'WebSite',
+			name: 'Tom Blog',
+			url: new URL('/', Astro.site).href,
+		},
+		about: {
+			'@type': 'SoftwareApplication',
+			name: structuredAppName,
+			url: productUrl,
+			operatingSystem: appOperatingSystem,
+			applicationCategory: app?.data.applicationCategory ?? 'UtilitiesApplication',
+		},
+		datePublished: policy.data.pubDate.toISOString(),
+		dateModified: (policy.data.updatedDate ?? policy.data.pubDate).toISOString(),
+	},
+	{
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{
+				'@type': 'ListItem',
+				position: 1,
+				name: text.products,
+				item: new URL(localizePath('/apps/', lang), Astro.site).href,
+			},
+			{
+				'@type': 'ListItem',
+				position: 2,
+				name: policy.data.appName,
+				item: productUrl,
+			},
+			{
+				'@type': 'ListItem',
+				position: 3,
+				name: text.privacyPolicy,
+				item: policyUrl,
+			},
+		],
+	},
+];
 ---
 
 <!doctype html>
 <html lang={text.htmlLang}>
 	<head>
-		<BaseHead title={policy.data.title} description={policy.data.description} />
+		<BaseHead
+			title={policyTitle}
+			description={policyDescription}
+			image={policy.data.seoImage}
+			structuredData={structuredData}
+			appStoreId={app?.data.appStoreId}
+			alternateLanguages={alternateLanguages}
+		/>
 		<style>
 			main {
 				width: 100%;
@@ -112,7 +183,7 @@ const text = UI[lang];
 		</style>
 	</head>
 	<body>
-		<Header />
+		<Header alternateHref={alternateHref} />
 		<main>
 			<header class="policy-head">
 				<div class="meta">

@@ -55,6 +55,16 @@ const appIdentifier = [
 	app.data.appStoreId ? { '@type': 'PropertyValue', propertyID: 'App Store ID', value: app.data.appStoreId } : undefined,
 	app.data.bundleId ? { '@type': 'PropertyValue', propertyID: 'Bundle ID', value: app.data.bundleId } : undefined,
 ].filter(Boolean);
+const appOffer =
+	typeof app.data.price === 'number'
+		? {
+				'@type': 'Offer',
+				price: String(app.data.price),
+				priceCurrency: app.data.priceCurrency ?? 'USD',
+				url: app.data.appStore ?? productUrl,
+				availability: app.data.appStore ? 'https://schema.org/InStock' : undefined,
+			}
+		: undefined;
 const structuredData = [
 	{
 		'@context': 'https://schema.org',
@@ -82,15 +92,7 @@ const structuredData = [
 			url: new URL('/', Astro.site).href,
 			sameAs: ['https://x.com/blocktom'],
 		},
-		offers: app.data.appStore
-			? {
-					'@type': 'Offer',
-					price: typeof app.data.price === 'number' ? String(app.data.price) : '0.99',
-					priceCurrency: app.data.priceCurrency ?? 'USD',
-					url: app.data.appStore,
-					availability: 'https://schema.org/InStock',
-				}
-			: undefined,
+		offers: appOffer,
 		privacyPolicy: privacyUrl,
 		sameAs: sameAsLinks.length > 0 ? sameAsLinks : undefined,
 	},
