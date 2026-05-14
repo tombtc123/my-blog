@@ -1,19 +1,19 @@
 ---
-title: 'TimeCue'
-description: 'TimeCue is a focused iPhone reminder app that brings one sentence back at the moment you choose, with no account, no tracking, and local notifications.'
+title: 'TimeCue: One Sentence Reminder'
+description: 'TimeCue: One Sentence Reminder is a focused iPhone app that brings one sentence back at the moment you choose, with no account, no tracking, and local notifications.'
 pubDate: '2026-05-14'
 updatedDate: '2026-05-14'
 lang: 'en'
 routeSlug: 'timecue'
 translationKey: 'timecue'
-seoTitle: 'TimeCue - One-Sentence Reminder App for iPhone'
-seoDescription: 'TimeCue is a $3.99 iPhone cue reminder app for one clear sentence, fixed or custom local notifications, notification styles, and no developer data collection.'
+seoTitle: 'TimeCue: One Sentence Reminder for iPhone'
+seoDescription: 'TimeCue: One Sentence Reminder is a $3.99 iPhone cue app for one clear sentence, fixed or custom local notifications, notification styles, and no developer data collection.'
 seoImage: '/apps/timecue/og.jpg'
 seoImageAlt: 'TimeCue app icon, iPhone interface, and the line One sentence right on time.'
 seoImageWidth: 1200
 seoImageHeight: 630
-appName: 'TimeCue'
-appStoreName: 'TimeCue'
+appName: 'TimeCue: One Sentence Reminder'
+appStoreName: 'TimeCue: One Sentence Reminder'
 bundleId: 'com.tom.timecue'
 contentRating: '4+'
 platforms: ['iOS']
@@ -22,7 +22,7 @@ applicationCategory: 'ProductivityApplication'
 price: 3.99
 priceCurrency: 'USD'
 minimumOsVersion: 'iOS 17.0 or later'
-softwareVersion: '1.0.0'
+softwareVersion: '1.0'
 supportUrl: 'https://x.com/blocktom'
 screenshots:
   - '/apps/timecue/01-one-sentence-right-on-time.png'
@@ -41,6 +41,7 @@ keywords:
   - focus cue
   - iPhone reminder
 alternateNames:
+  - TimeCue
   - Time Cue
   - Cue reminder
   - One sentence reminder
