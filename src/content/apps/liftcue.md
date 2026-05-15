@@ -117,9 +117,23 @@ draft: false
 </div>
 </section>
 
-<section>
-<h2>Download and support</h2>
-<p>LiftCue is now available on the App Store for supported regions. Download it here: <a href="https://apps.apple.com/us/app/liftcue/id6769323590?uo=4">https://apps.apple.com/us/app/liftcue/id6769323590</a>.</p>
-<p>For support or privacy questions, use the public X account: <a href="https://x.com/blocktom">https://x.com/blocktom</a>.</p>
+<section id="download" class="lc-download" aria-label="Download and support">
+<div class="lc-download-copy">
+<p class="lc-download-kicker">Available now</p>
+<h2>Ready for your next quiet set.</h2>
+<p>Install LiftCue from the App Store, keep the habit private, and use the public support channel if anything needs attention.</p>
+</div>
+<div class="lc-download-actions">
+<a class="lc-store-button" href="https://apps.apple.com/us/app/liftcue/id6769323590?uo=4"><span>Download on the</span><strong>App Store</strong></a>
+<div class="lc-download-links">
+<a href="/apps/liftcue/privacy/">Privacy Policy</a>
+<a href="https://x.com/blocktom">Support on X</a>
+</div>
+<div class="lc-download-meta">
+<span>$2.99 one-time</span>
+<span>iOS 17+</span>
+<span>4+</span>
+</div>
+</div>
 </section>
 </div>

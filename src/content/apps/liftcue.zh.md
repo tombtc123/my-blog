@@ -96,9 +96,24 @@ draft: false
 </div>
 </section>
 
-<section>
-<h2>下载与支持</h2>
-<p>LiftCue 已在支持的 App Store 地区上架，可通过这里下载：<a href="https://apps.apple.com/us/app/liftcue/id6769323590?uo=4">https://apps.apple.com/us/app/liftcue/id6769323590</a>。按照你的上架要求，它不在中国大陆地区销售。</p>
-<p>支持或隐私问题可以通过公开 X 账号联系：<a href="https://x.com/blocktom">https://x.com/blocktom</a>。</p>
+<section id="download" class="lc-download" aria-label="下载与支持">
+<div class="lc-download-copy">
+<p class="lc-download-kicker">现已上架</p>
+<h2>现在就开始一组安静训练。</h2>
+<p>通过 App Store 下载 LiftCue。训练记录保持私密，隐私政策和公开支持入口也放在这里，方便之后查看。</p>
+<p class="lc-region-note">按照你的上架要求，LiftCue 不在中国大陆地区销售。</p>
+</div>
+<div class="lc-download-actions">
+<a class="lc-store-button" href="https://apps.apple.com/us/app/liftcue/id6769323590?uo=4"><span>在</span><strong>App Store 下载</strong></a>
+<div class="lc-download-links">
+<a href="/zh/apps/liftcue/privacy/">隐私政策</a>
+<a href="https://x.com/blocktom">X 支持</a>
+</div>
+<div class="lc-download-meta">
+<span>一次性购买 $2.99</span>
+<span>iOS 17+</span>
+<span>4+</span>
+</div>
+</div>
 </section>
 </div>
