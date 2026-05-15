@@ -2,7 +2,7 @@
 title: 'LiftCue'
 description: 'LiftCue 是一款适合 iPhone 和 iPad 的低打扰盆底肌训练计时器，用于短时坐姿训练、温和提醒、私密记录和可选私人 iCloud 同步。'
 pubDate: '2026-05-14'
-updatedDate: '2026-05-14'
+updatedDate: '2026-05-15'
 lang: 'zh'
 routeSlug: 'liftcue'
 translationKey: 'liftcue'
@@ -13,8 +13,12 @@ appName: 'LiftCue'
 appStoreName: 'LiftCue'
 bundleId: 'com.tom.liftcue'
 platforms: ['iOS', 'iPadOS']
-status: '准备提交 App Store'
+status: '已在 App Store 上架'
 applicationCategory: 'HealthApplication'
+appStoreId: '6769323590'
+appStore: 'https://apps.apple.com/us/app/liftcue/id6769323590?uo=4'
+releaseDate: '2026-05-14'
+contentRating: '4+'
 price: 2.99
 priceCurrency: 'USD'
 minimumOsVersion: 'iOS 17.0 或更高版本'
@@ -50,7 +54,8 @@ draft: false
 <h2>一个安静的坐姿盆底肌训练计时器。</h2>
 <p class="lc-lede">LiftCue 帮你跟随简短的收缩与放松节奏，把私密的健康习惯做得轻一点、稳定一点。选择训练方案，跟着视觉提示完成一组，然后把记录留在自己的设备里。</p>
 <div class="lc-actions">
-<a class="lc-primary" href="/zh/apps/liftcue/privacy/">隐私政策</a>
+<a class="lc-primary" href="https://apps.apple.com/us/app/liftcue/id6769323590?uo=4">在 App Store 下载</a>
+<a class="lc-secondary" href="/zh/apps/liftcue/privacy/">隐私政策</a>
 <a class="lc-secondary" href="https://x.com/blocktom">支持</a>
 </div>
 <div class="lc-tags">
@@ -93,7 +98,7 @@ draft: false
 
 <section>
 <h2>下载与支持</h2>
-<p>LiftCue 正在准备提交 iPhone 和 iPad 版 App Store。Apple 公开上架链接可用后，本页会补上下载入口。</p>
+<p>LiftCue 已在支持的 App Store 地区上架，可通过这里下载：<a href="https://apps.apple.com/us/app/liftcue/id6769323590?uo=4">https://apps.apple.com/us/app/liftcue/id6769323590</a>。按照你的上架要求，它不在中国大陆地区销售。</p>
 <p>支持或隐私问题可以通过公开 X 账号联系：<a href="https://x.com/blocktom">https://x.com/blocktom</a>。</p>
 </section>
 </div>

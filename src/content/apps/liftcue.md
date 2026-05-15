@@ -2,7 +2,7 @@
 title: 'LiftCue'
 description: 'LiftCue is a discreet iOS and iPadOS pelvic floor training timer for short seated sets, gentle reminders, private progress, and optional private iCloud sync.'
 pubDate: '2026-05-14'
-updatedDate: '2026-05-14'
+updatedDate: '2026-05-15'
 lang: 'en'
 routeSlug: 'liftcue'
 translationKey: 'liftcue'
@@ -13,8 +13,12 @@ appName: 'LiftCue'
 appStoreName: 'LiftCue'
 bundleId: 'com.tom.liftcue'
 platforms: ['iOS', 'iPadOS']
-status: 'Preparing for App Store release'
+status: 'Available on the App Store'
 applicationCategory: 'HealthApplication'
+appStoreId: '6769323590'
+appStore: 'https://apps.apple.com/us/app/liftcue/id6769323590?uo=4'
+releaseDate: '2026-05-14'
+contentRating: '4+'
 price: 2.99
 priceCurrency: 'USD'
 minimumOsVersion: 'iOS 17.0 or later'
@@ -56,7 +60,8 @@ draft: false
 <h2>A quiet timer for seated pelvic floor training.</h2>
 <p class="lc-lede">LiftCue helps you follow short contract-and-relax sets without turning a private wellness habit into a noisy dashboard. Pick a rhythm, follow the visual cue, and keep a private record on your device.</p>
 <div class="lc-actions">
-<a class="lc-primary" href="/apps/liftcue/privacy/">Privacy Policy</a>
+<a class="lc-primary" href="https://apps.apple.com/us/app/liftcue/id6769323590?uo=4">Download on the App Store</a>
+<a class="lc-secondary" href="/apps/liftcue/privacy/">Privacy Policy</a>
 <a class="lc-secondary" href="https://x.com/blocktom">Support</a>
 </div>
 <div class="lc-tags">
@@ -108,13 +113,13 @@ draft: false
 <div class="lc-faq-grid">
 <div class="lc-faq"><h3>Does LiftCue collect health data?</h3><p>No. LiftCue stores training history locally and, when available, in your private iCloud account. The developer does not collect it.</p></div>
 <div class="lc-faq"><h3>Is this medical advice?</h3><p>No. LiftCue is for general wellness and habit support. Stop if training causes pain and consult a qualified clinician for medical concerns.</p></div>
-<div class="lc-faq"><h3>How much does it cost?</h3><p>LiftCue is planned as a one-time paid App Store app priced at $2.99 USD, with no ads and no subscription.</p></div>
+<div class="lc-faq"><h3>How much does it cost?</h3><p>LiftCue is a one-time paid App Store app priced at $2.99 USD, with no ads and no subscription.</p></div>
 </div>
 </section>
 
 <section>
 <h2>Download and support</h2>
-<p>LiftCue is being prepared for App Store release for iPhone and iPad. The public App Store link will be added here after Apple makes the listing available.</p>
+<p>LiftCue is now available on the App Store for supported regions. Download it here: <a href="https://apps.apple.com/us/app/liftcue/id6769323590?uo=4">https://apps.apple.com/us/app/liftcue/id6769323590</a>.</p>
 <p>For support or privacy questions, use the public X account: <a href="https://x.com/blocktom">https://x.com/blocktom</a>.</p>
 </section>
 </div>
