@@ -39,7 +39,7 @@ keywords:
 draft: false
 ---
 
-<style>@import url('/apps/liftcue/liftcue.css');</style>
+<style>@import url('/apps/liftcue/liftcue.css?v=20260515-download');</style>
 
 <div class="liftcue-page">
 <section class="lc-hero">
