@@ -1,13 +1,13 @@
 ---
 title: 'TimeCue: One Sentence Reminder Privacy Policy'
-description: 'Privacy policy for TimeCue: One Sentence Reminder, including local notification use, local device storage, and the app no-data-collected privacy posture.'
+description: 'Privacy policy for TimeCue: One Sentence Reminder, including local notification use, local cue deck storage, cue logs, and the app no-data-collected privacy posture.'
 pubDate: '2026-05-14'
-updatedDate: '2026-05-14'
+updatedDate: '2026-05-17'
 lang: 'en'
 routeSlug: 'timecue-privacy'
 translationKey: 'timecue'
 seoTitle: 'TimeCue: One Sentence Reminder Privacy Policy'
-seoDescription: 'TimeCue: One Sentence Reminder does not collect data from users. Cue text, schedule choices, and notification style settings stay on the device.'
+seoDescription: 'TimeCue: One Sentence Reminder does not collect data from users. Cue text, cue decks, cue logs, schedule choices, and notification style settings stay on the device.'
 seoImage: '/apps/timecue/og.jpg'
 appName: 'TimeCue: One Sentence Reminder'
 effectiveDate: '2026-05-14'
@@ -22,7 +22,7 @@ draft: false
 
 TimeCue does not collect data from users.
 
-The app stores your cue sentence, reminder schedule, repeat choice, and notification style locally on your device so it can schedule local notifications. The developer does not receive, collect, track, sell, or share this information.
+The app stores your cue sentences, cue deck, cue logs, reminder schedule, repeat choice, and notification style locally on your device so it can show your saved cues and schedule local notifications. The developer does not receive, collect, track, sell, or share this information.
 
 ## Information We Collect
 
@@ -30,7 +30,8 @@ TimeCue does not collect personal information, usage analytics, device identifie
 
 The following settings may be stored locally on your device:
 
-- Your cue sentence
+- Your cue sentences and saved cue deck
+- Cue log entries you create inside the app
 - Fixed reminder times you enable
 - A custom reminder date, time, and repeat choice
 - Your selected notification style
@@ -43,11 +44,12 @@ These settings are used only by the app on your device.
 TimeCue uses locally stored settings to:
 
 - Show your current cue inside the app
+- Show saved cues, templates you have added, and local cue logs
 - Schedule local notifications at the times you choose
 - Let you send a 10-second test cue
 - Let notification actions such as Later create a follow-up cue
 
-The developer does not have access to your cue sentence or schedule.
+The developer does not have access to your cue sentences, cue deck, cue logs, or schedule.
 
 ## Permissions
 
@@ -67,7 +69,7 @@ TimeCue does not sell, rent, trade, or share user data with third parties.
 
 ## Data Retention and Deletion
 
-Cue settings remain on your device until you edit them, clear them, or delete the app. Removing TimeCue from your device deletes its locally stored app settings according to iOS behavior.
+Cue settings, saved cues, and cue logs remain on your device until you edit them, clear them, or delete the app. Removing TimeCue from your device deletes its locally stored app settings according to iOS behavior.
 
 You can also manage or disable TimeCue notifications in iOS Settings.
 
