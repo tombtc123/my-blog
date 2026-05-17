@@ -49,6 +49,7 @@ const apps = defineCollection({
 			applicationCategory: z.string().default('UtilitiesApplication'),
 			price: z.number().optional(),
 			priceCurrency: z.string().optional(),
+			priceDescription: z.string().optional(),
 			minimumOsVersion: z.string().optional(),
 			softwareVersion: z.string().optional(),
 			releaseDate: z.coerce.date().optional(),

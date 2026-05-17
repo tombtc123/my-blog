@@ -68,6 +68,7 @@ const appOffer =
 				'@type': 'Offer',
 				price: String(app.data.price),
 				priceCurrency: app.data.priceCurrency ?? 'USD',
+				description: app.data.priceDescription,
 				url: app.data.appStore ?? productUrl,
 				availability: app.data.appStore ? 'https://schema.org/InStock' : undefined,
 				seller: {
