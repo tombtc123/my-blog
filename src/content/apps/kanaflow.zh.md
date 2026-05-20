@@ -2,16 +2,16 @@
 title: 'KanaFlow Practice'
 description: 'KanaFlow Practice 是一款英文优先的 iPhone 和 iPad 平假名、片假名练习 App，用于假名识别、罗马音回忆、限时挑战、日语发音和私密错题复习。'
 pubDate: '2026-05-14'
-updatedDate: '2026-05-14'
+updatedDate: '2026-05-20'
 lang: 'zh'
 routeSlug: 'kanaflow'
 translationKey: 'kanaflow'
 seoTitle: 'KanaFlow Practice - iPhone 和 iPad 平假名与片假名练习 App'
 seoDescription: '用 KanaFlow Practice 练习平假名与片假名：罗马音回忆、随机 50 题、3 分钟挑战、日语发音、本地错题复习，无广告、无需账号、无开发者追踪。'
-seoImage: '/apps/kanaflow/og.png'
-seoImageAlt: 'KanaFlow Practice iPhone 练习界面，显示平假名题目、罗马音输入、限时挑战、随机练习和错题复习控件'
-seoImageWidth: 1320
-seoImageHeight: 2868
+seoImage: '/apps/kanaflow/og-20260520.png'
+seoImageAlt: 'KanaFlow Practice App 图标和显示假名回忆练习的 iPhone 界面'
+seoImageWidth: 1200
+seoImageHeight: 630
 appName: 'KanaFlow Practice'
 appStoreName: 'KanaFlow Practice'
 bundleId: 'tom.KanaTrainer'
@@ -24,7 +24,7 @@ contentRating: '4+'
 price: 2.99
 priceCurrency: 'USD'
 minimumOsVersion: 'iOS 17.0 或更高版本'
-softwareVersion: '1.2'
+softwareVersion: '1.3'
 releaseDate: '2025-08-13'
 appStore: 'https://apps.apple.com/app/id6749825593'
 supportUrl: 'https://x.com/blocktom'
@@ -99,7 +99,7 @@ draft: false
 <section class="kf-hero">
 <div class="kf-hero-copy">
 <div class="kf-badge-row">
-<img class="kf-icon" src="/apps/kanaflow/app-icon.png" alt="KanaFlow Practice App 图标" />
+<img class="kf-icon" src="/apps/kanaflow/app-icon-20260520.png" alt="KanaFlow Practice App 图标" />
 <div>
 <p class="kf-kicker">iPhone 和 iPad</p>
 <p class="kf-price">$2.99 · 无需账号</p>

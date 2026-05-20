@@ -2,16 +2,16 @@
 title: 'KanaFlow Practice'
 description: 'KanaFlow Practice is an English-first hiragana and katakana trainer for iPhone and iPad, built for kana recognition, romaji recall, timed drills, voice playback, and private mistake review.'
 pubDate: '2026-05-14'
-updatedDate: '2026-05-14'
+updatedDate: '2026-05-20'
 lang: 'en'
 routeSlug: 'kanaflow'
 translationKey: 'kanaflow'
 seoTitle: 'KanaFlow Practice - Hiragana and Katakana Trainer for iPhone and iPad'
 seoDescription: 'Practice hiragana and katakana with KanaFlow Practice: romaji recall drills, random 50 prompts, a three-minute challenge, Japanese voice playback, local mistake review, no ads, no account, and no tracking.'
-seoImage: '/apps/kanaflow/og.png'
-seoImageAlt: 'KanaFlow Practice iPhone screen showing a hiragana prompt, romaji input, timed challenge, random practice, and mistake review controls'
-seoImageWidth: 1320
-seoImageHeight: 2868
+seoImage: '/apps/kanaflow/og-20260520.png'
+seoImageAlt: 'KanaFlow Practice app icon beside an iPhone screen showing a kana recall drill'
+seoImageWidth: 1200
+seoImageHeight: 630
 appName: 'KanaFlow Practice'
 appStoreName: 'KanaFlow Practice'
 bundleId: 'tom.KanaTrainer'
@@ -24,7 +24,7 @@ contentRating: '4+'
 price: 2.99
 priceCurrency: 'USD'
 minimumOsVersion: 'iOS 17.0 or later'
-softwareVersion: '1.2'
+softwareVersion: '1.3'
 releaseDate: '2025-08-13'
 appStore: 'https://apps.apple.com/app/id6749825593'
 supportUrl: 'https://x.com/blocktom'
@@ -104,7 +104,7 @@ draft: false
 <section class="kf-hero">
 <div class="kf-hero-copy">
 <div class="kf-badge-row">
-<img class="kf-icon" src="/apps/kanaflow/app-icon.png" alt="KanaFlow Practice app icon" />
+<img class="kf-icon" src="/apps/kanaflow/app-icon-20260520.png" alt="KanaFlow Practice app icon" />
 <div>
 <p class="kf-kicker">iPhone and iPad</p>
 <p class="kf-price">$2.99 · no account</p>
