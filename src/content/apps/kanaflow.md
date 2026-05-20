@@ -7,9 +7,9 @@ lang: 'en'
 routeSlug: 'kanaflow'
 translationKey: 'kanaflow'
 seoTitle: 'KanaFlow Practice - Hiragana and Katakana Trainer for iPhone and iPad'
-seoDescription: 'Practice hiragana and katakana with KanaFlow Practice: romaji recall drills, random 50 prompts, a three-minute challenge, Japanese voice playback, local mistake review, no ads, no account, and no tracking.'
-seoImage: '/apps/kanaflow/og-20260520.png'
-seoImageAlt: 'KanaFlow Practice app icon beside an iPhone screen showing a kana recall drill'
+seoDescription: 'Practice hiragana and katakana with KanaFlow Practice: a hand-painted kana recall app with romaji drills, random 50 prompts, a three-minute challenge, Japanese voice playback, local mistake review, no ads, no account, and no tracking.'
+seoImage: '/apps/kanaflow/og-20260520-v2.png'
+seoImageAlt: 'KanaFlow Practice hand-painted app icon beside colorful iPhone previews for kana recall practice'
 seoImageWidth: 1200
 seoImageHeight: 630
 appName: 'KanaFlow Practice'
@@ -24,12 +24,16 @@ contentRating: '4+'
 price: 2.99
 priceCurrency: 'USD'
 minimumOsVersion: 'iOS 17.0 or later'
-softwareVersion: '1.3'
+softwareVersion: '1.4'
 releaseDate: '2025-08-13'
 appStore: 'https://apps.apple.com/app/id6749825593'
 supportUrl: 'https://x.com/blocktom'
 screenshots:
-  - '/apps/kanaflow/main.png'
+  - '/apps/kanaflow/preview-01-fast-recall-20260520.png'
+  - '/apps/kanaflow/preview-02-hiragana-katakana-20260520.png'
+  - '/apps/kanaflow/preview-03-practice-modes-20260520.png'
+  - '/apps/kanaflow/preview-04-mistake-review-20260520.png'
+  - '/apps/kanaflow/preview-05-private-practice-20260520.png'
 tags: ['Education', 'Japanese', 'Kana', 'Hiragana', 'Katakana', 'Romaji', 'Language Learning']
 keywords:
   - KanaFlow
@@ -86,7 +90,7 @@ draft: false
 ---
 
 <style>
-@import url('/apps/kanaflow/kanaflow-20260514-v2.css');
+@import url('/apps/kanaflow/kanaflow-20260520-v3.css');
 .prose .kf-page a.kf-primary,
 .prose .kf-page a.kf-secondary {
 	display: inline-flex;
@@ -110,8 +114,8 @@ draft: false
 <p class="kf-price">$2.99 · no account</p>
 </div>
 </div>
-<h2>Build kana recall in short, focused loops.</h2>
-<p class="kf-lede">KanaFlow Practice turns hiragana and katakana practice into a clean recall drill: see the kana, type the romaji, hear the Japanese sound, and review only the characters that tripped you up.</p>
+<h2>Practice kana with a hand-painted recall card.</h2>
+<p class="kf-lede">KanaFlow Practice now pairs its fast hiragana and katakana drills with a warm hand-painted visual style: see the kana, type the romaji, hear the Japanese sound, and review only the characters that tripped you up.</p>
 <div class="kf-actions">
 <a class="kf-primary" href="https://apps.apple.com/app/id6749825593">Download KanaFlow Practice</a>
 <a class="kf-secondary" href="/apps/kanaflow/privacy/">Privacy Policy</a>
@@ -126,16 +130,31 @@ draft: false
 </div>
 <div class="kf-stage" aria-label="KanaFlow Practice interface preview">
 <figure class="kf-phone">
-<img src="/apps/kanaflow/main.png" alt="KanaFlow Practice screen showing a hiragana prompt, romaji input, and practice mode buttons" />
+<img src="/apps/kanaflow/main-20260520-v2.png" alt="KanaFlow Practice hand-painted preview showing a hiragana prompt, romaji input, and practice controls" />
 </figure>
 </div>
 </section>
 
 <section class="kf-metrics" aria-label="KanaFlow Practice product facts">
 <div><strong>208 prompts</strong><span>Hiragana and katakana across seion, dakuon, handakuon, and yoon.</span></div>
-<div><strong>3 modes</strong><span>Full practice, random 50, and a three-minute challenge.</span></div>
+<div><strong>3 modes</strong><span>Three-minute challenge, random 50, and focused mistake review.</span></div>
 <div><strong>Private</strong><span>Saved mistakes stay on your device for focused review.</span></div>
 <div><strong>Bilingual</strong><span>English-first interface with Simplified Chinese available in Settings.</span></div>
+</section>
+
+<section class="kf-preview-section" aria-label="KanaFlow Practice visual previews">
+<div class="kf-section-heading">
+<p class="kf-kicker">Version 1.4 visual refresh</p>
+<h2>A warmer hand-painted practice flow</h2>
+<p>The new App Store previews use the same red, yellow, sky blue, cream, and ink palette as the app icon, with short captions that explain the core practice loop.</p>
+</div>
+<div class="kf-preview-grid">
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-01-fast-recall-20260520.png" alt="KanaFlow Practice preview explaining fast kana recall" /><figcaption>Build kana recall</figcaption></figure>
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-02-hiragana-katakana-20260520.png" alt="KanaFlow Practice preview showing hiragana and katakana set controls" /><figcaption>Practice both alphabets</figcaption></figure>
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-03-practice-modes-20260520.png" alt="KanaFlow Practice preview showing three practice modes" /><figcaption>Pick your study loop</figcaption></figure>
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-04-mistake-review-20260520.png" alt="KanaFlow Practice preview showing local mistake review" /><figcaption>Review what you miss</figcaption></figure>
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-05-private-practice-20260520.png" alt="KanaFlow Practice preview explaining private on-device practice" /><figcaption>Private by design</figcaption></figure>
+</div>
 </section>
 
 <section class="kf-cta-band" aria-label="Download KanaFlow Practice">

@@ -7,9 +7,9 @@ lang: 'zh'
 routeSlug: 'kanaflow'
 translationKey: 'kanaflow'
 seoTitle: 'KanaFlow Practice - iPhone 和 iPad 平假名与片假名练习 App'
-seoDescription: '用 KanaFlow Practice 练习平假名与片假名：罗马音回忆、随机 50 题、3 分钟挑战、日语发音、本地错题复习，无广告、无需账号、无开发者追踪。'
-seoImage: '/apps/kanaflow/og-20260520.png'
-seoImageAlt: 'KanaFlow Practice App 图标和显示假名回忆练习的 iPhone 界面'
+seoDescription: '用 KanaFlow Practice 练习平假名与片假名：手绘卡片风格、罗马音回忆、随机 50 题、3 分钟挑战、日语发音、本地错题复习，无广告、无需账号、无开发者追踪。'
+seoImage: '/apps/kanaflow/og-20260520-v2.png'
+seoImageAlt: 'KanaFlow Practice 手绘 App 图标和多张彩色 iPhone 假名练习预览图'
 seoImageWidth: 1200
 seoImageHeight: 630
 appName: 'KanaFlow Practice'
@@ -24,12 +24,16 @@ contentRating: '4+'
 price: 2.99
 priceCurrency: 'USD'
 minimumOsVersion: 'iOS 17.0 或更高版本'
-softwareVersion: '1.3'
+softwareVersion: '1.4'
 releaseDate: '2025-08-13'
 appStore: 'https://apps.apple.com/app/id6749825593'
 supportUrl: 'https://x.com/blocktom'
 screenshots:
-  - '/apps/kanaflow/main.png'
+  - '/apps/kanaflow/preview-01-fast-recall-20260520.png'
+  - '/apps/kanaflow/preview-02-hiragana-katakana-20260520.png'
+  - '/apps/kanaflow/preview-03-practice-modes-20260520.png'
+  - '/apps/kanaflow/preview-04-mistake-review-20260520.png'
+  - '/apps/kanaflow/preview-05-private-practice-20260520.png'
 tags: ['教育', '日语', '假名', '平假名', '片假名', '罗马音', '语言学习']
 keywords:
   - KanaFlow
@@ -81,7 +85,7 @@ draft: false
 ---
 
 <style>
-@import url('/apps/kanaflow/kanaflow-20260514-v2.css');
+@import url('/apps/kanaflow/kanaflow-20260520-v3.css');
 .prose .kf-page a.kf-primary,
 .prose .kf-page a.kf-secondary {
 	display: inline-flex;
@@ -105,8 +109,8 @@ draft: false
 <p class="kf-price">$2.99 · 无需账号</p>
 </div>
 </div>
-<h2>用短而集中的循环建立假名反应。</h2>
-<p class="kf-lede">KanaFlow Practice 把平假名和片假名练习压缩成一个清爽的记忆闭环：看假名、输入罗马音、听日语发音，然后只复习真正答错的字符。</p>
+<h2>用手绘卡片练习假名回忆。</h2>
+<p class="kf-lede">KanaFlow Practice 现在把快速平假名、片假名练习和温暖的手绘视觉风格放在一起：看假名、输入罗马音、听日语发音，然后只复习真正答错的字符。</p>
 <div class="kf-actions">
 <a class="kf-primary" href="https://apps.apple.com/app/id6749825593">下载 KanaFlow Practice</a>
 <a class="kf-secondary" href="/zh/apps/kanaflow/privacy/">隐私政策</a>
@@ -121,16 +125,31 @@ draft: false
 </div>
 <div class="kf-stage" aria-label="KanaFlow Practice 界面预览">
 <figure class="kf-phone">
-<img src="/apps/kanaflow/main.png" alt="KanaFlow Practice 练习界面，显示平假名题目、罗马音输入框和练习模式按钮" />
+<img src="/apps/kanaflow/main-20260520-v2.png" alt="KanaFlow Practice 手绘预览图，显示平假名题目、罗马音输入框和练习控制区" />
 </figure>
 </div>
 </section>
 
 <section class="kf-metrics" aria-label="KanaFlow Practice 产品信息">
 <div><strong>208 个题目</strong><span>覆盖平假名与片假名中的清音、浊音、半浊音和拗音。</span></div>
-<div><strong>3 种模式</strong><span>完整练习、随机 50 个和 3 分钟挑战。</span></div>
+<div><strong>3 种模式</strong><span>3 分钟挑战、随机 50 个和错题针对复习。</span></div>
 <div><strong>私密</strong><span>错题保存在本设备上，用来做针对性复习。</span></div>
 <div><strong>双语</strong><span>英文优先，设置中可切换为简体中文。</span></div>
+</section>
+
+<section class="kf-preview-section" aria-label="KanaFlow Practice 视觉预览">
+<div class="kf-section-heading">
+<p class="kf-kicker">1.4 视觉更新</p>
+<h2>更温暖的手绘练习体验</h2>
+<p>新的 App Store 预览图沿用 App 图标里的红、黄、天蓝、奶油色和黑色描边，并用短句说明核心练习流程。</p>
+</div>
+<div class="kf-preview-grid">
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-01-fast-recall-20260520.png" alt="KanaFlow Practice 预览图，说明快速假名回忆" /><figcaption>建立假名反应</figcaption></figure>
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-02-hiragana-katakana-20260520.png" alt="KanaFlow Practice 预览图，显示平假名和片假名设置" /><figcaption>练平假名和片假名</figcaption></figure>
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-03-practice-modes-20260520.png" alt="KanaFlow Practice 预览图，显示三种练习模式" /><figcaption>选择练习循环</figcaption></figure>
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-04-mistake-review-20260520.png" alt="KanaFlow Practice 预览图，显示本地错题复习" /><figcaption>复习真正答错的字符</figcaption></figure>
+<figure class="kf-preview-card"><img src="/apps/kanaflow/preview-05-private-practice-20260520.png" alt="KanaFlow Practice 预览图，说明本地私密练习" /><figcaption>私密练习设计</figcaption></figure>
+</div>
 </section>
 
 <section class="kf-cta-band" aria-label="下载 KanaFlow Practice">
